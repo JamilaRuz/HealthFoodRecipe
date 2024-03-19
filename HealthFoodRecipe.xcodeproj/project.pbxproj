@@ -12,6 +12,7 @@
 		8D1EB3622BAA29D100285053 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1EB3612BAA29D100285053 /* Item.swift */; };
 		8D1EB3642BAA29D800285053 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D1EB3632BAA29D800285053 /* Assets.xcassets */; };
 		8D1EB3672BAA29D800285053 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D1EB3662BAA29D800285053 /* Preview Assets.xcassets */; };
+		8D1EB36E2BAA2A5100285053 /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1EB36D2BAA2A5100285053 /* MenuItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +22,7 @@
 		8D1EB3612BAA29D100285053 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		8D1EB3632BAA29D800285053 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8D1EB3662BAA29D800285053 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		8D1EB36D2BAA2A5100285053 /* MenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +57,7 @@
 			children = (
 				8D1EB35D2BAA29D100285053 /* HealthFoodRecipeApp.swift */,
 				8D1EB35F2BAA29D100285053 /* ContentView.swift */,
+				8D1EB36D2BAA2A5100285053 /* MenuItem.swift */,
 				8D1EB3612BAA29D100285053 /* Item.swift */,
 				8D1EB3632BAA29D800285053 /* Assets.xcassets */,
 				8D1EB3652BAA29D800285053 /* Preview Content */,
@@ -141,6 +144,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D1EB3602BAA29D100285053 /* ContentView.swift in Sources */,
+				8D1EB36E2BAA2A5100285053 /* MenuItem.swift in Sources */,
 				8D1EB3622BAA29D100285053 /* Item.swift in Sources */,
 				8D1EB35E2BAA29D100285053 /* HealthFoodRecipeApp.swift in Sources */,
 			);
