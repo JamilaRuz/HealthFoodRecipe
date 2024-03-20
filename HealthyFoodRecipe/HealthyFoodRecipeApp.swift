@@ -9,10 +9,10 @@ import SwiftUI
 import SwiftData
 
 @main
-struct HealthFoodRecipeApp: App {
+struct HealthyFoodRecipeApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
-            Item.self,
+            MenuItem.self,
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
@@ -25,7 +25,7 @@ struct HealthFoodRecipeApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            LandingView()
         }
         .modelContainer(sharedModelContainer)
     }
