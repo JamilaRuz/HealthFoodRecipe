@@ -12,7 +12,7 @@ import SwiftData
 struct HealthyFoodRecipeApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
-            MenuItem.self,
+            MenuItem.self, Recipe.self
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
