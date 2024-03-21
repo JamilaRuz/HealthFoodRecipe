@@ -13,17 +13,24 @@ struct RecipeDetails: View {
     @Query private var items: [MenuItem]
     
     let thisRecipe: Recipe
+    
     @State var selectedDay = Day.Monday
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
             HStack {
                 Text(thisRecipe.Title ?? "N/A")
                     .font(.title)
                 Spacer()
             }
                 
+            Text(thisRecipe.Ingredient01 ?? "N/A")
+            Text(thisRecipe.Ingredient02 ?? "N/A")
+            Text(thisRecipe.Ingredient03 ?? "N/A")
+            Text(thisRecipe.Ingredient04 ?? "N/A")
+            Text(thisRecipe.Unit01 ?? "N/A")
+                .padding(.top)
             Text(thisRecipe.Directions ?? "N/A")
             Spacer()
             
@@ -43,9 +50,10 @@ struct RecipeDetails: View {
                     .padding()
             }
         }
+        .padding()
     }
 }
 
 //#Preview {
-//    RecipeDetails(recipe: <#T##Recipe#>)
+//    RecipeDetails()
 //}
