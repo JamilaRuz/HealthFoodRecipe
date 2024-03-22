@@ -47,7 +47,14 @@ struct CategoryListView: View {
             }
             .padding()
             .navigationTitle("Our dishes")
+//            background color
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background {
+                Color.gray.opacity(0.1)
+                    .ignoresSafeArea()
+            }
         }
+        
     }
 }
 
