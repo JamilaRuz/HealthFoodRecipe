@@ -9,24 +9,24 @@ import SwiftUI
 import SwiftData
 
 struct RecipeListView: View {
+    var category: String
+    
     @Environment(\.modelContext) var modelContext
     @Query private var menuItems: [MenuItem]
     
     var body: some View {
-        NavigationView {
-            List() {
-                ForEach(recipes, id: \.self) { thisRecipe in
-                    NavigationLink(destination: RecipeDetails(thisRecipe: thisRecipe)) {
-                        Text(thisRecipe.Title ?? "")
-                    }
+        List() {
+            ForEach(recipes.filter {$0.Category == category}, id: \.self) { thisRecipe in
+                NavigationLink(destination: RecipeDetails(thisRecipe: thisRecipe)) {
+                    Text(thisRecipe.Title ?? "")
                 }
             }
-            .navigationTitle("Recipes")
         }
+        .navigationTitle("Recipes")
     }
 }
 
 #Preview {
-    RecipeListView()
+    RecipeListView(category: "Cake")
         .modelContainer(for: MenuItem.self, inMemory: true)
 }

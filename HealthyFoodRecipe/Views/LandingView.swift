@@ -12,15 +12,21 @@ struct LandingView: View {
     
     var body: some View {
         TabView {
+            CategoryListView()
+                .tabItem {
+                    Label("Categories", systemImage: "fork.knife.circle")
+                }
+            
             ContentView()
                 .tabItem {
                     Label("Weekly menu", systemImage: "menucard")
                 }
             
-            RecipeListView()
+            FavouritesView()
                 .tabItem {
-                    Label("Recipes", systemImage: "carrot")
+                    Label("Favourites", systemImage: "heart")
                 }
+            
         }
     }
 }
