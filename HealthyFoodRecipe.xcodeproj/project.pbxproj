@@ -20,6 +20,7 @@
 		8D1EB37E2BAB2D6000285053 /* RecipeDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1EB37D2BAB2D6000285053 /* RecipeDetails.swift */; };
 		8D1EB3812BACD6DC00285053 /* CategoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1EB3802BACD6DC00285053 /* CategoryListView.swift */; };
 		8D1EB3832BACE86800285053 /* FavouritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1EB3822BACE86700285053 /* FavouritesView.swift */; };
+		8D89C1202BADD497006FCF81 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D89C11F2BADD497006FCF81 /* CardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		8D1EB37F2BAB76BD00285053 /* HealthyFoodRecipe.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HealthyFoodRecipe.entitlements; sourceTree = "<group>"; };
 		8D1EB3802BACD6DC00285053 /* CategoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListView.swift; sourceTree = "<group>"; };
 		8D1EB3822BACE86700285053 /* FavouritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesView.swift; sourceTree = "<group>"; };
+		8D89C11F2BADD497006FCF81 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,9 +107,10 @@
 				8D1EB35F2BAA29D100285053 /* ContentView.swift */,
 				8D1EB3792BAB119000285053 /* LandingView.swift */,
 				8D1EB3802BACD6DC00285053 /* CategoryListView.swift */,
+				8D89C11F2BADD497006FCF81 /* CardView.swift */,
 				8D1EB37B2BAB29E200285053 /* RecipeListView.swift */,
-				8D1EB3822BACE86700285053 /* FavouritesView.swift */,
 				8D1EB37D2BAB2D6000285053 /* RecipeDetails.swift */,
+				8D1EB3822BACE86700285053 /* FavouritesView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -192,6 +195,7 @@
 				8D1EB3702BAA2DBA00285053 /* Weekdays.swift in Sources */,
 				8D1EB35E2BAA29D100285053 /* HealthyFoodRecipeApp.swift in Sources */,
 				8D1EB3832BACE86800285053 /* FavouritesView.swift in Sources */,
+				8D89C1202BADD497006FCF81 /* CardView.swift in Sources */,
 				8D1EB3782BAA321A00285053 /* Recipe.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
