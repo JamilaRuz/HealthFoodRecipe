@@ -13,7 +13,7 @@ struct CardView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Image("dish")
+            Image("dessert")
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(maxWidth: .infinity, maxHeight: 200)

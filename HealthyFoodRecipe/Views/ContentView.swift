@@ -35,9 +35,9 @@ struct ContentView: View {
     }
     
     func getCategory(for recipe: String) -> String {
-        let thisRecipe = recipes.first(where: {$0.Title == recipe})
+        let thisRecipe = recipes.first(where: {$0.name == recipe})
         
-        return thisRecipe?.Category ?? "None"
+        return thisRecipe?.category ?? "None"
     }
 }
 

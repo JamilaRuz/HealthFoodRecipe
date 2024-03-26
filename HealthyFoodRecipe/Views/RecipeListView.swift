@@ -16,9 +16,9 @@ struct RecipeListView: View {
     
     var body: some View {
         List() {
-            ForEach(recipes.filter {$0.Category == category}, id: \.self) { thisRecipe in
+            ForEach(recipes.filter {$0.category == category}, id: \.self) { thisRecipe in
                 NavigationLink(destination: RecipeDetails(thisRecipe: thisRecipe)) {
-                    Text(thisRecipe.Title ?? "")
+                    Text(thisRecipe.name)
                 }
             }
         }

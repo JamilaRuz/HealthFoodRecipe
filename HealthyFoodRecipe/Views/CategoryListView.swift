@@ -37,7 +37,7 @@ struct CategoryListView: View {
                 
                 ScrollView {
                     LazyVGrid(columns: columns, spacing: 20) {
-                        ForEach([String](Set(recipes.map{$0.Category!})), id: \.self) { category in
+                        ForEach([String](Set(recipes.map{$0.category})), id: \.self) { category in
                             NavigationLink(destination: RecipeListView(category: category)) {
                                 CardView(category: category)
                             }

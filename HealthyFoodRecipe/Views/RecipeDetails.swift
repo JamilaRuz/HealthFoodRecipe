@@ -20,18 +20,14 @@ struct RecipeDetails: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                Text(thisRecipe.Title ?? "N/A")
+                Text(thisRecipe.name)
                     .font(.title)
                 Spacer()
             }
                 
-            Text(thisRecipe.Ingredient01 ?? "N/A")
-            Text(thisRecipe.Ingredient02 ?? "N/A")
-            Text(thisRecipe.Ingredient03 ?? "N/A")
-            Text(thisRecipe.Ingredient04 ?? "N/A")
-            Text(thisRecipe.Unit01 ?? "N/A")
-                .padding(.top)
-            Text(thisRecipe.Directions ?? "N/A")
+//            Text(thisRecipe.ingredients)
+//                .multilineTextAlignment(.leading)
+            Text(thisRecipe.directions)
             Spacer()
             
             Picker("Select a day to add to the menu", selection: $selectedDay) {
@@ -41,7 +37,7 @@ struct RecipeDetails: View {
             }
             
             Button(action: {
-                let thisMenuItem = MenuItem(recipeName: thisRecipe.Title ?? "N/A", day: selectedDay.rawValue)
+                let thisMenuItem = MenuItem(recipeName: thisRecipe.name, day: selectedDay.rawValue)
                 modelContext.insert(thisMenuItem)
                 
                 dismiss()
@@ -54,6 +50,6 @@ struct RecipeDetails: View {
     }
 }
 
-//#Preview {
-//    RecipeDetails()
-//}
+#Preview {
+    RecipeDetails(thisRecipe: Recipe(name: "", image: "", ingredients: [""], directions: "", category: "Salads", datePublished: ""))
+}
