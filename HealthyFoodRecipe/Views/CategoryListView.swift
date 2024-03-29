@@ -34,7 +34,6 @@ struct CategoryListView: View {
                 
                 Text("Choose a category")
                     .font(.title2)
-                
                 ScrollView {
                     LazyVGrid(columns: columns, spacing: 20) {
                         ForEach([String](Set(recipes.map{$0.category})), id: \.self) { category in
@@ -47,10 +46,9 @@ struct CategoryListView: View {
             }
             .padding()
             .navigationTitle("Our dishes")
-//            background color
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background {
-                Color.gray.opacity(0.1)
+                Color.blue.opacity(0.1)
                     .ignoresSafeArea()
             }
         }
@@ -61,4 +59,5 @@ struct CategoryListView: View {
 #Preview {
     CategoryListView()
         .modelContainer(for: MenuItem.self, inMemory: true)
+//        .modelContainer(for: Recipe.self, inMemory: true)
 }

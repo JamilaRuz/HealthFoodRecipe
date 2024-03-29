@@ -13,24 +13,20 @@ struct CardView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Image("dessert")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(maxWidth: .infinity, maxHeight: 200)
-            
-            VStack {
-                Text(category)
-                    .font(.headline)
-                    .minimumScaleFactor(0.1)
-                    .foregroundColor(.primary)
-                
-                Text("7 favourites")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-                
+            VStack(alignment: .leading) {
+                Image("meat")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .overlay(alignment: .bottom) {
+                        Text(category)
+                            .font(.headline)
+//                            .minimumScaleFactor(0.1)
+                            .foregroundColor(.white)
+                            .shadow(color: .black, radius: 3, x: 0, y: 0)
+                            .frame(maxWidth: 150)
+                            .padding()
+                    }
             }
-            .frame(maxWidth: .infinity, minHeight: 70)
-            .background(Color.white) // Set the background color
         }
         .cornerRadius(10) // Add rounded corners
         .shadow(radius: 5) // Add a subtle shadow

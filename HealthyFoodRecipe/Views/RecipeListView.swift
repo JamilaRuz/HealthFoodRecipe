@@ -15,14 +15,40 @@ struct RecipeListView: View {
     @Query private var menuItems: [MenuItem]
     
     var body: some View {
-        List() {
-            ForEach(recipes.filter {$0.category == category}, id: \.self) { thisRecipe in
-                NavigationLink(destination: RecipeDetails(thisRecipe: thisRecipe)) {
-                    Text(thisRecipe.name)
+        VStack {
+            List() {
+                ForEach(recipes.filter {$0.category == category}, id: \.self) { recipe in
+                    NavigationLink(destination: RecipeDetails(recipe: recipe)) {
+                        HStack {
+                            Image("meat")
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 100, height: 80)
+                                .cornerRadius(5)
+                            
+                            VStack(alignment: .leading, spacing: 10) {
+                                Text(recipe.name)
+                                    .font(.headline)
+                                    .bold()
+                                Text(recipe.name)
+                                    .font(.caption)
+                                    .foregroundColor(.gray)
+//                                    .baselineOffset(15)
+                            }
+                        }
+                    }
                 }
             }
+            .background(Color.white)
+            .listStyle(.grouped)
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .cornerRadius(10)
         .navigationTitle("Recipes")
+        .background {
+            Color.blue.opacity(0.1)
+                .ignoresSafeArea()
+        }
     }
 }
 
