@@ -11,6 +11,8 @@ import SwiftData
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query var menuItems: [MenuItem]
+    @State private var isSubscribed = false
+    
     //    @Query var recipes: [Recipe]
     
     var body: some View {
@@ -35,24 +37,34 @@ struct ContentView: View {
                                                 .lineLimit(1)
                                                 .font(.callout)
                                                 .bold()
+                                                .opacity(isSubscribed ? 1.0 : 0.5)
                                             Text("(\(getCategory(for: recipeSelected.recipeName ?? "")))")
                                                 .foregroundStyle(.secondary)
                                                 .font(.caption)
                                         }
+                                        
                                         Spacer()
-                                        Image(systemName: "checkmark")
+                                        
+                                        Image(systemName: isSubscribed ? "checkmark.circle.fill" : "circle")
+                                            .foregroundColor(.pink)
+                                            .padding()
+                                            .onTapGesture {
+                                                withAnimation(.easeInOut(duration: 1.0)) {
+                                                    isSubscribed.toggle()
+                                                }
+                                            }
                                     }
-//                                    .contentShape(Rectangle())
+                                    .contentShape(Rectangle())
                                 }
                             }
-//                            .listRowSeparatorTint(.pink)
+                            .listRowSeparatorTint(.pink)
                         }//section
                     }
-                    .listRowBackground(
-                        Capsule()
-                            .fill(Color(white: 1, opacity: 0.8))
-                            .padding(.vertical, 2)
-                    )
+//                    .listRowBackground(
+//                        Capsule()
+//                            .fill(Color(white: 1, opacity: 0.8))
+//                            .padding(.vertical, 2)
+//                    )
                 } //list
                 
             } //Vstack main
@@ -60,12 +72,13 @@ struct ContentView: View {
             .navigationBarTitleDisplayMode(.inline)
             .scrollContentBackground(.hidden)
             .background(
-                Image("fruits-bg")
-                    .resizable()
-                    .scaledToFill()
-                    .blur(radius: 3)
-                    .overlay(Color.indigo.opacity(0.1))
-                    .ignoresSafeArea(.container)
+//                Image("fruits-bg")
+//                    .resizable()
+//                    .scaledToFill()
+//                    .blur(radius: 3)
+//                    .overlay(Color.indigo.opacity(0.1))
+//                    .ignoresSafeArea(.container)
+                LinearGradient(colors: [.lightPurple, .pink, .white], startPoint: .topLeading, endPoint: .bottomTrailing)
             )
         }
         
