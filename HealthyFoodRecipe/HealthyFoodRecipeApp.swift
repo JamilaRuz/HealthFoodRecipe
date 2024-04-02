@@ -25,7 +25,7 @@ struct HealthyFoodRecipeApp: App {
 
     var body: some Scene {
         WindowGroup {
-            LandingView()
+            ContentView()
         }
         .modelContainer(sharedModelContainer)
     }
