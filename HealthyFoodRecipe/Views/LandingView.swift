@@ -22,7 +22,7 @@ struct LandingView: View {
                     Label("Weekly menu", systemImage: "menucard")
                 }
             
-            FavouritesView()
+            FavouriteListView()
                 .tabItem {
                     Label("Favourites", systemImage: "heart")
                 }

@@ -37,7 +37,7 @@ struct ContentView: View {
                                                 .lineLimit(1)
                                                 .font(.callout)
                                                 .bold()
-                                                .opacity(isSubscribed ? 1.0 : 0.5)
+                                                .opacity(isSubscribed ? 0.3 : 1.0)
                                             Text("(\(getCategory(for: recipeSelected.recipeName ?? "")))")
                                                 .foregroundStyle(.secondary)
                                                 .font(.caption)

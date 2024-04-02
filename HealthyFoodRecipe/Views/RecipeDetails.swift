@@ -22,7 +22,6 @@ struct RecipeDetails: View {
     var body: some View {
         
         ScrollView {
-            
             VStack {
                 Image(recipe.image)
                     .resizable()
@@ -41,25 +40,19 @@ struct RecipeDetails: View {
                 VStack(alignment: .leading, spacing: 10) {
                     HStack {
                         Text("Ingredients")
+                            .font(.headline)
                         Spacer()
                         Button(action: {
                             isFavorited.toggle()
+                            recipe.isFavorite = isFavorited
                         }) {
-                            if isFavorited {
-                                Image(systemName: "heart.fill")
-                                    .resizable()
-                                    .tint(Color.pink)
-                                    .frame(width: 30, height: 30)
-                            } else {
-                                Image(systemName: "heart.fill")
-                                    .resizable()
-                                    .tint(Color.gray)
-                                    .frame(width: 30, height: 30)
-                            }
+                            Image(systemName: recipe.isFavorite ? "heart.fill" : "heart")
+                                .resizable()
+                                .tint(Color.pink)
+                                .frame(width: 30, height: 30)
                         }
-//                        .disabled(isFavorited)
                     }
-                        .font(.headline)
+                        
                     ForEach(recipe.ingredients, id: \.name) { ingredient in
                         HStack(spacing: 10) {
                             Text("- \(ingredient.name)")
