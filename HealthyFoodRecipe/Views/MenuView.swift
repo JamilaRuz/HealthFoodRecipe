@@ -11,6 +11,7 @@ import SwiftData
 struct MenuView: View {
     @Environment(\.modelContext) private var modelContext
     @Query var menuItems: [MenuItem]
+    @Query var recipes: [Recipe]
     @State private var isSubscribed = false
     
     //    @Query var recipes: [Recipe]
@@ -91,5 +92,5 @@ struct MenuView: View {
 
 #Preview {
     MenuView()
-        .modelContainer(for: MenuItem.self, inMemory: true)
+        .modelContainer(for: MenuItem.self, inMemory: false)
 }

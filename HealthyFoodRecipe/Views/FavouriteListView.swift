@@ -10,9 +10,11 @@ import SwiftData
 
 struct FavouriteListView: View {
     @Environment(\.modelContext) var modelContext
-    @Query private var menuItems: [MenuItem]
+    @Query private var recipes: [Recipe]
 
-    let favorites = recipes.filter {$0.isFavorite}
+    var favorites: [Recipe] {
+         recipes.filter {$0.isFavorite}
+    }
     
     var body: some View {
         NavigationStack {
@@ -34,7 +36,6 @@ struct FavouriteListView: View {
                                     Text(recipe.name)
                                         .font(.caption)
                                         .foregroundColor(.gray)
-                                    //                                    .baselineOffset(15)
                                 }
                             }
                         }
@@ -52,5 +53,5 @@ struct FavouriteListView: View {
 
 #Preview {
     FavouriteListView()
-        .modelContainer(for: Recipe.self, inMemory: true)
+        .modelContainer(for: Recipe.self, inMemory: false)
 }

@@ -10,7 +10,7 @@ import SwiftData
 
 struct CategoryListView: View {
     @Environment(\.modelContext) var modelContext
-    @Query private var menuItems: [MenuItem]
+    @Query private var recipes: [Recipe]
     
     let images = ["dessert", "dish", "garnish", "meat", "soup"]
     let columns = [
@@ -58,6 +58,6 @@ struct CategoryListView: View {
 
 #Preview {
     CategoryListView()
-        .modelContainer(for: MenuItem.self, inMemory: true)
+        .modelContainer(for: Recipe.self, inMemory: true)
 //        .modelContainer(for: Recipe.self, inMemory: true)
 }
