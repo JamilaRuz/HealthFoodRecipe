@@ -12,9 +12,11 @@ import SwiftData
 final class MenuItem {
     var recipeName: String?
     var day: String?
+    var isChecked: Bool
     
-    init(recipeName: String, day: String) {
+    init(recipeName: String, day: String, isChecked: Bool = false) {
         self.recipeName = recipeName
         self.day = day
+        self.isChecked = isChecked
     }
 }

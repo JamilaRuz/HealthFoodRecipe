@@ -26,7 +26,7 @@ struct RecipeListView: View {
             VStack {
                 List() {
                     ForEach(filteredRecipes, id: \.self) { recipe in
-                        NavigationLink(destination: RecipeDetails(recipe: recipe)) {
+                        NavigationLink(destination: RecipeDetailView(recipe: recipe)) {
                             HStack {
                                 Image("meat")
                                     .resizable()

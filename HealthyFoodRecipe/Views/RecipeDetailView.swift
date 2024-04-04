@@ -8,15 +8,17 @@
 import SwiftUI
 import SwiftData
 
-struct RecipeDetails: View {
-    @Environment(\.modelContext) var modelContext
+
+
+struct RecipeDetailView: View {
     @Query private var menuItems: [MenuItem]
-    @State private var isFavorited = false
-    
-    @Bindable var recipe: Recipe
-    
-    @State var selectedDay = Day.Monday
+    @Environment(\.modelContext) var modelContext
     @Environment(\.dismiss) var dismiss
+
+    @State private var isFavorited = false
+    @State private var isSelecting = false
+    @State var selectedDay = Day.Monday
+    @Bindable var recipe: Recipe
     
     var body: some View {
         
@@ -25,7 +27,8 @@ struct RecipeDetails: View {
                 Image(recipe.image)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .frame(maxWidth: .infinity, maxHeight: 300)
+                    .clipped()
             } //image
             .frame(height: 300)
             .background(LinearGradient(gradient: Gradient(colors: [Color(.gray).opacity(0.3), Color(.gray)]), startPoint: .top, endPoint: .bottom))
@@ -47,7 +50,7 @@ struct RecipeDetails: View {
                         }) {
                             Image(systemName: recipe.isFavorite ? "heart.fill" : "heart")
                                 .resizable()
-                                .tint(Color.pink)
+                                .tint(Color.lightPurple)
                                 .frame(width: 30, height: 30)
                         }
                     }
@@ -69,12 +72,17 @@ struct RecipeDetails: View {
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 
-                HStack {
+                VStack(spacing: 0) {
+                    Text("Select a day to add to the menu")
+                        .foregroundColor(.gray)
+                        .font(.caption2)
+                    
                     Picker("Select a day to add to the menu", selection: $selectedDay) {
                         ForEach(Day.allCases, id: \.self) {
                             Text($0.rawValue).tag($0)
                         }
                     }
+                    .pickerStyle(.menu)
                     
                     Button(action: {
                         let thisMenuItem = MenuItem(recipeName: recipe.name, day: selectedDay.rawValue)
@@ -82,8 +90,14 @@ struct RecipeDetails: View {
                         
                         dismiss()
                     }) {
-                        Text("Add to weekly menu")
-                            .padding()
+                        Text("Add to menu")
+                            .frame(width: 150, height: 50)
+                            .background(LinearGradient(colors: [.purple, .lightPurple], startPoint: .top, endPoint: .bottom))
+                            .foregroundColor(.white)
+                            .font(.body)
+                            .bold()
+                            .cornerRadius(10)
+                            .padding(15)
                     }
                 }
             }
@@ -96,7 +110,7 @@ struct RecipeDetails: View {
 }
 
 #Preview {
-    RecipeDetails(recipe: 
+    RecipeDetailView(recipe: 
                     Recipe(
                         name: "Strawberry Chia Seed Pudding",
                         image: "dessert",
