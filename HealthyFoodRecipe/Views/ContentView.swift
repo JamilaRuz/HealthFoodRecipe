@@ -26,6 +26,9 @@ struct ContentView: View {
                     Label("Favourites", systemImage: "heart")
                 }
         }
+        .onAppear() {
+            UITabBar.appearance().backgroundColor = UIColor(.lightPink)
+        }
     }
 }
 

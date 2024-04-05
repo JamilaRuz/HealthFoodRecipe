@@ -18,13 +18,15 @@ struct MenuView: View {
             VStack {
                 if menuItems.isEmpty {
                     VStack(alignment: .center) {
+                        Image("logo1")
+                            .resizable()
+                            .frame(width: 200, height: 200)
+                            .scaledToFit()
                         Text("No recipe is chosen for the week's menu, please go to the main page and choose your favorite dish!")
                             .padding()
-                            .font(.title2)
-                            .foregroundColor(.gray)
-                            .background(.white)
-                            .cornerRadius(20)
-                            .frame(width: 350, alignment: .center)
+                            .font(.title)
+                            .foregroundColor(.white)
+                            .multilineTextAlignment(.center)
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                 } else {
