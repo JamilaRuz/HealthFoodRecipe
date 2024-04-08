@@ -21,25 +21,28 @@ enum Category: String {
 
 @Model
 class Recipe: Identifiable {
-    let id = UUID()
+    @Attribute(.unique)
+//    let id = UUID()
     var name: String
     var image: String
     var ingredients: [Ingredient]
     var directions: String
     var category: Category.RawValue
     var isFavorite: Bool
+    var menuItems: [MenuItem]?
     
-    init(name: String, image: String, ingredients: [Ingredient], directions: String, category: Category.RawValue, isFavorite: Bool) {
+    init(name: String, image: String, ingredients: [Ingredient], directions: String, category: Category.RawValue, isFavorite: Bool, menuItems: [MenuItem]) {
         self.name = name
         self.image = image
         self.ingredients = ingredients
         self.directions = directions
         self.category = category
         self.isFavorite = isFavorite
+        self.menuItems = menuItems
     }
 }
 
-struct Ingredient: Codable {
+struct Ingredient: Codable, Hashable {
     var name: String
     var unit: String
     var quantity: Float

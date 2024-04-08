@@ -10,13 +10,15 @@ import SwiftData
 
 @Model
 final class MenuItem {
-    var recipeName: String?
     var day: String?
     var isChecked: Bool
     
-    init(recipeName: String, day: String, isChecked: Bool = false) {
-        self.recipeName = recipeName
+    @Relationship(deleteRule: .cascade, inverse: \Recipe.menuItems)
+    var recipe: Recipe?
+    
+    init(day: String, isChecked: Bool, recipe: Recipe) {
         self.day = day
         self.isChecked = isChecked
+        self.recipe = recipe
     }
 }

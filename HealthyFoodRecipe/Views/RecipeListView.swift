@@ -18,6 +18,7 @@ struct RecipeListView: View {
     var filteredRecipes: [Recipe] {
         let categoryFiltered = recipes.filter {$0.category == category}
         guard !searchTerm.isEmpty else { return categoryFiltered }
+        
         return categoryFiltered.filter { $0.name.localizedCaseInsensitiveContains(searchTerm)}
     }
     
@@ -34,14 +35,28 @@ struct RecipeListView: View {
                                     .frame(width: 100, height: 80)
                                     .cornerRadius(5)
                                 
-                                VStack(alignment: .leading, spacing: 10) {
+                                VStack(alignment: .leading, spacing: 5) {
                                     Text(recipe.name)
                                         .font(.headline)
                                         .bold()
-                                    Text(recipe.name)
-                                        .font(.caption)
+                                    
+                                    let allIngreds = recipe.ingredients.map{$0.name}.joined(separator: ", ")
+                                    Text(allIngreds)
+                                        .font(.system(size: 14))
                                         .foregroundColor(.gray)
+                                    
+                                    HStack {
+                                        if recipe.isFavorite {
+                                            Image(systemName: "heart.fill")
+                                                .foregroundColor(.accentColor)
+                                        }
+                                        if !(recipe.menuItems?.isEmpty ?? true) {
+                                            Image(systemName: "menucard.fill")
+                                                .foregroundColor(.purple)
+                                        }
+                                    }
                                 }
+                                .padding(.horizontal, 5)
                             }
                         }
                     }
@@ -58,6 +73,6 @@ struct RecipeListView: View {
 }
 
 #Preview {
-    RecipeListView(category: "Cake")
-        .modelContainer(for: MenuItem.self, inMemory: true)
+    RecipeListView(category: "Breakfasts")
+        .modelContainer(for: Recipe.self, inMemory: true)
 }

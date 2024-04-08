@@ -21,7 +21,6 @@ struct RecipeDetailView: View {
     @Bindable var recipe: Recipe
     
     var body: some View {
-        
         ScrollView {
             VStack {
                 Image(recipe.image)
@@ -56,10 +55,10 @@ struct RecipeDetailView: View {
                     }
                         
                     ForEach(recipe.ingredients, id: \.name) { ingredient in
-                        HStack(spacing: 10) {
-                            Text("- \(ingredient.name)")
+                        HStack(spacing: 5) {
                             Text(String(format: "%g", ingredient.quantity))
                             Text("(\(ingredient.unit))")
+                            Text("- \(ingredient.name)")
                         }
                     }
                     Divider()
@@ -85,7 +84,7 @@ struct RecipeDetailView: View {
                     .pickerStyle(.menu)
                     
                     Button(action: {
-                        let thisMenuItem = MenuItem(recipeName: recipe.name, day: selectedDay.rawValue)
+                        let thisMenuItem = MenuItem(day: selectedDay.rawValue, isChecked: false, recipe: recipe)
                         modelContext.insert(thisMenuItem)
                         
                         dismiss()
@@ -121,7 +120,8 @@ struct RecipeDetailView: View {
                         directions:
                         "In a medium saucepan combine 3 cups of the strawberries and the orange juice. Mash until berries are coarsely chopped. Cook over medium until mixture has a jam-like consistency, about 20 minutes. Cool 15 minutes. In a medium bowl whisk together milk, chia seeds, maple syrup, and vanilla. Stir in cooked strawberries. Cover and chill at least 3 hours or overnight. Spoon pudding and the remaining 3 cups fresh strawberries into serving dishes or glasses.",
                         category: "Drinks",
-                        isFavorite: false
+                        isFavorite: false,
+                        menuItems: []
     )
 )
         .modelContainer(for: MenuItem.self, inMemory: true)

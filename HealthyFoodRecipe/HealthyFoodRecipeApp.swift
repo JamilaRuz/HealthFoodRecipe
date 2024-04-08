@@ -31,7 +31,8 @@ struct HealthyFoodRecipeApp: App {
                     directions:
                     "In a medium saucepan combine 3 cups of the strawberries and the orange juice. Mash until berries are coarsely chopped. Cook over medium until mixture has a jam-like consistency, about 20 minutes. Cool 15 minutes. In a medium bowl whisk together milk, chia seeds, maple syrup, and vanilla. Stir in cooked strawberries. Cover and chill at least 3 hours or overnight. Spoon pudding and the remaining 3 cups fresh strawberries into serving dishes or glasses.",
                     category: "Drinks",
-                    isFavorite: false
+                    isFavorite: false,
+                    menuItems: []
                 ),
                 Recipe(
                     name: "Crunchy Hash Brown Waffles with Applesauce",
@@ -40,7 +41,8 @@ struct HealthyFoodRecipeApp: App {
                         [Ingredient(name: "extra-firm tofu, drained", unit: "package", quantity: 12), Ingredient(name: "lemon juice", unit: "tbs", quantity: 3), Ingredient(name: "white wine vinegar", unit: "tbs", quantity: 1), Ingredient(name: "yellow mustard", unit: "ts", quantity: 0.25)],
                     directions: "For Tofu Sour Cream, in a blender combine tofu, lemon juice, white wine vinegar; ½ teaspoon sea salt, and the yellow mustard. Cover and blend until smooth and creamy. Refrigerate until ready to use. Preheat oven to 250°F. Place a cooling rack inside a baking sheet. In a food processor combine potatoes, carrot, and cabbage; pulse until finely chopped. Transfer chopped vegetables to a large nonstick skillet; cook over medium-low about 5 minutes or until potatoes are almost tender, stirring occasionally.",
                     category: "Breakfasts",
-                    isFavorite: false
+                    isFavorite: false,
+                    menuItems: []
                 ),
                 Recipe(
                     name: "Fried eggs with avocado",
@@ -49,7 +51,8 @@ struct HealthyFoodRecipeApp: App {
                         [Ingredient(name: "extra-firm tofu, drained", unit: "package", quantity: 12), Ingredient(name: "lemon juice", unit: "tbs", quantity: 3), Ingredient(name: "white wine vinegar", unit: "tbs", quantity: 1), Ingredient(name: "yellow mustard", unit: "ts", quantity: 0.25)],
                     directions: "For Tofu Sour Cream, in a blender combine tofu, lemon juice, white wine vinegar; ½ teaspoon sea salt, and the yellow mustard. Cover and blend until smooth and creamy. Refrigerate until ready to use. Preheat oven to 250°F. Place a cooling rack inside a baking sheet. In a food processor combine potatoes, carrot, and cabbage; pulse until finely chopped. Transfer chopped vegetables to a large nonstick skillet; cook over medium-low about 5 minutes or until potatoes are almost tender, stirring occasionally.",
                     category: "Breakfasts",
-                    isFavorite: false
+                    isFavorite: false,
+                    menuItems: []
                 ),
                 Recipe(
                     name: "Toast with coffee",
@@ -58,7 +61,8 @@ struct HealthyFoodRecipeApp: App {
                         [Ingredient(name: "extra-firm tofu, drained", unit: "package", quantity: 12), Ingredient(name: "lemon juice", unit: "tbs", quantity: 3), Ingredient(name: "white wine vinegar", unit: "tbs", quantity: 1), Ingredient(name: "yellow mustard", unit: "ts", quantity: 0.25)],
                     directions: "For Tofu Sour Cream, in a blender combine tofu, lemon juice, white wine vinegar; ½ teaspoon sea salt, and the yellow mustard. Cover and blend until smooth and creamy. Refrigerate until ready to use. Preheat oven to 250°F. Place a cooling rack inside a baking sheet. In a food processor combine potatoes, carrot, and cabbage; pulse until finely chopped. Transfer chopped vegetables to a large nonstick skillet; cook over medium-low about 5 minutes or until potatoes are almost tender, stirring occasionally.",
                     category: "Breakfasts",
-                    isFavorite: false
+                    isFavorite: false,
+                    menuItems: []
                 ),
                 Recipe(
                     name: "Strawberry-Radish Salad",
@@ -68,7 +72,8 @@ struct HealthyFoodRecipeApp: App {
 
                     directions: "For dressing, in a medium bowl combine the first five ingredients (through pepper) and 2 tablespoons water. Blend with an immersion blender or in a mini food processor until smooth. Stir in shallot. Let stand at room temperature 15 minutes to let flavors blend.",
                     category: "Salads",
-                    isFavorite: false
+                    isFavorite: false,
+                    menuItems: []
                 ),
                 Recipe(
                     name: "Energy Balls and Bars",
@@ -77,7 +82,8 @@ struct HealthyFoodRecipeApp: App {
                         [Ingredient(name: "extra-firm tofu, drained", unit: "package", quantity: 12), Ingredient(name: "lemon juice", unit: "tbs", quantity: 3), Ingredient(name: "white wine vinegar", unit: "tbs", quantity: 1), Ingredient(name: "yellow mustard", unit: "ts", quantity: 0.25)],
                     directions: "Preheat oven to 350°F. Line a 2-quart square baking dish with parchment paper. For filling, in a small saucepan combine figs and 1 cup water. Bring to boiling; reduce heat. Cover and simmer 10 minutes or until figs are soft. Transfer figs and cooking liquid to a blender or food processor. Add lemon juice and vanilla. Cover and blend until smooth.",
                     category: "Appetizers",
-                    isFavorite: false
+                    isFavorite: false,
+                    menuItems: []
                 ),
                 Recipe(
                     name: "Creamy Spinach and Artichoke Soup",
@@ -86,7 +92,8 @@ struct HealthyFoodRecipeApp: App {
                         [Ingredient(name: "extra-firm tofu, drained", unit: "package", quantity: 12), Ingredient(name: "lemon juice", unit: "tbs", quantity: 3), Ingredient(name: "white wine vinegar", unit: "tbs", quantity: 1), Ingredient(name: "yellow mustard", unit: "ts", quantity: 0.25)],
                     directions: "Preheat oven to 350°F. Line a 2-quart square baking dish with parchment paper. For filling, in a small saucepan combine figs and 1 cup water. Bring to boiling; reduce heat. Cover and simmer 10 minutes or until figs are soft. Transfer figs and cooking liquid to a blender or food processor. Add lemon juice and vanilla. Cover and blend until smooth.",
                     category: "Soups",
-                    isFavorite: false
+                    isFavorite: false,
+                    menuItems: []
                 ),
                 Recipe(
                     name: "Creamy Spinach and Artichoke Soup",
@@ -95,7 +102,8 @@ struct HealthyFoodRecipeApp: App {
                         [Ingredient(name: "extra-firm tofu, drained", unit: "package", quantity: 12), Ingredient(name: "lemon juice", unit: "tbs", quantity: 3), Ingredient(name: "white wine vinegar", unit: "tbs", quantity: 1), Ingredient(name: "yellow mustard", unit: "ts", quantity: 0.25)],
                     directions: "Preheat oven to 350°F. Line a 2-quart square baking dish with parchment paper. For filling, in a small saucepan combine figs and 1 cup water. Bring to boiling; reduce heat. Cover and simmer 10 minutes or until figs are soft. Transfer figs and cooking liquid to a blender or food processor. Add lemon juice and vanilla. Cover and blend until smooth.",
                     category: "Main",
-                    isFavorite: true
+                    isFavorite: true,
+                    menuItems: []
                 ),
                 Recipe(
                     name: "Creamy Spinach and Artichoke Soup",
@@ -104,7 +112,8 @@ struct HealthyFoodRecipeApp: App {
                         [Ingredient(name: "extra-firm tofu, drained", unit: "package", quantity: 12), Ingredient(name: "lemon juice", unit: "tbs", quantity: 3), Ingredient(name: "white wine vinegar", unit: "tbs", quantity: 1), Ingredient(name: "yellow mustard", unit: "ts", quantity: 0.25)],
                     directions: "Preheat oven to 350°F. Line a 2-quart square baking dish with parchment paper. For filling, in a small saucepan combine figs and 1 cup water. Bring to boiling; reduce heat. Cover and simmer 10 minutes or until figs are soft. Transfer figs and cooking liquid to a blender or food processor. Add lemon juice and vanilla. Cover and blend until smooth.",
                     category: "Desserts",
-                    isFavorite: false
+                    isFavorite: false,
+                    menuItems: []
                 ),
                 Recipe(
                     name: "Creamy Spinach and Artichoke Soup",
@@ -113,7 +122,8 @@ struct HealthyFoodRecipeApp: App {
                         [Ingredient(name: "extra-firm tofu, drained", unit: "package", quantity: 12), Ingredient(name: "lemon juice", unit: "tbs", quantity: 3), Ingredient(name: "white wine vinegar", unit: "tbs", quantity: 1), Ingredient(name: "yellow mustard", unit: "ts", quantity: 0.25)],
                     directions: "Preheat oven to 350°F. Line a 2-quart square baking dish with parchment paper. For filling, in a small saucepan combine figs and 1 cup water. Bring to boiling; reduce heat. Cover and simmer 10 minutes or until figs are soft. Transfer figs and cooking liquid to a blender or food processor. Add lemon juice and vanilla. Cover and blend until smooth.",
                     category: "Side",
-                    isFavorite: true
+                    isFavorite: true,
+                    menuItems: []
                 )
             ]
             

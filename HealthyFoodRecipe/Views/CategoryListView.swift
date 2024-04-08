@@ -12,7 +12,6 @@ struct CategoryListView: View {
     @Environment(\.modelContext) var modelContext
     @Query private var recipes: [Recipe]
     
-    let images = ["dessert", "dish", "garnish", "meat", "soup"]
     let columns = [
         GridItem(.adaptive(minimum: 150))
     ]
@@ -20,18 +19,7 @@ struct CategoryListView: View {
     var body: some View {
         NavigationStack {
             VStack(alignment: .leading) {
-                ScrollView(.horizontal, showsIndicators: true) {
-                    HStack(spacing: 0) {
-                        ForEach(images, id: \.self) { image in
-                            Image(image)
-                                .scaledToFill()
-                        }
-                    }
-                }
-                .frame(maxWidth: .infinity, maxHeight: 150)
-                .cornerRadius(10)
-                .shadow(radius: 10)
-                
+                CarouselView()
                 Text("Choose a category")
                     .font(.title2)
                 ScrollView {

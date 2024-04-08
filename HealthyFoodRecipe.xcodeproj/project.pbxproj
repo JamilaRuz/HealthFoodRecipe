@@ -21,6 +21,7 @@
 		8D89C1252BB1D69F006FCF81 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D89C1242BB1D69F006FCF81 /* Recipe.swift */; };
 		8DE46A992BB733DC00482A6C /* menu-bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8DE46A982BB733DB00482A6C /* menu-bg.jpg */; };
 		8DE46A9B2BBC642D00482A6C /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE46A9A2BBC642D00482A6C /* MenuView.swift */; };
+		8DE46A9F2BC0CFBB00482A6C /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE46A9E2BC0CFBB00482A6C /* CarouselView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		8D89C1242BB1D69F006FCF81 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		8DE46A982BB733DB00482A6C /* menu-bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "menu-bg.jpg"; sourceTree = "<group>"; };
 		8DE46A9A2BBC642D00482A6C /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
+		8DE46A9E2BC0CFBB00482A6C /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 				8D89C11F2BADD497006FCF81 /* CardView.swift */,
 				8D1EB37B2BAB29E200285053 /* RecipeListView.swift */,
 				8DE46A9A2BBC642D00482A6C /* MenuView.swift */,
+				8DE46A9E2BC0CFBB00482A6C /* CarouselView.swift */,
 				8D1EB37D2BAB2D6000285053 /* RecipeDetailView.swift */,
 				8D1EB3822BACE86700285053 /* FavouriteListView.swift */,
 			);
@@ -204,6 +207,7 @@
 				8D1EB35E2BAA29D100285053 /* HealthyFoodRecipeApp.swift in Sources */,
 				8D1EB3832BACE86800285053 /* FavouriteListView.swift in Sources */,
 				8D89C1202BADD497006FCF81 /* CardView.swift in Sources */,
+				8DE46A9F2BC0CFBB00482A6C /* CarouselView.swift in Sources */,
 				8D89C1252BB1D69F006FCF81 /* Recipe.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
