@@ -32,13 +32,13 @@ struct RecipeDetailView: View {
             .frame(height: 300)
             .background(LinearGradient(gradient: Gradient(colors: [Color(.gray).opacity(0.3), Color(.gray)]), startPoint: .top, endPoint: .bottom))
             
-            VStack(spacing: 30) {
+            VStack(spacing: 15) {
                 Text(recipe.name)
                     .font(.title)
                     .bold()
                     .multilineTextAlignment(.center)
                 
-                VStack(alignment: .leading, spacing: 10) {
+                VStack(alignment: .leading, spacing: 5) {
                     HStack {
                         Text("Ingredients")
                             .font(.headline)
@@ -54,13 +54,21 @@ struct RecipeDetailView: View {
                         }
                     }
                         
-                    ForEach(recipe.ingredients, id: \.name) { ingredient in
-                        HStack(spacing: 5) {
-                            Text(String(format: "%g", ingredient.quantity))
-                            Text("(\(ingredient.unit))")
-                            Text("- \(ingredient.name)")
+                    let columns = [
+                        GridItem(.flexible()),
+                        GridItem(.flexible())
+                    ]
+                    
+                    LazyVGrid(columns: columns, spacing: 5) {
+                        ForEach(recipe.ingredients, id: \.name) { ingredient in
+                            Text("\(String(format: "%g", ingredient.quantity)) (\(ingredient.unit)) -")
+                                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                            Text("\(ingredient.name)")
+                                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                                .multilineTextAlignment(.leading)
                         }
                     }
+
                     Divider()
                     
                     VStack(alignment: .leading, spacing: 10) {
@@ -100,7 +108,7 @@ struct RecipeDetailView: View {
                     }
                 }
             }
-            .padding(.horizontal, 40)// why is it so big
+            .padding(.horizontal, 10)// why is it so big
         }
         .ignoresSafeArea(.container, edges: .top)
     }
@@ -112,14 +120,14 @@ struct RecipeDetailView: View {
     RecipeDetailView(recipe: 
                     Recipe(
                         name: "Strawberry Chia Seed Pudding",
-                        image: "dessert",
+                        image: "dish1",
                         ingredients:
-                            [Ingredient(name: "extra-firm tofu, drained", unit: "package", quantity: 12), Ingredient(name: "lemon juice", unit: "tbs", quantity: 3),
+                            [Ingredient(name: "extra-firm tofu, drained somethig somewhere", unit: "pkg", quantity: 12), Ingredient(name: "lemon juice", unit: "tbs", quantity: 3),
                              Ingredient(name: "white wine vinegar", unit: "tbs", quantity: 1),
                              Ingredient(name: "yellow mustard", unit: "ts", quantity: 0.25)],
                         directions:
                         "In a medium saucepan combine 3 cups of the strawberries and the orange juice. Mash until berries are coarsely chopped. Cook over medium until mixture has a jam-like consistency, about 20 minutes. Cool 15 minutes. In a medium bowl whisk together milk, chia seeds, maple syrup, and vanilla. Stir in cooked strawberries. Cover and chill at least 3 hours or overnight. Spoon pudding and the remaining 3 cups fresh strawberries into serving dishes or glasses.",
-                        category: "Drinks",
+                        category: Category(name: "Напитки", image: "drink"),
                         isFavorite: false,
                         menuItems: []
     )

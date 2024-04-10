@@ -8,16 +8,6 @@
 import Foundation
 import SwiftData
 
-enum Category: String {
-    case breakfast = "Breakfast"
-    case soup = "Soups"
-    case salad = "Salads"
-    case appetizers = "Appetizers"
-    case main = "Main"
-    case side = "Side"
-    case dessert = "Dessert"
-    case drink = "Drinks"
-}
 
 @Model
 class Recipe: Identifiable {
@@ -27,11 +17,11 @@ class Recipe: Identifiable {
     var image: String
     var ingredients: [Ingredient]
     var directions: String
-    var category: Category.RawValue
+    var category: Category
     var isFavorite: Bool
     var menuItems: [MenuItem]?
     
-    init(name: String, image: String, ingredients: [Ingredient], directions: String, category: Category.RawValue, isFavorite: Bool, menuItems: [MenuItem]) {
+    init(name: String, image: String, ingredients: [Ingredient], directions: String, category: Category, isFavorite: Bool, menuItems: [MenuItem]) {
         self.name = name
         self.image = image
         self.ingredients = ingredients
@@ -46,4 +36,9 @@ struct Ingredient: Codable, Hashable {
     var name: String
     var unit: String
     var quantity: Float
+}
+
+struct Category: Codable, Hashable {
+    var name: String
+    var image: String
 }

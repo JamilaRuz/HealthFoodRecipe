@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct RecipeListView: View {
-    var category: String
+    var category: Category
     
     @Environment(\.modelContext) var modelContext
     @Query private var recipes: [Recipe]
@@ -29,7 +29,7 @@ struct RecipeListView: View {
                     ForEach(filteredRecipes, id: \.self) { recipe in
                         NavigationLink(destination: RecipeDetailView(recipe: recipe)) {
                             HStack {
-                                Image("meat")
+                                Image(recipe.image)
                                     .resizable()
                                     .scaledToFill()
                                     .frame(width: 100, height: 80)
@@ -37,13 +37,13 @@ struct RecipeListView: View {
                                 
                                 VStack(alignment: .leading, spacing: 5) {
                                     Text(recipe.name)
-                                        .font(.headline)
-                                        .bold()
+                                        .font(.system(size: 18, weight: .medium))
                                     
                                     let allIngreds = recipe.ingredients.map{$0.name}.joined(separator: ", ")
                                     Text(allIngreds)
-                                        .font(.system(size: 14))
+                                        .font(.system(size: 12))
                                         .foregroundColor(.gray)
+                                        .lineLimit(2)
                                     
                                     HStack {
                                         if recipe.isFavorite {
@@ -73,6 +73,6 @@ struct RecipeListView: View {
 }
 
 #Preview {
-    RecipeListView(category: "Breakfasts")
+    RecipeListView(category: Category(name: "Breakfasts", image: "breakfast1"))
         .modelContainer(for: Recipe.self, inMemory: true)
 }

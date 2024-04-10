@@ -72,7 +72,7 @@ struct MenuItemView: View {
                     .font(.callout)
                     .bold()
                     .opacity(menuItem.isChecked ? 0.3 : 1.0)
-                Text("(\(menuItem.recipe?.category ?? ""))")
+                Text("(\(menuItem.recipe?.category.name ?? ""))")
                     .foregroundStyle(.secondary)
                     .font(.caption)
             }

@@ -9,23 +9,24 @@ import SwiftUI
 import SwiftData
 
 struct CardView: View {
-    let category: String
+    let category: Category
     
     var body: some View {
         VStack(alignment: .leading) {
             VStack(alignment: .leading) {
-                Image("meat")
+                Image(category.image)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                    .overlay(alignment: .bottom) {
-                        Text(category)
-                            .font(.headline)
-//                            .minimumScaleFactor(0.1)
-                            .foregroundColor(.white)
-                            .shadow(color: .black, radius: 3, x: 0, y: 0)
-                            .frame(maxWidth: 150)
-                            .padding()
-                    }
+            }
+            .frame(width: 170, height: 120)
+            .overlay(alignment: .bottom) {
+                Text(category.name)
+                    .font(.headline)
+                    .minimumScaleFactor(0.1)
+                    .foregroundColor(.white)
+                    .shadow(color: .black, radius: 3, x: 0, y: 0)
+                    .frame(maxWidth: 150)
+                    .padding()
             }
         }
         .cornerRadius(10) // Add rounded corners
@@ -35,7 +36,7 @@ struct CardView: View {
 
 struct CardView_Previews: PreviewProvider {
     static var previews: some View {
-        CardView(category: "Salads and dressings")
+        CardView(category: Category(name: "Breakfasts", image: "breakfast"))
             .previewLayout(.sizeThatFits)
     }
 }
