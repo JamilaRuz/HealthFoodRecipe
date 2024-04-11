@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CarouselView: View {
-    let images = ["dessert", "dish", "garnish", "salad", "soup"]
+    let images = ["motto1", "motto6", "greens-bg", "dessert", "breakfast"]
 //    let timer = Timer.publish(every: 3.0, on: .main, in: .common).autoconnect()
     @State private var selectedImageIndex: Int = 0
     let screenMidX = UIScreen.main.bounds.midX
@@ -41,14 +41,13 @@ struct CarouselView: View {
         .frame(maxWidth: .infinity, maxHeight: 150)
         .cornerRadius(10)
         .shadow(radius: 20)
-
        
 //        Create navigation dots
         
         HStack {
             ForEach(images.indices, id: \.self) { index in
                 Capsule()
-                    .fill(Color.darkPink.opacity(selectedImageIndex == index ? 1 : 0.33))
+                    .fill(Color.gray.opacity(selectedImageIndex == index ? 1 : 0.33))
                     .frame(width: 35, height: 8)
                     .onTapGesture {
                         selectedImageIndex = index

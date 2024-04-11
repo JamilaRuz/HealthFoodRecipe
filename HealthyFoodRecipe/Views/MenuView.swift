@@ -16,20 +16,9 @@ struct MenuView: View {
         NavigationView {
             VStack {
                 if menuItems.isEmpty {
-                    VStack(alignment: .center) {
-                        Image("logo1")
-                            .resizable()
-                            .frame(width: 200, height: 200)
-                            .scaledToFit()
-                        Text("No recipe is chosen for the week's menu, please go to the main page and choose your favorite dish!")
-                            .padding()
-                            .font(.title3)
-                            .foregroundColor(.gray)
-                            .multilineTextAlignment(.center)
-                    }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    EmptyView(emptyText: "Здесь должно быть меню составленное на неделю. Добавить блюда в меню можно, выбрав конкретное блюдо.")
                 } else {
-                    Text("Menu of the week")
+                    Text("Меню на неделю")
                         .foregroundColor(.white)
                         .font(.title3)
                         .bold()
@@ -53,9 +42,6 @@ struct MenuView: View {
             } //Vstack main
             .navigationBarTitleDisplayMode(.inline)
             .scrollContentBackground(.hidden)
-            .background(
-                LinearGradient(colors: [.darkPink, .lightPink, .white], startPoint: .top, endPoint: .bottom)
-            )
         }// nav view
     }//body
 }

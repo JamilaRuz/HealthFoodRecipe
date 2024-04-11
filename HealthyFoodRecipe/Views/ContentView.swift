@@ -21,7 +21,7 @@ struct ContentView: View {
                     Label("Weekly menu", systemImage: "menucard")
                 }
             
-            FavouriteListView()
+            FavouriteListView(emptyText: "")
                 .tabItem {
                     Label("Favourites", systemImage: "heart")
                 }

@@ -8,5 +8,5 @@
 import Foundation
 
 enum Day:String, CaseIterable {
-    case Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
+    case Понедельник, Вторник, Среда, Четверг, Пятница, Суббота, Воскресенье
 }

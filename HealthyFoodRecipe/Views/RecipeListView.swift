@@ -66,8 +66,8 @@ struct RecipeListView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .cornerRadius(10)
-            .navigationTitle("Recipes")
-            .searchable(text: $searchTerm, prompt: "Search recipe")
+            .navigationTitle("Рецепты")
+            .searchable(text: $searchTerm, prompt: "Поиск рецептов")
         }
     }
 }

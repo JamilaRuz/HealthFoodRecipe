@@ -30,7 +30,7 @@ struct CategoryListView: View {
         NavigationStack {
             VStack(alignment: .leading) {
                 CarouselView()
-                Text("Choose a category")
+                Text("Категории")
                     .font(.title2)
                 ScrollView {
                     LazyVGrid(columns: columns, spacing: 20) {
@@ -43,7 +43,7 @@ struct CategoryListView: View {
                 }
             }
             .padding()
-            .navigationTitle("Our dishes")
+            .navigationTitle("Pohudeyka")
             .frame(maxWidth: .infinity, maxHeight: .infinity)
 //            .background {
 //                Color.lightPurple.opacity(0.5)

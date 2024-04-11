@@ -72,7 +72,7 @@ struct RecipeDetailView: View {
                     Divider()
                     
                     VStack(alignment: .leading, spacing: 10) {
-                        Text("Instructions")
+                        Text("Инструкции")
                             .font(.headline)
                         Text(recipe.directions)
                     }
@@ -80,11 +80,11 @@ struct RecipeDetailView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 
                 VStack(spacing: 0) {
-                    Text("Select a day to add to the menu")
+                    Text("Выберите день для добавления в меню")
                         .foregroundColor(.gray)
                         .font(.caption2)
                     
-                    Picker("Select a day to add to the menu", selection: $selectedDay) {
+                    Picker("Выберите день недели", selection: $selectedDay) {
                         ForEach(Day.allCases, id: \.self) {
                             Text($0.rawValue).tag($0)
                         }
@@ -97,7 +97,7 @@ struct RecipeDetailView: View {
                         
                         dismiss()
                     }) {
-                        Text("Add to menu")
+                        Text("Добавить")
                             .frame(width: 150, height: 50)
                             .background(LinearGradient(colors: [.purple, .lightPurple], startPoint: .top, endPoint: .bottom))
                             .foregroundColor(.white)
@@ -119,12 +119,13 @@ struct RecipeDetailView: View {
 #Preview {
     RecipeDetailView(recipe: 
                     Recipe(
-                        name: "Strawberry Chia Seed Pudding",
+                        name: "Клубничный пуддинг с чиа",
                         image: "dish1",
                         ingredients:
-                            [Ingredient(name: "extra-firm tofu, drained somethig somewhere", unit: "pkg", quantity: 12), Ingredient(name: "lemon juice", unit: "tbs", quantity: 3),
-                             Ingredient(name: "white wine vinegar", unit: "tbs", quantity: 1),
-                             Ingredient(name: "yellow mustard", unit: "ts", quantity: 0.25)],
+                            [Ingredient(name: "Свежая клубника", unit: "гр", quantity: 200),
+                             Ingredient(name: "Семена Чиа", unit: "ч.л", quantity: 3),
+                             Ingredient(name: "Кефир 3.2%", unit: "л", quantity: 1),
+                             Ingredient(name: "Сахзам", unit: "ts", quantity: 0.25)],
                         directions:
                         "In a medium saucepan combine 3 cups of the strawberries and the orange juice. Mash until berries are coarsely chopped. Cook over medium until mixture has a jam-like consistency, about 20 minutes. Cool 15 minutes. In a medium bowl whisk together milk, chia seeds, maple syrup, and vanilla. Stir in cooked strawberries. Cover and chill at least 3 hours or overnight. Spoon pudding and the remaining 3 cups fresh strawberries into serving dishes or glasses.",
                         category: Category(name: "Напитки", image: "drink"),
