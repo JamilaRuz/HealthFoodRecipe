@@ -15,9 +15,9 @@ struct RecipeDetailView: View {
     @Environment(\.modelContext) var modelContext
     @Environment(\.dismiss) var dismiss
 
-    @State private var isFavorited = false
+//    @State private var isFavorited = false
     @State private var isSelecting = false
-    @State var selectedDay = Day.Monday
+    @State var selectedDay = Day.Понедельник
     @Bindable var recipe: Recipe
     
     var body: some View {
@@ -26,7 +26,7 @@ struct RecipeDetailView: View {
                 Image(recipe.image)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                    .frame(maxWidth: .infinity, maxHeight: 300)
+                    .frame(width: UIScreen.main.bounds.width, height: 300)
                     .clipped()
             } //image
             .frame(height: 300)
@@ -44,8 +44,8 @@ struct RecipeDetailView: View {
                             .font(.headline)
                         Spacer()
                         Button(action: {
-                            isFavorited.toggle()
-                            recipe.isFavorite = isFavorited
+//                            isFavorited.toggle()
+                            recipe.isFavorite.toggle()
                         }) {
                             Image(systemName: recipe.isFavorite ? "heart.fill" : "heart")
                                 .resizable()
@@ -118,21 +118,34 @@ struct RecipeDetailView: View {
 
 #Preview {
     RecipeDetailView(recipe: 
-                    Recipe(
-                        name: "Клубничный пуддинг с чиа",
-                        image: "dish1",
-                        ingredients:
-                            [Ingredient(name: "Свежая клубника", unit: "гр", quantity: 200),
-                             Ingredient(name: "Семена Чиа", unit: "ч.л", quantity: 3),
-                             Ingredient(name: "Кефир 3.2%", unit: "л", quantity: 1),
-                             Ingredient(name: "Сахзам", unit: "ts", quantity: 0.25)],
-                        directions:
-                        "In a medium saucepan combine 3 cups of the strawberries and the orange juice. Mash until berries are coarsely chopped. Cook over medium until mixture has a jam-like consistency, about 20 minutes. Cool 15 minutes. In a medium bowl whisk together milk, chia seeds, maple syrup, and vanilla. Stir in cooked strawberries. Cover and chill at least 3 hours or overnight. Spoon pudding and the remaining 3 cups fresh strawberries into serving dishes or glasses.",
-                        category: Category(name: "Напитки", image: "drink"),
-                        isFavorite: false,
-                        menuItems: []
-    )
-)
+//        Recipe(
+//            name: "Клубничный пуддинг с чиа",
+//            image: "dish1",
+//            ingredients:
+//                [Ingredient(name: "Свежая клубника", unit: "гр", quantity: 200),
+//                 Ingredient(name: "Семена Чиа", unit: "ч.л", quantity: 3),
+//                 Ingredient(name: "Кефир 3.2%", unit: "л", quantity: 1),
+//                 Ingredient(name: "Сахзам", unit: "ts", quantity: 0.25)],
+//            directions:
+//            "In a medium saucepan combine 3 cups of the strawberries and the orange juice. Mash until berries are coarsely chopped. Cook over medium until mixture has a jam-like consistency, about 20 minutes. Cool 15 minutes. In a medium bowl whisk together milk, chia seeds, maple syrup, and vanilla. Stir in cooked strawberries. Cover and chill at least 3 hours or overnight. Spoon pudding and the remaining 3 cups fresh strawberries into serving dishes or glasses.",
+//            category: Category(name: "Напитки", image: "drink"),
+//            isFavorite: false,
+//            menuItems: []
+//    )
+         Recipe(
+             name: "ПП Мохито",
+             image: "drink1",
+             ingredients:
+                 [Ingredient(name: "Минеральная вода", unit: "л", quantity: 1),
+                  Ingredient(name: "лайм", unit: "шт", quantity: 2),
+                  Ingredient(name: "сахзам", unit: "ст.л", quantity: 3),
+                  Ingredient(name: "листья мяты", unit: "шт", quantity: 10)],
+             directions: "Нарезать лайм кружочками. В минеланую воду добавить лайм, сахзам по вкусу, мяты и выдавить сок 2 лаймов. Все перемешать и потреблять добавив лед.",
+             category: Category(name: "Напитки", image: "drink"),
+             isFavorite: true,
+             menuItems: []
+         )
+     )
         .modelContainer(for: MenuItem.self, inMemory: true)
  
 //    do {
