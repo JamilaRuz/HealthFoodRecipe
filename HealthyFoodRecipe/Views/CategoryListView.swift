@@ -54,8 +54,25 @@ struct CategoryListView: View {
     }
 }
 
-#Preview {
-    CategoryListView()
-        .modelContainer(for: Recipe.self, inMemory: true)
-//        .modelContainer(for: Recipe.self, inMemory: true)
+struct CategoryListView_Previews: PreviewProvider {
+
+    static var previews: some View {
+        let categories = [
+            Category(name: "Завтраки", image: "breakfast"),
+            Category(name: "Основные блюда", image: "dish"),
+            Category(name: "Супы", image: "soup"),
+            Category(name: "Салаты", image: "salad"),
+            Category(name: "Выпечки", image: "baking"),
+            Category(name: "Аппетайзеры", image: "appetizer"),
+            Category(name: "Напитки", image: "drink"),
+            Category(name: "Дессерты", image: "dessert")
+        ]
+        
+        CategoryListView()
+        
+        ForEach(1...6, id: \.self) { number in
+            CardView(category: categories[number - 1])
+                .modelContainer(for: Recipe.self, inMemory: true)
+        }
+    }
 }
