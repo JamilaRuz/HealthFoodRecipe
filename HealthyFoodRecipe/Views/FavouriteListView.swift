@@ -55,7 +55,7 @@ struct FavouriteListView: View {
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .cornerRadius(10)
-                .navigationTitle("Favorites")
+                .navigationTitle("Избранное")
             }
         }
     }
