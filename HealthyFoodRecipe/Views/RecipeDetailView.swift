@@ -17,7 +17,7 @@ struct RecipeDetailView: View {
 
 //    @State private var isFavorited = false
     @State private var isSelecting = false
-    @State var selectedDay = Day.Понедельник
+    @State var selectedDay = Day.Monday
     @Bindable var recipe: Recipe
     
     var body: some View {
@@ -86,7 +86,7 @@ struct RecipeDetailView: View {
                     
                     Picker("Выберите день недели", selection: $selectedDay) {
                         ForEach(Day.allCases, id: \.self) {
-                            Text($0.rawValue).tag($0)
+                            Text($0.displayName).tag($0)
                         }
                     }
                     .pickerStyle(.menu)

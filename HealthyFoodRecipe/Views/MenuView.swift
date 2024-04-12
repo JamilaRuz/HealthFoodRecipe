@@ -25,7 +25,7 @@ struct MenuView: View {
                     List {
                         ForEach(Day.allCases, id: \.self) { weekday in
                             Section(
-                                header: Text("\(weekday)")
+                                header: Text("\(weekday.displayName)")
                                     .font(.body)
                             ) {
                                 ForEach(menuItems) { menuItem in
@@ -42,6 +42,9 @@ struct MenuView: View {
             } //Vstack main
             .navigationBarTitleDisplayMode(.inline)
             .scrollContentBackground(.hidden)
+            .background(
+                LinearGradient(colors: [.darkPink, .lightPink, .white], startPoint: .top, endPoint: .bottom)
+            )
         }// nav view
     }//body
 }
