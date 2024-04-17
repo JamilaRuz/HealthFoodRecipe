@@ -10,7 +10,7 @@ import SwiftData
 
 struct CardView: View {
     let category: Category
-    
+
     var body: some View {
         VStack(alignment: .leading) {
             VStack(alignment: .leading) {

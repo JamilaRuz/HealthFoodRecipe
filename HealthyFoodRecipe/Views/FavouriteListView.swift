@@ -29,7 +29,7 @@ struct FavouriteListView: View {
                         ForEach(favorites, id: \.self) { recipe in
                             NavigationLink(destination: RecipeDetailView(recipe: recipe)) {
                                 HStack {
-                                    Image(recipe.image)
+                                    Image(recipe.images[0])
                                         .resizable()
                                         .scaledToFill()
                                         .frame(width: 100, height: 80)
