@@ -25,15 +25,40 @@ struct RecipeListView: View {
     var body: some View {
         NavigationStack {
             VStack {
+                Text("\(filteredRecipes.count) рецептов")
+                    .font(.title)
+                    .fontWeight(.semibold)
                 List() {
                     ForEach(filteredRecipes, id: \.self) { recipe in
                         NavigationLink(destination: RecipeDetailView(recipe: recipe)) {
                             HStack {
-                                Image(recipe.images[0])
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(width: 100, height: 80)
-                                    .cornerRadius(5)
+                                AsyncImage(url: URL(string: recipe.images.first ?? "")) { phase in
+                                    switch phase {
+                                    case .empty:
+                                        ProgressView()
+                                            .frame(width: 100, height: 80)
+                                            .background(Color.gray.opacity(0.2))
+                                            .cornerRadius(5)
+                                    case .success(let image):
+                                        image
+                                            .resizable()
+                                            .scaledToFill()
+                                            .frame(width: 100, height: 80)
+                                            .cornerRadius(5)
+                                    case .failure:
+                                        Image("placeholderImg")
+                                            .resizable()
+                                            .scaledToFill()
+                                            .frame(width: 100, height: 80)
+                                            .cornerRadius(5)
+                                    @unknown default:
+                                        Image("placeholderImg")
+                                            .resizable()
+                                            .scaledToFill()
+                                            .frame(width: 100, height: 80)
+                                            .cornerRadius(5)
+                                    }
+                                }
                                 
                                 VStack(alignment: .leading, spacing: 5) {
                                     Text(recipe.name)
@@ -74,5 +99,5 @@ struct RecipeListView: View {
 
 #Preview {
     RecipeListView(category: Category(name: "Breakfasts", image: "breakfast1"))
-        .modelContainer(for: Recipe.self, inMemory: true)
+    .modelContainer(for: Recipe.self, inMemory: true)
 }

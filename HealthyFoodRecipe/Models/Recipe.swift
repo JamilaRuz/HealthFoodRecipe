@@ -12,7 +12,7 @@ import SwiftData
 @Model
 class Recipe: Identifiable {
     @Attribute(.unique)
-    let id = UUID()
+    let id: Int
     var name: String
     var images: [String]
     var ingredients: [Ingredient]
@@ -21,7 +21,8 @@ class Recipe: Identifiable {
     var isFavorite: Bool
     var menuItems: [MenuItem]?
     
-    init(name: String, images: [String], ingredients: [Ingredient], instructions: String, category: Category, isFavorite: Bool, menuItems: [MenuItem]) {
+    init(id: Int, name: String, images: [String], ingredients: [Ingredient], instructions: String, category: Category, isFavorite: Bool, menuItems: [MenuItem]) {
+        self.id = id
         self.name = name
         self.images = images
         self.ingredients = ingredients

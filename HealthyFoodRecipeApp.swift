@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import CoreData
 
 
 @main
@@ -15,25 +16,6 @@ struct HealthyFoodRecipeApp: App {
     let container = try! ModelContainer(for: Recipe.self)
     let postLoader = PostLoader()
     
-//    var sharedModelContainer: ModelContainer = {
-//        let schema = Schema([
-//            MenuItem.self, Recipe.self
-//        ])
-//        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: true)
-//
-//        do {
-//            let container = try ModelContainer(for: schema, configurations: [modelConfiguration])
-//
-//            return container
-//
-////            return try ModelContainer(for: schema, configurations: [modelConfiguration])
-//
-//
-//        } catch {
-//            fatalError("Could not create ModelContainer: \(error)")
-//        }
-//    }()
-//
     @MainActor
     private func importData() async {
         //        get access to the context
@@ -44,15 +26,25 @@ struct HealthyFoodRecipeApp: App {
             if !posts.isEmpty {
         // insert data into local db
                 posts.forEach { post in
-                    let category = Category(name: post.category.name, image: "breakfast")
+                    let name = post.name
+                    let descriptor = FetchDescriptor<Recipe>(predicate: #Predicate { $0.name == name })
+                    let count = (try? context.fetchCount(descriptor)) ?? 0
                     
-                    let ingredients = post.ingredients.map { postIngredient in
-                        Ingredient(name: postIngredient.ingredient.name, unit: postIngredient.unit, quantity: postIngredient.quantity)
+                    if count == 0 {
+                        let category = Category(name: post.category.name, image: "breakfast")
+                        
+                        let ingredients = post.ingredients.map { postIngredient in
+                            Ingredient(name: postIngredient.ingredient.name, unit: postIngredient.unit, quantity: postIngredient.quantity)
+                        }
+                        
+                        let recipe = Recipe(id: post.id, name: post.name, images: post.pictures, ingredients: ingredients, instructions: post.instructions, category: category, isFavorite: false, menuItems: [])
+                        
+                        
+                        context.insert(recipe)
+                    } else {
+                        // Recipe already exists, handle accordingly or skip
+                        print("Recipe already exists: \(post.name)")
                     }
-                    
-                    let recipe = Recipe(name: post.name, images: post.pictures, ingredients: ingredients, instructions: post.instructions, category: category, isFavorite: false, menuItems: [])
-                    
-                    context.insert(recipe)
                 }
             }
         } catch {

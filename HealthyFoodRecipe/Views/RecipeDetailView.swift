@@ -10,7 +10,6 @@ import SwiftData
 
 struct RecipeDetailView: View {
     @Query private var menuItems: [MenuItem]
-    @Query private var recipes: [Recipe]
     @Environment(\.modelContext) var modelContext
     @Environment(\.dismiss) var dismiss
 
@@ -20,14 +19,36 @@ struct RecipeDetailView: View {
     @Bindable var recipe: Recipe
     
     var body: some View {
-        ScrollView {
-            VStack {
+        ScrollView() {
+            ScrollView(.horizontal, showsIndicators: true) {
                 ForEach(recipe.images, id: \.self) { imageUrl in
-                    Image(imageUrl)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: UIScreen.main.bounds.width, height: 300)
-                        .clipped()
+                    AsyncImage(url: URL(string: imageUrl)) { phase in
+                        switch phase {
+                        case .empty:
+                            ProgressView()
+                                .frame(width: 100, height: 80)
+                                .background(Color.gray.opacity(0.2))
+                                .cornerRadius(5)
+                        case .success(let image):
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: UIScreen.main.bounds.width, height: 300)
+                                .clipped()
+                        case .failure:
+                            Image("placeholderImg")
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: UIScreen.main.bounds.width, height: 300)
+                                .clipped()
+                        @unknown default:
+                            Image("placeholderImg")
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: UIScreen.main.bounds.width, height: 300)
+                                .clipped()
+                        }
+                    }
                 } //ForEach
             } //Vstack
             .frame(height: 300)
@@ -120,6 +141,7 @@ struct RecipeDetailView: View {
 #Preview {
     RecipeDetailView(recipe:
         Recipe(
+            id: 1,
             name: "Клубничный пуддинг с чиа",
             images: ["dish1"],
             ingredients:
@@ -135,14 +157,4 @@ struct RecipeDetailView: View {
     )
      )
         .modelContainer(for: MenuItem.self, inMemory: true)
- 
-//    do {
-//        let config = ModelConfiguration(isStoredInMemoryOnly: true) // Store the container in memory since we don't actually want to save the preview data
-//        let container = try ModelContainer(for: Recipe.self, configurations: config)
-//
-//        return RecipeDetails(recipe: recipes[0])
-//            .modelContainer(container)
-//    } catch {
-//        return Text("Failed to create preview: \(error.localizedDescription)")
-//    }
 }
