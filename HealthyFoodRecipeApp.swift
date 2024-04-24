@@ -31,7 +31,8 @@ struct HealthyFoodRecipeApp: App {
                     let count = (try? context.fetchCount(descriptor)) ?? 0
                     
                     if count == 0 {
-                        let category = Category(name: post.category.name, image: "breakfast")
+                        let categoryImage = getCategoryAssetName(for: post.category.name)
+                        let category = Category(name: post.category.name, image: categoryImage)
                         
                         let ingredients = post.ingredients.map { postIngredient in
                             Ingredient(name: postIngredient.ingredient.name, unit: postIngredient.unit, quantity: postIngredient.quantity)
@@ -43,7 +44,7 @@ struct HealthyFoodRecipeApp: App {
                         context.insert(recipe)
                     } else {
                         // Recipe already exists, handle accordingly or skip
-                        print("Recipe already exists: \(post.name)")
+//                        print("Recipe already exists: \(post.name)")
                     }
                 }
             }

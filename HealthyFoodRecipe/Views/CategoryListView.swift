@@ -12,6 +12,7 @@ struct CategoryListView: View {
     @Environment(\.modelContext) var modelContext
     @Query private var recipes: [Recipe]
     
+    
     let columns = [
         GridItem(.adaptive(minimum: 150))
     ]
@@ -36,7 +37,7 @@ struct CategoryListView: View {
             .navigationTitle("Pohudeyka")
             .frame(maxWidth: .infinity, maxHeight: .infinity)
 //            .background {
-//                Color.lightPurple.opacity(0.5)
+//                Color.purple1.opacity(0.5)
 //                    .ignoresSafeArea()
 //            }
         }
@@ -55,7 +56,7 @@ struct CategoryListView_Previews: PreviewProvider {
             Category(name: "Выпечки", image: "baking"),
             Category(name: "Аппетайзеры", image: "appetizer"),
             Category(name: "Напитки", image: "drink"),
-            Category(name: "Дессерты", image: "dessert")
+            Category(name: "Десерты", image: "dessert")
         ]
         
         CategoryListView()

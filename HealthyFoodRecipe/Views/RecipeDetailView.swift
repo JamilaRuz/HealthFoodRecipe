@@ -13,14 +13,13 @@ struct RecipeDetailView: View {
     @Environment(\.modelContext) var modelContext
     @Environment(\.dismiss) var dismiss
 
-//    @State private var isFavorited = false
     @State private var isSelecting = false
     @State var selectedDay = Day.Monday
     @Bindable var recipe: Recipe
     
     var body: some View {
         ScrollView() {
-            ScrollView(.horizontal, showsIndicators: true) {
+            TabView {
                 ForEach(recipe.images, id: \.self) { imageUrl in
                     AsyncImage(url: URL(string: imageUrl)) { phase in
                         switch phase {
@@ -50,20 +49,29 @@ struct RecipeDetailView: View {
                         }
                     }
                 } //ForEach
-            } //Vstack
+            } //Scroll Horizontal
+            .tabViewStyle(PageTabViewStyle())
             .frame(height: 300)
             .background(LinearGradient(gradient: Gradient(colors: [Color(.gray).opacity(0.3), Color(.gray)]), startPoint: .top, endPoint: .bottom))
             
-            VStack(spacing: 15) {
+            VStack {
                 Text(recipe.name)
                     .font(.title)
                     .bold()
+                    .foregroundColor(.white)
                     .multilineTextAlignment(.center)
+                    .padding(5)
+            }
+            .frame(maxWidth: .infinity, maxHeight: 100)
+            .background(Color.pink2)
+            
+            VStack(spacing: 15) {
                 
                 VStack(alignment: .leading, spacing: 5) {
                     HStack {
-                        Text("Ингредиенты")
+                        Text("Ингредиенты:")
                             .font(.headline)
+                            .foregroundColor(.pink2)
                         Spacer()
                         Button(action: {
 //                            isFavorited.toggle()
@@ -71,7 +79,7 @@ struct RecipeDetailView: View {
                         }) {
                             Image(systemName: recipe.isFavorite ? "heart.fill" : "heart")
                                 .resizable()
-                                .tint(Color.lightPurple)
+                                .tint(Color.green1)
                                 .frame(width: 30, height: 30)
                         }
                     }
@@ -83,23 +91,40 @@ struct RecipeDetailView: View {
                     
                     LazyVGrid(columns: columns, spacing: 5) {
                         ForEach(recipe.ingredients, id: \.name) { ingredient in
-                            Text("\(String(format: "%g", ingredient.quantity)) (\(ingredient.unit)) -")
+                            HStack(spacing: 5) { // Adjust spacing as needed
+                                Image(systemName: "circle.fill")
+                                    .font(.system(size: 5)) // Adjust the size as needed
+                                Text("\(ingredient.name)")
+                                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                                    .multilineTextAlignment(.leading)
+                            }
+                            Text("\(String(format: "%g", ingredient.quantity)) (\(ingredient.unit))")
                                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                            Text("\(ingredient.name)")
-                                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                                .multilineTextAlignment(.leading)
                         }
                     }
-
+                    .padding(.bottom, 10)
+                    
                     Divider()
                     
                     VStack(alignment: .leading, spacing: 10) {
-                        Text("Инструкции")
-                            .font(.headline)
+                        HStack {
+                            Text("Способ приготовления:")
+                                .font(.headline)
+                                .foregroundColor(.green)
+                            Spacer()
+                            
+                            Image("cloud")
+                                .resizable()
+                                .scaledToFill()
+                                .edgesIgnoringSafeArea(.all)
+                                .frame(width: 120, height: 60)
+                        }
+                        
                         Text(recipe.instructions)
+                        
                     }
+                    .padding(.top, 10)
                 }
-                .frame(maxWidth: .infinity, alignment: .leading)
                 
                 VStack(spacing: 0) {
                     Text("Выберите день для добавления в меню")
@@ -121,7 +146,8 @@ struct RecipeDetailView: View {
                     }) {
                         Text("Добавить")
                             .frame(width: 150, height: 50)
-                            .background(LinearGradient(colors: [.purple, .lightPurple], startPoint: .top, endPoint: .bottom))
+//                            .background(LinearGradient(colors: [.green3, .green1], startPoint: .top, endPoint: .bottom))
+                            .background(LinearGradient(colors: [.pink3, .pink2], startPoint: .top, endPoint: .bottom))
                             .foregroundColor(.white)
                             .font(.body)
                             .bold()
@@ -130,9 +156,18 @@ struct RecipeDetailView: View {
                     }
                 }
             }
-            .padding(.horizontal, 10)// why is it so big
+            .padding(.horizontal, 15)// why is it so big
         }
         .ignoresSafeArea(.container, edges: .top)
+        .background(
+            //                Image("bg_pink")
+            //                    .resizable()
+            //                    .scaledToFill()
+            //                    .overlay(Color.black.opacity(0.2))
+            //                    .ignoresSafeArea()
+            Color(.pink1)
+                .opacity(0.5)
+        )
     }
     
     

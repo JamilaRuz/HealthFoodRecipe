@@ -43,7 +43,7 @@ struct MenuView: View {
             .navigationBarTitleDisplayMode(.inline)
             .scrollContentBackground(.hidden)
             .background(
-                LinearGradient(colors: [.darkPink, .lightPink, .white], startPoint: .top, endPoint: .bottom)
+                LinearGradient(colors: [.pink3, .pink1, .white], startPoint: .top, endPoint: .bottom)
             )
         }// nav view
     }//body
