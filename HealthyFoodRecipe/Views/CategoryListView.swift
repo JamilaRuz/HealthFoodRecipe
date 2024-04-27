@@ -25,7 +25,9 @@ struct CategoryListView: View {
                     .font(.title2)
                 ScrollView {
                     LazyVGrid(columns: columns, spacing: 20) {
-                        ForEach([Category](Set(recipes.map{$0.category})), id: \.self) { category in
+                        let categories = [Category](Set(recipes.map{$0.category}))
+                            .sorted(by: { $0.name < $1.name })
+                        ForEach(categories, id: \.self) { category in
                             NavigationLink(destination: RecipeListView(category: category)) {
                                 CardView(category: category)
                             }
@@ -34,7 +36,7 @@ struct CategoryListView: View {
                 }
             }
             .padding()
-            .navigationTitle("Pohudeyka")
+            .navigationTitle("Похудейка")
             .frame(maxWidth: .infinity, maxHeight: .infinity)
 //            .background {
 //                Color.purple1.opacity(0.5)

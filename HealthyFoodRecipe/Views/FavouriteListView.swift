@@ -28,24 +28,7 @@ struct FavouriteListView: View {
                     List() {
                         ForEach(favorites, id: \.self) { recipe in
                             NavigationLink(destination: RecipeDetailView(recipe: recipe)) {
-                                HStack {
-                                    Image(recipe.images[0])
-                                        .resizable()
-                                        .scaledToFill()
-                                        .frame(width: 100, height: 80)
-                                        .cornerRadius(5)
-                                    
-                                    VStack(alignment: .leading, spacing: 10) {
-                                        Text(recipe.name)
-                                            .font(.headline)
-                                            .bold()
-                                        let allIngreds = recipe.ingredients.map{$0.name}.joined(separator: ", ")
-                                        Text(allIngreds)
-                                            .font(.system(size: 12))
-                                            .foregroundColor(.gray)
-                                            .lineLimit(2)
-                                    }
-                                }
+                                ListRowView(recipe: recipe)
                             }
                         }
                     }
@@ -56,6 +39,11 @@ struct FavouriteListView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .cornerRadius(10)
                 .navigationTitle("Избранное")
+                .navigationBarTitleDisplayMode(.inline)
+                .background(
+                    LinearGradient(colors: [.pink2, .pink1, .white], startPoint: .top, endPoint: .bottom)
+                )
+
             }
         }
     }

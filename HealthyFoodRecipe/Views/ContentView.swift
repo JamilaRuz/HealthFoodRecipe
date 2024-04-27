@@ -9,30 +9,37 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
+    init() {
+        let appearance = UISearchBar.appearance()
+        appearance.barTintColor = UIColor(.pink1)
+        if let textfield = UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]) as? UITextField {
+            textfield.backgroundColor = UIColor.white // Adjust if needed
+        }
+    }
+        
     var body: some View {
         TabView {
             CategoryListView()
                 .tabItem {
-                    Label("Categories", systemImage: "fork.knife.circle")
+                    Label("Категории", systemImage: "fork.knife.circle")
                 }
             
             MenuView()
                 .tabItem {
-                    Label("Weekly menu", systemImage: "menucard")
+                    Label("Меню на неделю", systemImage: "menucard")
                 }
             
             FavouriteListView(emptyText: "")
                 .tabItem {
-                    Label("Favourites", systemImage: "heart")
+                    Label("Избранные", systemImage: "heart")
                 }
         }
         .onAppear() {
-            UITabBar.appearance().backgroundColor = UIColor(.pink1)
+//            UINavigationBar.appearance().backgroundColor = UIColor(.pink1)
+            UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor(.white)]
         }
     }
 }
-
-
 
 #Preview {
     ContentView()

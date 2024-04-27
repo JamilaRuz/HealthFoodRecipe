@@ -62,7 +62,7 @@ struct RecipeDetailView: View {
                     .multilineTextAlignment(.center)
                     .padding(5)
             }
-            .frame(maxWidth: .infinity, maxHeight: 100)
+            .frame(maxWidth: .infinity, maxHeight: 120)
             .background(Color.pink2)
             
             VStack(spacing: 15) {
