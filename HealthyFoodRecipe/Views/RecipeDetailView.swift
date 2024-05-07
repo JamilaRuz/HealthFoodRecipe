@@ -90,7 +90,7 @@ struct RecipeDetailView: View {
                     ]
                     
                     LazyVGrid(columns: columns, spacing: 5) {
-                        ForEach(recipe.ingredients, id: \.name) { ingredient in
+                        ForEach(recipe.ingredients, id: \.self) { ingredient in
                             HStack(spacing: 5) { // Adjust spacing as needed
                                 Image(systemName: "circle.fill")
                                     .font(.system(size: 5)) // Adjust the size as needed
