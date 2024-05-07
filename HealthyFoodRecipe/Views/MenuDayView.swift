@@ -42,10 +42,9 @@ struct MenuDayView: View {
       $0.day == dayRawValue
     })
   }
-
   
-  // GroupBox
   var body: some View {
+    //   GroupBox
     VStack {
       GroupBox {
         if menuItems.isEmpty {
@@ -61,6 +60,7 @@ struct MenuDayView: View {
           ForEach(categoriesForToday, id: \.self) { category in
             Text("\(category ?? "None"):")
               .italic()
+              .foregroundColor(.pink3)
             
             //Recipes
             ForEach(menuItems.filter { $0.recipe?.category.name == category }, id: \.self) { menuItem in
@@ -78,12 +78,10 @@ struct MenuDayView: View {
                   menuItem.isChecked.toggle()
                 }) {
                   Image(systemName: menuItem.isChecked ? "checkmark" : "circle")
-                    .foregroundColor(menuItem.isChecked ? .pink3 : .gray)
+                    .foregroundColor(menuItem.isChecked ? .pink3 : .green)
                 }
               }
               Divider()
-                .foregroundColor(.pink3)
-              
             } //ForEach recipes
           } //ForEach categories
         }
@@ -91,19 +89,21 @@ struct MenuDayView: View {
     label: {
       Text(day.displayName)
         .font(.title2)
-      }
+        .fontDesign(.monospaced)
+        .foregroundColor(.green)
+    }
     .padding(.horizontal, 10)
-//    .groupBoxStyle(.custom)
+      //    .groupBoxStyle(.custom)
     .shadow(radius: 5)
     }
-
+    
   } //body
 } //struct
-  
+
 #if DEBUG
-  struct MenuDayView_Previews: PreviewProvider {
-    static var previews: some View {
-      MenuDayView(day: .Monday)
-    }
+struct MenuDayView_Previews: PreviewProvider {
+  static var previews: some View {
+    MenuDayView(day: .Monday)
   }
+}
 #endif

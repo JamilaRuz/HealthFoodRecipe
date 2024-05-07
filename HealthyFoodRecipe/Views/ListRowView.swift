@@ -59,7 +59,7 @@ let recipe: Recipe
                     }
                     if !(recipe.menuItems?.isEmpty ?? true) {
                         Image(systemName: "menucard.fill")
-                            .foregroundColor(.green2)
+                            .foregroundColor(.green)
                     }
                 }
             }
