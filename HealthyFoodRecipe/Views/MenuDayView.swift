@@ -8,6 +8,25 @@
 import SwiftUI
 import SwiftData
 
+struct CustomGroupBoxStyle: GroupBoxStyle {
+  func makeBody(configuration: Configuration) -> some View {
+    
+    VStack(alignment: .leading) {
+      configuration.label
+        .foregroundColor(Color.pink3)
+        .bold()
+      configuration.content
+    }
+    .frame(height: 200)
+    .background(Color.white.opacity(0.8))
+    .border(Color.black)
+  }
+}
+
+extension GroupBoxStyle where Self == CustomGroupBoxStyle {
+  static var custom: CustomGroupBoxStyle { .init() }
+}
+
 struct MenuDayView: View {
   @Environment(\.modelContext) private var modelContext
   @Query private var menuItems: [MenuItem]
@@ -28,7 +47,7 @@ struct MenuDayView: View {
   // GroupBox
   var body: some View {
     VStack {
-      GroupBox(label: Text(day.displayName)) {
+      GroupBox {
         if menuItems.isEmpty {
           Text("Нет блюд на сегодняшний день")
             .font(.callout)
@@ -36,6 +55,8 @@ struct MenuDayView: View {
         } else {
           //Categories
           Divider()
+            .foregroundColor(.pink3)
+          
           let categoriesForToday = Array(Set(menuItems.map { $0.recipe?.category.name }))
           ForEach(categoriesForToday, id: \.self) { category in
             Text("\(category ?? "None"):")
@@ -57,19 +78,25 @@ struct MenuDayView: View {
                   menuItem.isChecked.toggle()
                 }) {
                   Image(systemName: menuItem.isChecked ? "checkmark" : "circle")
-                    .foregroundColor(menuItem.isChecked ? .green1 : .gray)
+                    .foregroundColor(menuItem.isChecked ? .pink3 : .gray)
                 }
               }
               Divider()
+                .foregroundColor(.pink3)
               
             } //ForEach recipes
           } //ForEach categories
         }
       }
-//      .foregroundColor(Color.pink3)
-      .padding(10)
+    label: {
+      Text(day.displayName)
+        .font(.title2)
+      }
+    .padding(.horizontal, 10)
+//    .groupBoxStyle(.custom)
+    .shadow(radius: 5)
     }
-//    .shadow(radius: 5)
+
   } //body
 } //struct
   

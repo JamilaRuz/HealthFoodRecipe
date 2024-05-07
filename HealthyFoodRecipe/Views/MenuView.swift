@@ -11,19 +11,21 @@ import SwiftData
 struct MenuView: View {
   
   var body: some View {
-    VStack {
-      ScrollView(.vertical) {
-        ForEach(Day.allCases, id: \.self) { day in
-          MenuDayView(day: day)
+    NavigationView {
+      VStack {
+        ScrollView(.vertical) {
+          ForEach(Day.allCases, id: \.self) { day in
+            MenuDayView(day: day)
+          }
         }
-      }
-    }//Vstack main
-    .navigationTitle("Меню на неделю")
-    .navigationBarTitleDisplayMode(.inline)
-//    .scrollContentBackground(.hidden)
-    .background(
-      LinearGradient(colors: [.pink2, .pink1, .white], startPoint: .top, endPoint: .bottom)
-    )
+      }//Vstack main
+      .navigationTitle("Меню на неделю")
+      .navigationBarTitleDisplayMode(.inline)
+      //    .scrollContentBackground(.hidden)
+      .background(
+        LinearGradient(colors: [.pink2, .pink1, .white], startPoint: .top, endPoint: .bottom)
+      )
+    }
   }//body
 }
 
