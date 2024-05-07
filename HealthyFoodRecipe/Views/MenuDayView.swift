@@ -56,11 +56,14 @@ struct MenuDayView: View {
           Divider()
             .foregroundColor(.pink3)
           
-          let categoriesForToday = Array(Set(menuItems.map { $0.recipe?.category.name }))
+          let categoriesForToday = Array(Set(menuItems.map { $0.recipe?.category.name ?? "Unknown" })).sorted()
           ForEach(categoriesForToday, id: \.self) { category in
-            Text("\(category ?? "None"):")
-              .italic()
-              .foregroundColor(.pink3)
+            HStack {
+              Text("\(category):")
+                .italic()
+                .foregroundColor(.pink3)
+              Spacer()
+            }
             
             //Recipes
             ForEach(menuItems.filter { $0.recipe?.category.name == category }, id: \.self) { menuItem in
