@@ -16,12 +16,15 @@ struct RecipeDetailView: View {
     @State private var isSelecting = false
     @State var selectedDay = Day.Monday
     @Bindable var recipe: Recipe
+  
+  let picsApiUrl = "http://127.0.0.1:8001/recipes/pictures/"
+
     
     var body: some View {
         ScrollView() {
             TabView {
                 ForEach(recipe.images, id: \.self) { imageUrl in
-                    AsyncImage(url: URL(string: imageUrl)) { phase in
+                    AsyncImage(url: URL(string: picsApiUrl + imageUrl)) { phase in
                         switch phase {
                         case .empty:
                             ProgressView()
@@ -79,7 +82,7 @@ struct RecipeDetailView: View {
                         }) {
                             Image(systemName: recipe.isFavorite ? "heart.fill" : "heart")
                                 .resizable()
-                                .tint(Color.green1)
+                                .tint(Color.pink2)
                                 .frame(width: 30, height: 30)
                         }
                     }
@@ -113,11 +116,10 @@ struct RecipeDetailView: View {
                                 .foregroundColor(.green)
                             Spacer()
                             
-                            Image("cloud")
+                            Image("cooking")
                                 .resizable()
-                                .scaledToFill()
-                                .edgesIgnoringSafeArea(.all)
-                                .frame(width: 120, height: 60)
+                                .scaledToFit()
+                                .frame(width: 60, height: 60)
                         }
                         
                         Text(recipe.instructions)

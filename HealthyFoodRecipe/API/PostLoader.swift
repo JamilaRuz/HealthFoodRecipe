@@ -35,7 +35,7 @@ struct PostIngredient: Decodable {
 struct PostLoader {
     func loadPosts() async throws -> [Post] {
 //        making request
-        guard let url = URL(string: "http://127.0.0.1:5001/recipes") else { return []}
+        guard let url = URL(string: "http://127.0.0.1:8001/recipes") else { return []}
 //        perform request with async function
         let (data, response) = try await URLSession.shared.data(from: url)
         guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else { return [] }

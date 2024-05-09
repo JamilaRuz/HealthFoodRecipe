@@ -8,29 +8,11 @@
 import SwiftUI
 import SwiftData
 
-struct CustomGroupBoxStyle: GroupBoxStyle {
-  func makeBody(configuration: Configuration) -> some View {
-    
-    VStack(alignment: .leading) {
-      configuration.label
-        .foregroundColor(Color.pink3)
-        .bold()
-      configuration.content
-    }
-    .frame(height: 200)
-    .background(Color.white.opacity(0.8))
-    .border(Color.black)
-  }
-}
-
-extension GroupBoxStyle where Self == CustomGroupBoxStyle {
-  static var custom: CustomGroupBoxStyle { .init() }
-}
-
 struct MenuDayView: View {
   @Environment(\.modelContext) private var modelContext
   @Query private var menuItems: [MenuItem]
   
+  @State private var isBeingDeleted = false
   let day: Day
   
   init(day: Day) {
@@ -56,7 +38,8 @@ struct MenuDayView: View {
           Divider()
             .foregroundColor(.pink3)
           
-          let categoriesForToday = Array(Set(menuItems.map { $0.recipe?.category.name ?? "Unknown" })).sorted()
+          let categoriesForToday = Array(Set(menuItems.map { $0.recipe?.category.name ?? "Unknown" }
+                                                      .filter { $0 != "Unknown" } )).sorted()
           ForEach(categoriesForToday, id: \.self) { category in
             HStack {
               Text("\(category):")
@@ -72,13 +55,29 @@ struct MenuDayView: View {
                   Image(systemName: "circle.fill")
                     .foregroundColor(.gray)
                     .font(.system(size: 8))
-                  Text(menuItem.recipe?.name ?? "None")
+                  Text(menuItem.recipe?.name ?? "Unknown")
+                    .lineLimit(1)
+                    .truncationMode(.tail)
                 }
+                .opacity(menuItem.isChecked ? 0.3 : 1)
                 
                 Spacer()
                 
                 Button(action: {
                   menuItem.isChecked.toggle()
+                  if menuItem.isChecked {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                      withAnimation(.easeInOut(duration: 2).delay(1)) {
+                        do {
+                          modelContext.delete(menuItem)
+                          try modelContext.save()
+                        } catch {
+                          print("Failed to save context: \(error)")
+                          // Handle the error appropriately
+                        }
+                      }
+                    }
+                  }
                 }) {
                   Image(systemName: menuItem.isChecked ? "checkmark" : "circle")
                     .foregroundColor(menuItem.isChecked ? .pink3 : .green)
@@ -96,7 +95,7 @@ struct MenuDayView: View {
         .foregroundColor(.green)
     }
     .padding(.horizontal, 10)
-      //    .groupBoxStyle(.custom)
+//    .groupBoxStyle(.custom)
     .shadow(radius: 5)
     }
     

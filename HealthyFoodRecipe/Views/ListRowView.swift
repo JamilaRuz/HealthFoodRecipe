@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct ListRowView: View {
-    
+
+let picsApiUrl = "http://127.0.0.1:8001/recipes/pictures/"
 let recipe: Recipe
     
     var body: some View {
         HStack {
-            AsyncImage(url: URL(string: recipe.images.first ?? "")) { phase in
+            AsyncImage(url: URL(string: picsApiUrl + (recipe.images.first ?? ""))) { phase in
                 switch phase {
                 case .empty:
                     ProgressView()
@@ -55,7 +56,7 @@ let recipe: Recipe
                 HStack {
                     if recipe.isFavorite {
                         Image(systemName: "heart.fill")
-                            .foregroundColor(.accentColor)
+                            .foregroundColor(.pink2)
                     }
                     if !(recipe.menuItems?.isEmpty ?? true) {
                         Image(systemName: "menucard.fill")

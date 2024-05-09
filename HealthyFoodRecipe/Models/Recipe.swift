@@ -20,7 +20,7 @@ class Recipe: Identifiable {
     var isFavorite: Bool
     var menuItems: [MenuItem]?
     
-    init(id: Int, name: String, images: [String], ingredients: [Ingredient], instructions: String, category: Category, isFavorite: Bool, menuItems: [MenuItem]) {
+    init(id: Int, name: String, images: [String], ingredients: [Ingredient], instructions: String, category: Category, isFavorite: Bool, menuItems: [MenuItem]? = nil) {
         self.id = id
         self.name = name
         self.images = images
