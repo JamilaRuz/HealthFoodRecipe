@@ -57,7 +57,6 @@ struct CategoryListView_Previews: PreviewProvider {
             Category(name: "Салаты", image: "salad"),
             Category(name: "Выпечки", image: "baking"),
             Category(name: "Аппетайзеры", image: "appetizer"),
-            Category(name: "Напитки", image: "drink"),
             Category(name: "Десерты", image: "dessert")
         ]
         

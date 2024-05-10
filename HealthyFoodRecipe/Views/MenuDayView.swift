@@ -67,7 +67,7 @@ struct MenuDayView: View {
                   menuItem.isChecked.toggle()
                   if menuItem.isChecked {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                      withAnimation(.easeInOut(duration: 2).delay(1)) {
+                      withAnimation(.easeInOut(duration: 0.5).delay(0.2)) {
                         do {
                           modelContext.delete(menuItem)
                           try modelContext.save()
