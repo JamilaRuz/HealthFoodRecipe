@@ -57,16 +57,12 @@ struct RecipeDetailView: View {
             .frame(height: 300)
             .background(LinearGradient(gradient: Gradient(colors: [Color(.gray).opacity(0.3), Color(.gray)]), startPoint: .top, endPoint: .bottom))
             
-            VStack {
-                Text(recipe.name)
-                    .font(.title)
-                    .bold()
-                    .foregroundColor(.white)
-                    .multilineTextAlignment(.center)
-                    .padding(5)
-            }
-            .frame(maxWidth: .infinity, maxHeight: 120)
-            .background(Color.pink2)
+            Text(recipe.name)
+                .font(.title)
+                .bold()
+                .foregroundColor(.pink2)
+                .multilineTextAlignment(.center)
+                .padding(5)
             
             VStack(spacing: 15) {
                 
