@@ -61,26 +61,11 @@ struct CarouselView: View {
         
 //    Simple Banner
         HStack {
-            Image("logo2")
+            Image("banner")
                 .resizable()
-                .scaledToFit()
-                .frame(maxWidth: 100, maxHeight: 100)
-//            Spacer()
-            VStack {
-                Text("Ешь, пей, худей!")
-                    .font(.title)
-                    .bold()
-                Text("Похудейка - твой ключ к идеальному образу жизни!")
-                    .italic()
-            }
-            .foregroundColor(.white)
-            .shadow(radius: 5)
+                .scaledToFill()
         }
-        .padding()
         .frame(maxWidth: .infinity, maxHeight: 150)
-        .background {
-            AngularGradient(colors: [.green1, .green3], center: .bottomTrailing, startAngle: .zero, endAngle: .degrees(120))
-        }
         .cornerRadius(10)
         .shadow(radius: 10)
     }
