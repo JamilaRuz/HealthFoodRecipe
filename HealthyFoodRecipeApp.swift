@@ -16,43 +16,6 @@ struct HealthyFoodRecipeApp: App {
   let container = try! ModelContainer(for: Recipe.self)
   let postLoader = PostLoader()
   
-  @MainActor
-  private func importData() async {
-    //        get access to the context
-    let context = container.mainContext
-    //        save posts to the local context
-    do {
-      let posts = try await postLoader.loadPosts()
-      if !posts.isEmpty {
-        // insert data into local db
-        posts.forEach { post in
-          let name = post.name
-          let descriptor = FetchDescriptor<Recipe>(predicate: #Predicate { $0.name == name })
-          let count = (try? context.fetchCount(descriptor)) ?? 0
-          
-          if count == 0 {
-            let categoryImage = getCategoryAssetName(for: post.category.name)
-            let category = Category(name: post.category.name, image: categoryImage)
-            
-            let ingredients = post.ingredients.map { postIngredient in
-              Ingredient(name: postIngredient.ingredient.name, unit: postIngredient.unit, quantity: postIngredient.qty)
-            }
-            
-            let recipe = Recipe(id: post.id, name: post.name, images: post.pictures.map{String($0)}, ingredients: ingredients, instructions: post.instructions, category: category, isFavorite: false, menuItems: [])
-            
-            context.insert(recipe)
-          } else {
-            // Recipe already exists, handle accordingly or skip
-            //                        print("Recipe already exists: \(post.name)")
-          }
-        }
-      }
-    } catch {
-      print("Could not load posts: \(error)")
-    }
-    
-  }
-  
   var body: some Scene {
     WindowGroup {
       ContentView()
@@ -62,4 +25,58 @@ struct HealthyFoodRecipeApp: App {
     }
     .modelContainer(container)
   }
+  
+  @MainActor
+  private func importData() async {
+    do {
+      let posts = try await postLoader.loadPosts()
+      if !posts.isEmpty {
+        posts.forEach { post in
+          let id = post.id
+          let descriptor = FetchDescriptor<Recipe>(predicate: #Predicate { $0.id == id })
+          let foundRecipes = (try? container.mainContext.fetch(descriptor)) ?? [Recipe]()
+          
+          if foundRecipes.count == 0 {
+            insertRecipe(post)
+          } else {
+            updateRecipe(post: post, existingRecipe: foundRecipes[0])
+          }
+        }
+      }
+    } catch {
+      print("Could not load posts: \(error)")
+    }
+  }
+  
+  @MainActor
+  fileprivate func insertRecipe(_ post: Post) {
+    let recipe = createRecipe(post)
+    
+    container.mainContext.insert(recipe)
+  }
+  
+  @MainActor
+  fileprivate func updateRecipe(post: Post, existingRecipe: Recipe) {
+    let recipe = createRecipe(post)
+    
+    existingRecipe.name = recipe.name
+    existingRecipe.images = recipe.images
+    existingRecipe.ingredients = recipe.ingredients
+    existingRecipe.instructions = recipe.instructions
+    existingRecipe.category = recipe.category
+    
+    try! container.mainContext.save()
+  }
+  
+  fileprivate func createRecipe(_ post: Post) -> Recipe {
+    let categoryImage = getCategoryAssetName(for: post.category.name)
+    let category = Category(name: post.category.name, image: categoryImage)
+    
+    let ingredients = post.ingredients.map { postIngredient in
+      Ingredient(name: postIngredient.ingredient.name, unit: postIngredient.unit, quantity: postIngredient.qty)
+    }
+    
+    return Recipe(id: post.id, name: post.name, images: post.pictures.map{String($0)}, ingredients: ingredients, instructions: post.instructions, category: category, isFavorite: false, menuItems: [])
+  }
+  
 }
