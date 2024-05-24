@@ -41,6 +41,8 @@ struct HealthyFoodRecipeApp: App {
           } else {
             updateRecipe(post: post, existingRecipe: foundRecipes[0])
           }
+          
+          deleteRecipesNotInPosts(posts: posts)
         }
       }
     } catch {
@@ -66,6 +68,22 @@ struct HealthyFoodRecipeApp: App {
     existingRecipe.category = recipe.category
     
     try! container.mainContext.save()
+  }
+  
+  @MainActor
+  private func deleteRecipesNotInPosts(posts: [Post]) {
+    do {
+      let allRecipes = try container.mainContext.fetch(FetchDescriptor<Recipe>())
+      let postIDs = posts.map { $0.id }
+      for recipe in allRecipes {
+        if !postIDs.contains(recipe.id) {
+          container.mainContext.delete(recipe)
+        }
+      }
+      try container.mainContext.save()
+    } catch {
+      print("Failed to delete recipes not in posts: \(error)")
+    }
   }
   
   fileprivate func createRecipe(_ post: Post) -> Recipe {
