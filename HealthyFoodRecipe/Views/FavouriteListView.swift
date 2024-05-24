@@ -20,7 +20,7 @@ struct FavouriteListView: View {
     var body: some View {
         NavigationStack {
             if favorites.isEmpty {
-                EmptyView(emptyText: "Нет избранных рецептов. Добавьте их, чтобы они появились здесь.")
+                EmptyFavouriteListView(emptyText: "Нет избранных рецептов. Добавьте их, чтобы они появились здесь.")
                     .font(.title)
                     .foregroundColor(.gray)
             } else {
@@ -28,7 +28,7 @@ struct FavouriteListView: View {
                     List() {
                         ForEach(favorites, id: \.self) { recipe in
                             NavigationLink(destination: RecipeDetailView(recipe: recipe)) {
-                                ListRowView(recipe: recipe)
+                                RecipeListRowView(recipe: recipe)
                             }
                         }
                     }

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct EmptyView: View {
+struct EmptyFavouriteListView: View {
     let emptyText: String
     
     var body: some View {
@@ -31,5 +31,5 @@ struct EmptyView: View {
 }
 
 #Preview {
-    EmptyView(emptyText: "Чтобы добавть рецепт в избранное, нажмите на сердечко на самом рецепте.")
+    EmptyFavouriteListView(emptyText: "Чтобы добавть рецепт в избранное, нажмите на сердечко на самом рецепте.")
 }

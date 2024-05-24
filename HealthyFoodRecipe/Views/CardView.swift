@@ -34,9 +34,7 @@ struct CardView: View {
     }
 }
 
-struct CardView_Previews: PreviewProvider {
-    static var previews: some View {
-        CardView(category: Category(name: "Breakfasts", image: "breakfast"))
-            .previewLayout(.sizeThatFits)
-    }
+#Preview {
+  CardView(category: createStubRecipes()[0].category)
+    .environment(\.modelContext, createPreviewModelContainer().mainContext)
 }

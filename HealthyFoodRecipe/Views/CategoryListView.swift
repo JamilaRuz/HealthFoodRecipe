@@ -12,7 +12,6 @@ struct CategoryListView: View {
     @Environment(\.modelContext) var modelContext
     @Query private var recipes: [Recipe]
     
-    
     let columns = [
         GridItem(.adaptive(minimum: 150))
     ]
@@ -20,8 +19,17 @@ struct CategoryListView: View {
     var body: some View {
         NavigationStack {
             VStack(alignment: .leading) {
-                CarouselView()
-                Text("Категории")
+
+              HStack {
+                  Image("banner")
+                      .resizable()
+                      .scaledToFill()
+              }
+              .frame(maxWidth: .infinity, maxHeight: 150)
+              .cornerRadius(10)
+              .shadow(radius: 10)
+
+              Text("Категории")
                     .font(.title2)
                 ScrollView {
                     LazyVGrid(columns: columns, spacing: 20) {
@@ -47,24 +55,7 @@ struct CategoryListView: View {
     }
 }
 
-struct CategoryListView_Previews: PreviewProvider {
-
-    static var previews: some View {
-        let categories = [
-            Category(name: "Завтраки", image: "breakfast"),
-            Category(name: "Основные блюда", image: "dish"),
-            Category(name: "Супы", image: "soup"),
-            Category(name: "Салаты", image: "salad"),
-            Category(name: "Выпечки", image: "baking"),
-            Category(name: "Аппетайзеры", image: "appetizer"),
-            Category(name: "Десерты", image: "dessert")
-        ]
-        
-        CategoryListView()
-        
-        ForEach(1...6, id: \.self) { number in
-            CardView(category: categories[number - 1])
-                .modelContainer(for: Recipe.self, inMemory: true)
-        }
-    }
+#Preview {
+  CategoryListView()
+    .environment(\.modelContext, createPreviewModelContainer().mainContext)
 }

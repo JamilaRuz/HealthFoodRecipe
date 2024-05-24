@@ -29,7 +29,7 @@ struct MenuView: View {
   }//body
 }
 
-//#Preview {
-//  MenuView(day: .Monday)
-//    .modelContainer(for: MenuItem.self, inMemory: false)
-//}
+#Preview {
+  MenuView()
+    .environment(\.modelContext, createPreviewModelContainer().mainContext)
+}

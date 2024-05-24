@@ -102,10 +102,7 @@ struct MenuDayView: View {
   } //body
 } //struct
 
-#if DEBUG
-struct MenuDayView_Previews: PreviewProvider {
-  static var previews: some View {
-    MenuDayView(day: .Monday)
-  }
+#Preview {
+  MenuDayView(day: .Monday)
+    .environment(\.modelContext, createPreviewModelContainer().mainContext)
 }
-#endif

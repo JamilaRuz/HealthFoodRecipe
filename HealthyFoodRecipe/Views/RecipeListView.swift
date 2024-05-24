@@ -30,7 +30,7 @@ struct RecipeListView: View {
                     Section(header: Text("\(category.name) (\(filteredRecipes.count))")) {
                         ForEach(filteredRecipes, id: \.self) { recipe in
                             NavigationLink(destination: RecipeDetailView(recipe: recipe)) {
-                                ListRowView(recipe: recipe)
+                                RecipeListRowView(recipe: recipe)
                             }
                         }
                         .padding(.vertical, 5)
@@ -63,6 +63,6 @@ struct RecipeListView: View {
 }
 
 #Preview {
-    RecipeListView(category: Category(name: "Breakfasts", image: "breakfast1"))
-        .modelContainer(for: Recipe.self, inMemory: true)
+  RecipeListView(category: createStubRecipes()[0].category)
+    .environment(\.modelContext, createPreviewModelContainer().mainContext)
 }
