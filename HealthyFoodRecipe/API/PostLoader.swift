@@ -33,15 +33,24 @@ struct PostIngredient: Decodable {
 }
 
 struct PostLoader {
+  
   func loadPosts() async throws -> [Post] {
-    //        making request
+    print("loadPosts")
     guard let url = URL(string: "http://127.0.0.1:8001/recipes") else { return []}
-    //        perform request with async function
     let (data, response) = try await URLSession.shared.data(from: url)
     guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else { return [] }
-    //        trying to decode the data
     let posts = try JSONDecoder().decode([Post].self, from: data)
     
     return posts
+  }
+  
+  func getLastChangeTimeFromServer() async throws -> String {
+    print("getLastChangeTimeFromServer")
+    let url = URL(string: "http://127.0.0.1:8001/last-change")!
+    let (data, response) = try await URLSession.shared.data(from: url)
+    guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else { return "" }
+    let lastChangeTimestamp = try JSONDecoder().decode(String.self, from: data)
+    
+    return lastChangeTimestamp
   }
 }
