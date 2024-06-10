@@ -31,7 +31,12 @@ struct ContentView: View {
             
             FavouriteListView(emptyText: "")
                 .tabItem {
-                    Label("Избранные", systemImage: "heart")
+                    Label("Избранное", systemImage: "heart")
+                }
+            
+            ActivationView()
+                .tabItem {
+                    Label("Активация", systemImage: "person")
                 }
         }
         .onAppear() {

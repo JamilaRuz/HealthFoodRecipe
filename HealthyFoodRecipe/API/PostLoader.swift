@@ -34,9 +34,12 @@ struct PostIngredient: Decodable {
 
 struct PostLoader {
   
+  let activationManager = ActivationManager()
+  
   func loadPosts() async throws -> [Post] {
-    print("loadPosts")
-    guard let url = URL(string: "http://127.0.0.1:8001/recipes") else { return []}
+    print("loadPosts installationToken \(activationManager.getInstallationToken())")
+    
+    guard let url = URL(string: "http://127.0.0.1:8001/recipes") else { return [] }
     let (data, response) = try await URLSession.shared.data(from: url)
     guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else { return [] }
     let posts = try JSONDecoder().decode([Post].self, from: data)
@@ -45,7 +48,8 @@ struct PostLoader {
   }
   
   func getLastChangeTimeFromServer() async throws -> String {
-    print("getLastChangeTimeFromServer")
+    print("getLastChangeTimeFromServer installationToken \(activationManager.getInstallationToken())")
+    
     let url = URL(string: "http://127.0.0.1:8001/last-change")!
     let (data, response) = try await URLSession.shared.data(from: url)
     guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else { return "" }

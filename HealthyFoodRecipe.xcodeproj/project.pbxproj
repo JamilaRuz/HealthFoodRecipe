@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8D18A3AE2C0A169800B2238D /* ActivationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D18A3AD2C0A169800B2238D /* ActivationView.swift */; };
+		8D18A3B02C0A18BB00B2238D /* ActivationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D18A3AF2C0A18BA00B2238D /* ActivationManager.swift */; };
 		8D1EB35E2BAA29D100285053 /* HealthyFoodRecipeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1EB35D2BAA29D100285053 /* HealthyFoodRecipeApp.swift */; };
 		8D1EB3602BAA29D100285053 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1EB35F2BAA29D100285053 /* ContentView.swift */; };
 		8D1EB3642BAA29D800285053 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D1EB3632BAA29D800285053 /* Assets.xcassets */; };
@@ -30,6 +32,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8D18A3AD2C0A169800B2238D /* ActivationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivationView.swift; sourceTree = "<group>"; };
+		8D18A3AF2C0A18BA00B2238D /* ActivationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivationManager.swift; sourceTree = "<group>"; };
 		8D1EB35A2BAA29D100285053 /* HealthyFoodRecipe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HealthyFoodRecipe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D1EB35D2BAA29D100285053 /* HealthyFoodRecipeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthyFoodRecipeApp.swift; sourceTree = "<group>"; };
 		8D1EB35F2BAA29D100285053 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -127,6 +131,7 @@
 				8D848FC42BC830200057534F /* EmptyFavouriteListView.swift */,
 				8D94D6652BDADC0600416CD7 /* RecipeListRowView.swift */,
 				8D89C11F2BADD497006FCF81 /* CardView.swift */,
+				8D18A3AD2C0A169800B2238D /* ActivationView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -145,6 +150,7 @@
 			children = (
 				8DB4125A2BD0025200984AC8 /* PostLoader.swift */,
 				8D4D7EAA2C02783400FF7EF5 /* DataImporter.swift */,
+				8D18A3AF2C0A18BA00B2238D /* ActivationManager.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -226,9 +232,11 @@
 				8D1EB3812BACD6DC00285053 /* CategoryListView.swift in Sources */,
 				8D1EB36E2BAA2A5100285053 /* MenuItem.swift in Sources */,
 				8D1EB37E2BAB2D6000285053 /* RecipeDetailView.swift in Sources */,
+				8D18A3AE2C0A169800B2238D /* ActivationView.swift in Sources */,
 				8D1EB3702BAA2DBA00285053 /* Weekdays.swift in Sources */,
 				8D94D6642BD866D300416CD7 /* Category.swift in Sources */,
 				8DE46A9B2BBC642D00482A6C /* MenuView.swift in Sources */,
+				8D18A3B02C0A18BB00B2238D /* ActivationManager.swift in Sources */,
 				8D1EB35E2BAA29D100285053 /* HealthyFoodRecipeApp.swift in Sources */,
 				8D1EB3832BACE86800285053 /* FavouriteListView.swift in Sources */,
 				8D89C1202BADD497006FCF81 /* CardView.swift in Sources */,

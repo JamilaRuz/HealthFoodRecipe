@@ -22,7 +22,6 @@ struct RecipeListView: View {
         return categoryFiltered.filter { $0.name.localizedCaseInsensitiveContains(searchTerm)}
     }
     
-    
     var body: some View {
         NavigationStack {
             VStack(alignment: .leading) {
