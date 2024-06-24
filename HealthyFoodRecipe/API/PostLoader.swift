@@ -10,7 +10,7 @@ import Foundation
 struct Post: Decodable {
   let id: Int
   let name: String
-  let pictures: [Int]
+  let pictures: [String]
   let category: PostCategory
   let ingredients: [PostIngredientWithQuantity]
   let instructions: String
@@ -39,7 +39,7 @@ struct PostLoader {
   func loadPosts() async throws -> [Post] {
     print("loadPosts installationToken \(activationManager.getInstallationToken())")
     
-    guard let url = URL(string: "http://127.0.0.1:8001/recipes") else { return [] }
+    guard let url = URL(string: "http://127.0.0.1:8002/recipes") else { return [] }
     let (data, response) = try await URLSession.shared.data(from: url)
     guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else { return [] }
     let posts = try JSONDecoder().decode([Post].self, from: data)
@@ -50,7 +50,7 @@ struct PostLoader {
   func getLastChangeTimeFromServer() async throws -> String {
     print("getLastChangeTimeFromServer installationToken \(activationManager.getInstallationToken())")
     
-    let url = URL(string: "http://127.0.0.1:8001/last-change")!
+    let url = URL(string: "http://127.0.0.1:8002/last-change")!
     let (data, response) = try await URLSession.shared.data(from: url)
     guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else { return "" }
     let lastChangeTimestamp = try JSONDecoder().decode(String.self, from: data)

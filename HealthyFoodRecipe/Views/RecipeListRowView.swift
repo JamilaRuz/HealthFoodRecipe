@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RecipeListRowView: View {
   
-  let picsApiUrl = "http://127.0.0.1:8001/pictures/"
+  let picsApiUrl = "http://127.0.0.1:8002/pictures/"
   let recipe: Recipe
   
   var body: some View {

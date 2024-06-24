@@ -98,7 +98,7 @@ class DataImporter {
       Ingredient(name: postIngredient.ingredient.name, unit: postIngredient.unit, quantity: postIngredient.qty)
     }
     
-    return Recipe(id: post.id, name: post.name, images: post.pictures.map{String($0)}, ingredients: ingredients, instructions: post.instructions, category: category, isFavorite: false, menuItems: [])
+    return Recipe(id: post.id, name: post.name, images: post.pictures, ingredients: ingredients, instructions: post.instructions, category: category, isFavorite: false, menuItems: [])
   }
   
   private func saveLastChangeTimeToApp(_ lastChangeTime: String) {

@@ -17,7 +17,7 @@ struct RecipeDetailView: View {
   @State var selectedDay = Day.Monday
   @Bindable var recipe: Recipe
   
-  let picsApiUrl = "http://127.0.0.1:8001/pictures/"
+  let picsApiUrl = "http://127.0.0.1:8002/pictures/"
   
   
   var body: some View {

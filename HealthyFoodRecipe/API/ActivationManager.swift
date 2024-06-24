@@ -25,7 +25,7 @@ class ActivationManager {
   
   func activateApp() async throws -> String {
     print("createActivationCode")
-    let url = URL(string: "http://127.0.0.1:8001/app-activation/create-code")!
+    let url = URL(string: "http://127.0.0.1:8002/app-activation/create-code")!
 
     var request = URLRequest(url: url)
     request.httpMethod = "POST"
@@ -41,7 +41,7 @@ class ActivationManager {
   
   func activateApp(activationCode: String) async throws {
     print("activateApp")
-    let url = URL(string: "http://127.0.0.1:8001/auth/activate-app")!
+    let url = URL(string: "http://127.0.0.1:8002/auth/activate-app")!
     
     let requestBody = CreateTokenRequest(activation_code: activationCode)
     let requestData = try JSONEncoder().encode(requestBody)
