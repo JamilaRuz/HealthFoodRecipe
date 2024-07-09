@@ -29,3 +29,16 @@ func getCategoryAssetName(for category: String) -> String {
     return "placeholder"
   }
 }
+
+func getAllCategories() -> [Category] {
+  [
+    Category(name: "Завтраки", image: "breakfast"),
+    Category(name: "Основные блюда", image: "lunch"),
+    Category(name: "Ужины", image: "dinner"),
+    Category(name: "Супы", image: "soup"),
+    Category(name: "Салаты", image: "salad"),
+    Category(name: "ПП Выпечка", image: "baking"),
+    Category(name: "Перекусы", image: "appetizer"),
+    Category(name: "Десерты", image: "dessert")
+  ]
+}

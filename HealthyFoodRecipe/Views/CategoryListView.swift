@@ -12,6 +12,8 @@ struct CategoryListView: View {
   @Environment(\.modelContext) var modelContext
   @Query private var recipes: [Recipe]
   
+  let categories = getAllCategories()
+  
   let columns = [
     GridItem(.adaptive(minimum: 150))
   ]
@@ -33,8 +35,6 @@ struct CategoryListView: View {
           .font(.title2)
         ScrollView {
           LazyVGrid(columns: columns, spacing: 20) {
-            let categories = [Category](Set(recipes.map{$0.category}))
-              .sorted(by: { $0.name < $1.name })
             ForEach(categories, id: \.self) { category in
               NavigationLink(destination: RecipeListView(category: category)) {
                 CardView(category: category)
