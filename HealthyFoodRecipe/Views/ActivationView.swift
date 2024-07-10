@@ -33,6 +33,7 @@ struct ActivationView: View {
               try await ActivationManager().activateApp(activationCode: activationCode)
               isSuccess = true
             } catch {
+              print("Error activating app: \(error)")
               isSuccess = false
             }
             showAlert = true

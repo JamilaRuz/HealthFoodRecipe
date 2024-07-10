@@ -23,22 +23,6 @@ class ActivationManager {
   
   private let installationTokenKey = "InstallationToken"
   
-  func activateApp() async throws -> String {
-    print("createActivationCode")
-    let url = URL(string: "http://127.0.0.1:8002/app-activation/create-code")!
-
-    var request = URLRequest(url: url)
-    request.httpMethod = "POST"
-
-    let (data, response) = try await URLSession.shared.upload(for: request, from: Data())
-    guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-      throw ActivationError.invalidResponse
-    }
-    
-    let activationCode = try JSONDecoder().decode(String.self, from: data)
-    return activationCode
-  }
-  
   func activateApp(activationCode: String) async throws {
     print("activateApp")
     let url = URL(string: "http://127.0.0.1:8002/auth/activate-app")!
@@ -57,8 +41,11 @@ class ActivationManager {
     }
     
     let createTokenResponse = try JSONDecoder().decode(CreateTokenResponse.self, from: data)
+    let installationToken = createTokenResponse.installation_token
     
-    saveInstallationToken(createTokenResponse.installation_token)
+    saveInstallationToken(installationToken)
+    
+    try await AuthManager().logIn(installationToken: installationToken)
   }
   
   func saveInstallationToken(_ installationToken: String) {

@@ -35,20 +35,33 @@ struct PostIngredient: Decodable {
 struct PostLoader {
   
   let activationManager = ActivationManager()
+  let authManager = AuthManager()
   
   func loadPosts() async throws -> [Post] {
-    print("loadPosts installationToken \(activationManager.getInstallationToken())")
+    print("loadPosts authToken \(authManager.getAuthToken() != nil)")
     
     guard let url = URL(string: "http://127.0.0.1:8002/recipes") else { return [] }
-    let (data, response) = try await URLSession.shared.data(from: url)
-    guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else { return [] }
-    let posts = try JSONDecoder().decode([Post].self, from: data)
     
-    return posts
+    if let authToken = authManager.getAuthToken() {
+      var request = URLRequest(url: url)
+      request.setValue("Bearer \(authToken)", forHTTPHeaderField: "Authorization")
+
+      let (data, response) = try await URLSession.shared.data(for: request)
+      guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else { return [] }
+
+      let posts = try JSONDecoder().decode([Post].self, from: data)
+      return posts
+    } else {
+      let (data, response) = try await URLSession.shared.data(from: url)
+      guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else { return [] }
+
+      let posts = try JSONDecoder().decode([Post].self, from: data)
+      return posts
+    }
   }
   
   func getLastChangeTimeFromServer() async throws -> String {
-    print("getLastChangeTimeFromServer installationToken \(activationManager.getInstallationToken())")
+    print("getLastChangeTimeFromServer authToken \(authManager.getAuthToken() != nil)")
     
     let url = URL(string: "http://127.0.0.1:8002/last-change")!
     let (data, response) = try await URLSession.shared.data(from: url)
