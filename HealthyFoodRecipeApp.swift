@@ -37,7 +37,7 @@ struct HealthyFoodRecipeApp: App {
   
   private func refreshDataFromServer() {
     Task { @MainActor in
-      await DataImporter(modelContext: container.mainContext).importData()
+      await DataImporter(modelContext: container.mainContext).importData(resetLastChangeTime: false)
     }
   }
 }

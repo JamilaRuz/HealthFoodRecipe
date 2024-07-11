@@ -22,10 +22,11 @@ struct CreateTokenResponse: Codable {
 class ActivationManager {
   
   private let installationTokenKey = "InstallationToken"
+  let activationUrl = ApiConf.baseUrl + "auth/activate-app"
   
   func activateApp(activationCode: String) async throws {
     print("activateApp")
-    let url = URL(string: "http://127.0.0.1:8002/auth/activate-app")!
+    let url = URL(string: activationUrl)!
     
     let requestBody = CreateTokenRequest(activation_code: activationCode)
     let requestData = try JSONEncoder().encode(requestBody)

@@ -22,10 +22,11 @@ struct LogInResponse: Codable {
 class AuthManager {
   
   private let authTokenKey = "AuthToken"
+  let logInUrl = ApiConf.baseUrl + "auth/login"
   
   func logIn(installationToken: String) async throws {
     print("logIn")
-    let url = URL(string: "http://127.0.0.1:8002/auth/login")!
+    let url = URL(string: logInUrl)!
     
     let requestBody = LogInRequest(installation_token: installationToken)
     let requestData = try JSONEncoder().encode(requestBody)

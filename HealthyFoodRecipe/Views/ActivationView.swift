@@ -10,6 +10,7 @@ import SwiftUI
 import SwiftUI
 
 struct ActivationView: View {
+  @Environment(\.modelContext) var modelContext
   @Environment(\.presentationMode) var presentationMode
   
   @State private var activationCode: String = ""
@@ -31,6 +32,7 @@ struct ActivationView: View {
           Task {
             do {
               try await ActivationManager().activateApp(activationCode: activationCode)
+              await DataImporter(modelContext: modelContext).importData(resetLastChangeTime: true)
               isSuccess = true
             } catch {
               print("Error activating app: \(error)")

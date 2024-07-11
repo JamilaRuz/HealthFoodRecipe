@@ -21,6 +21,7 @@
 		8D1EB3832BACE86800285053 /* FavouriteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1EB3822BACE86700285053 /* FavouriteListView.swift */; };
 		8D4D7EAB2C02783400FF7EF5 /* DataImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4D7EAA2C02783400FF7EF5 /* DataImporter.swift */; };
 		8D4FC5C92C3DCE98007F0BB9 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4FC5C82C3DCE98007F0BB9 /* AuthManager.swift */; };
+		8D4FC5CB2C4035DC007F0BB9 /* ApiConf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4FC5CA2C4035DC007F0BB9 /* ApiConf.swift */; };
 		8D848FC52BC830200057534F /* EmptyFavouriteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D848FC42BC830200057534F /* EmptyFavouriteListView.swift */; };
 		8D89C1202BADD497006FCF81 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D89C11F2BADD497006FCF81 /* CardView.swift */; };
 		8D89C1252BB1D69F006FCF81 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D89C1242BB1D69F006FCF81 /* Recipe.swift */; };
@@ -49,6 +50,7 @@
 		8D1EB3822BACE86700285053 /* FavouriteListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteListView.swift; sourceTree = "<group>"; };
 		8D4D7EAA2C02783400FF7EF5 /* DataImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataImporter.swift; sourceTree = "<group>"; };
 		8D4FC5C82C3DCE98007F0BB9 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
+		8D4FC5CA2C4035DC007F0BB9 /* ApiConf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiConf.swift; sourceTree = "<group>"; };
 		8D848FC42BC830200057534F /* EmptyFavouriteListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyFavouriteListView.swift; sourceTree = "<group>"; };
 		8D89C11F2BADD497006FCF81 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		8D89C1242BB1D69F006FCF81 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 				8D4D7EAA2C02783400FF7EF5 /* DataImporter.swift */,
 				8D18A3AF2C0A18BA00B2238D /* ActivationManager.swift */,
 				8D4FC5C82C3DCE98007F0BB9 /* AuthManager.swift */,
+				8D4FC5CA2C4035DC007F0BB9 /* ApiConf.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -240,6 +243,7 @@
 				8D1EB3702BAA2DBA00285053 /* Weekdays.swift in Sources */,
 				8D94D6642BD866D300416CD7 /* Category.swift in Sources */,
 				8DE46A9B2BBC642D00482A6C /* MenuView.swift in Sources */,
+				8D4FC5CB2C4035DC007F0BB9 /* ApiConf.swift in Sources */,
 				8D18A3B02C0A18BB00B2238D /* ActivationManager.swift in Sources */,
 				8D1EB35E2BAA29D100285053 /* HealthyFoodRecipeApp.swift in Sources */,
 				8D1EB3832BACE86800285053 /* FavouriteListView.swift in Sources */,

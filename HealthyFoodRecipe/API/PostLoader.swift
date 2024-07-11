@@ -37,33 +37,51 @@ struct PostLoader {
   let activationManager = ActivationManager()
   let authManager = AuthManager()
   
-  func loadPosts() async throws -> [Post] {
+  let recipesUrl = ApiConf.baseUrl + "recipes"
+  let lastChangeUrl = ApiConf.baseUrl + "last-change"
+  
+  func loadPosts(isFirstAttempt: Bool = true) async throws -> [Post] {
     print("loadPosts authToken \(authManager.getAuthToken() != nil)")
     
-    guard let url = URL(string: "http://127.0.0.1:8002/recipes") else { return [] }
+    let url = URL(string: recipesUrl)!
     
     if let authToken = authManager.getAuthToken() {
       var request = URLRequest(url: url)
       request.setValue("Bearer \(authToken)", forHTTPHeaderField: "Authorization")
 
       let (data, response) = try await URLSession.shared.data(for: request)
-      guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else { return [] }
 
-      let posts = try JSONDecoder().decode([Post].self, from: data)
-      return posts
+      let httpResponse = response as! HTTPURLResponse
+      if httpResponse.statusCode == 401 {
+        if isFirstAttempt {
+          print("Server answered that authToken is expired. Trying to re-login...")
+          try await authManager.logIn(installationToken: activationManager.getInstallationToken())
+          return try await loadPosts(isFirstAttempt: false)
+        } else {
+          print("Failed to load data even after re-login attempt!")
+          return []
+        }
+      } else if httpResponse.statusCode != 200 {
+        print("Failed to load data. Server responded with code \(httpResponse.statusCode).")
+        return []
+      }
+
+      return try JSONDecoder().decode([Post].self, from: data)
     } else {
       let (data, response) = try await URLSession.shared.data(from: url)
-      guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else { return [] }
 
-      let posts = try JSONDecoder().decode([Post].self, from: data)
-      return posts
+      let httpResponse = response as! HTTPURLResponse
+      if httpResponse.statusCode != 200 {
+        print("Failed to load data. Server responded with code \(httpResponse.statusCode).")
+        return []
+      }
+
+      return try JSONDecoder().decode([Post].self, from: data)
     }
   }
   
   func getLastChangeTimeFromServer() async throws -> String {
-    print("getLastChangeTimeFromServer authToken \(authManager.getAuthToken() != nil)")
-    
-    let url = URL(string: "http://127.0.0.1:8002/last-change")!
+    let url = URL(string: lastChangeUrl)!
     let (data, response) = try await URLSession.shared.data(from: url)
     guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else { return "" }
     let lastChangeTimestamp = try JSONDecoder().decode(String.self, from: data)

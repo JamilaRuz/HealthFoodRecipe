@@ -44,7 +44,7 @@ struct CategoryListView: View {
         }
         .refreshable {
           print("Refresh...")
-          await DataImporter(modelContext: modelContext).importData()
+          await DataImporter(modelContext: modelContext).importData(resetLastChangeTime: false)
         }
       }
       .padding()

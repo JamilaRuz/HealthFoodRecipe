@@ -23,8 +23,12 @@ class DataImporter {
   }
   
   @MainActor
-  func importData() async {
+  func importData(resetLastChangeTime: Bool) async {
     do {
+      if resetLastChangeTime {
+        saveLastChangeTimeToApp("")
+      }
+      
       let lastChangeTimeFromServer = try await postLoader.getLastChangeTimeFromServer()
       let lastChangeTimeFromApp = getLastChangeTimeFromApp()
       if lastChangeTimeFromServer == lastChangeTimeFromApp {
