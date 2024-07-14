@@ -96,7 +96,7 @@ struct RecipeDetailView: View {
                   .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                   .multilineTextAlignment(.leading)
               }
-              Text("\(String(format: "%g", ingredient.quantity)) (\(ingredient.unit))")
+              Text("\(String(format: "%g", ingredient.quantity)) \(ingredient.unit)")
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
             }
           }
@@ -143,7 +143,6 @@ struct RecipeDetailView: View {
           }) {
             Text("Добавить")
               .frame(width: 150, height: 50)
-            //                            .background(LinearGradient(colors: [.green3, .green1], startPoint: .top, endPoint: .bottom))
               .background(LinearGradient(colors: [.pink3, .pink2], startPoint: .top, endPoint: .bottom))
               .foregroundColor(.white)
               .font(.body)

@@ -43,7 +43,6 @@ struct FavouriteListView: View {
                 .background(
                     LinearGradient(colors: [.pink2, .pink1, .white], startPoint: .top, endPoint: .bottom)
                 )
-
             }
         }
     }

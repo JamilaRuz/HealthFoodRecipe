@@ -24,7 +24,7 @@ struct EmptyFavouriteListView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(
-            LinearGradient(colors: [.pink3, .pink1, .white], startPoint: .top, endPoint: .bottom)
+            LinearGradient(colors: [.pink2, .pink1, .white], startPoint: .top, endPoint: .bottom)
         )
         .edgesIgnoringSafeArea(.all)
     }

@@ -73,7 +73,7 @@ struct MenuDayView: View {
                           try modelContext.save()
                         } catch {
                           print("Failed to save context: \(error)")
-                          // Handle the error appropriately
+                          // TODO Handle the error appropriately
                         }
                       }
                     }

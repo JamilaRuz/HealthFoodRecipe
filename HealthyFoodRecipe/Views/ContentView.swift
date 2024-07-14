@@ -9,44 +9,39 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
-    init() {
-        let appearance = UISearchBar.appearance()
-        appearance.barTintColor = UIColor(.pink1)
-        if let textfield = UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]) as? UITextField {
-            textfield.backgroundColor = UIColor.white // Adjust if needed
+  init() {
+//    let appearance = UISearchBar.appearance()
+//    appearance.barTintColor = UIColor(.pink1)
+//
+    UITextField
+      .appearance(whenContainedInInstancesOf: [UISearchBar.self])
+      .backgroundColor = UIColor.white // Adjust if needed
+  }
+  
+  var body: some View {
+    TabView {
+      CategoryListView()
+        .tabItem {
+          Label("Категории", systemImage: "fork.knife.circle")
+        }
+      
+      MenuView()
+        .tabItem {
+          Label("Меню на неделю", systemImage: "menucard")
+        }
+      
+      FavouriteListView(emptyText: "")
+        .tabItem {
+          Label("Избранное", systemImage: "heart")
         }
     }
-        
-    var body: some View {
-        TabView {
-            CategoryListView()
-                .tabItem {
-                    Label("Категории", systemImage: "fork.knife.circle")
-                }
-            
-            MenuView()
-                .tabItem {
-                    Label("Меню на неделю", systemImage: "menucard")
-                }
-            
-            FavouriteListView(emptyText: "")
-                .tabItem {
-                    Label("Избранное", systemImage: "heart")
-                }
-            
-            ActivationView()
-                .tabItem {
-                    Label("Активация", systemImage: "person")
-                }
-        }
-        .onAppear() {
-//            UINavigationBar.appearance().backgroundColor = UIColor(.pink1)
-            UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor(.white)]
-        }
+    .onAppear() {
+      UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor(.white)]
     }
+  }
 }
 
 #Preview {
-    ContentView()
-        .modelContainer(for: MenuItem.self, inMemory: true)
+  ContentView()
+    .modelContainer(for: MenuItem.self, inMemory: true)
 }
