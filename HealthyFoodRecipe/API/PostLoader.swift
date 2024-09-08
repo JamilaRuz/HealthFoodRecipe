@@ -41,7 +41,7 @@ struct PostLoader {
   let lastChangeUrl = ApiConf.baseUrl + "last-change"
   
   func loadPosts(isFirstAttempt: Bool = true) async throws -> [Post] {
-    print("loadPosts authToken \(authManager.getAuthToken() != nil)")
+//    print("loadPosts authToken \(authManager.getAuthToken() != nil)")
     
     let url = URL(string: recipesUrl)!
     
@@ -54,7 +54,7 @@ struct PostLoader {
       let httpResponse = response as! HTTPURLResponse
       if httpResponse.statusCode == 401 {
         if isFirstAttempt {
-          print("Server answered that authToken is expired. Trying to re-login...")
+//          print("Server answered that authToken is expired. Trying to re-login...")
           try await authManager.logIn(installationToken: activationManager.getInstallationToken())
           return try await loadPosts(isFirstAttempt: false)
         } else {

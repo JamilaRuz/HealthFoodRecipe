@@ -25,7 +25,7 @@ class AuthManager {
   let logInUrl = ApiConf.baseUrl + "auth/login"
   
   func logIn(installationToken: String) async throws {
-    print("logIn")
+//    print("logIn")
     let url = URL(string: logInUrl)!
     
     let requestBody = LogInRequest(installation_token: installationToken)
