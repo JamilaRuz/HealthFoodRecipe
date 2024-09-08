@@ -9,5 +9,6 @@ import Foundation
 
 class ApiConf {
   // static let baseUrl = "http://127.0.0.1:8002/" // for local testing
-  static let baseUrl = "https://healthy-food-test-1-3ecaa6bfaf46.herokuapp.com/"
+  static let baseUrl = "https://healthy-food-test-1-240b0ea01d6e.herokuapp.com/"
 }
+
