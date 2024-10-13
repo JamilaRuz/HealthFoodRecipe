@@ -11,12 +11,9 @@ import SwiftData
 struct RecipeListView: View {
   var category: Category
   
-  @Binding private var isAppActivated: Bool
-  
   @Environment(\.modelContext) var modelContext
   @Query private var recipes: [Recipe]
   @State private var searchTerm = ""
-  @State private var isActivationShown = false
   
   var filteredRecipes: [Recipe] {
     let categoryFiltered = recipes.filter {$0.category == category}
@@ -25,9 +22,8 @@ struct RecipeListView: View {
     return categoryFiltered.filter { $0.name.localizedCaseInsensitiveContains(searchTerm)}
   }
   
-  init(category: Category, isAppActivated: Binding<Bool>) {
+  init(category: Category) {
     self.category = category
-    self._isAppActivated = isAppActivated
   }
   
   var body: some View {
@@ -59,38 +55,16 @@ struct RecipeListView: View {
         .navigationTitle("Рецепты")
         .navigationBarTitleDisplayMode(.inline)
         .searchable(text: $searchTerm, prompt: "Поиск рецептов")
-        
-        if !self.isAppActivated {
-          Button(action: {
-            isActivationShown.toggle()
-          }) {
-            Text("Активировать приложение")
-              .font(.headline)
-              .foregroundColor(.white)
-              .padding()
-              .frame(maxWidth: .infinity)
-              .background(
-                LinearGradient(colors: [.pink3, .pink2], startPoint: .top, endPoint: .bottom)
-              )
-              .cornerRadius(10)
-              .shadow(radius: 5)
-              .padding(.horizontal)
-              .padding(.bottom, 10)
-          }
-        }
       }//nav stack
       .background(
         LinearGradient(colors: [.pink2, .pink1, .white], startPoint: .top, endPoint: .bottom)
       )
       
     }//body
-    .sheet(isPresented: $isActivationShown) {
-      ActivationView(isAppActivated: self.$isAppActivated)
-    }
   }
 }
 
 #Preview {
-  RecipeListView(category: createStubRecipes()[0].category, isAppActivated: .constant(false))
+  RecipeListView(category: createStubRecipes()[0].category)
     .environment(\.modelContext, createPreviewModelContainer().mainContext)
 }

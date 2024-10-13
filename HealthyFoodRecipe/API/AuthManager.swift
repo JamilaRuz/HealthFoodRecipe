@@ -7,51 +7,27 @@
 
 import Foundation
 
-enum LogInError: Error {
-  case invalidResponse
-}
-
-struct LogInRequest: Codable {
-  let installation_token: String
-}
-
-struct LogInResponse: Codable {
-  let token: String
-}
-
 class AuthManager {
-  
-  private let authTokenKey = "AuthToken"
-  let logInUrl = ApiConf.baseUrl + "auth/login"
-  
-  func logIn(installationToken: String) async throws {
-//    print("logIn")
-    let url = URL(string: logInUrl)!
+    static let shared = AuthManager()
+    private init() {}
     
-    let requestBody = LogInRequest(installation_token: installationToken)
-    let requestData = try JSONEncoder().encode(requestBody)
+    private var authToken: String?
+    private let authTokenKey = "AuthToken"
     
-    var request = URLRequest(url: url)
-    request.httpMethod = "POST"
-    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-    
-    let (data, response) = try await URLSession.shared.upload(for: request, from: requestData)
-    
-    guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-      throw ActivationError.invalidResponse
+    func getAuthToken() -> String? {
+        if authToken == nil {
+            authToken = UserDefaults.standard.string(forKey: authTokenKey)
+        }
+        return authToken
     }
     
-    let logInResponse = try JSONDecoder().decode(LogInResponse.self, from: data)
+    func setAuthToken(_ token: String) {
+        authToken = token
+        UserDefaults.standard.set(token, forKey: authTokenKey)
+    }
     
-    saveAuthToken(logInResponse.token)
-  }
-  
-  private func saveAuthToken(_ authToken: String) {
-    UserDefaults.standard.set(authToken, forKey: authTokenKey)
-  }
-  
-  func getAuthToken() -> String? {
-    return UserDefaults.standard.string(forKey: authTokenKey)
-  }
-
+    func clearAuthToken() {
+        authToken = nil
+        UserDefaults.standard.removeObject(forKey: authTokenKey)
+    }
 }

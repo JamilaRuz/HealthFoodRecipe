@@ -72,6 +72,6 @@ struct RecipeListRowView: View {
 }
 
 #Preview {
-  RecipeListView(category: Category(name: "Breakfasts", image: "breakfast1"), isAppActivated: .constant(false))
+  RecipeListView(category: Category(name: "Breakfasts", image: "breakfast1"))
 }
 

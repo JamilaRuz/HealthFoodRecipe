@@ -8,84 +8,85 @@
 import Foundation
 
 struct Post: Decodable {
-  let id: Int
-  let name: String
-  let pictures: [String]
-  let category: PostCategory
-  let ingredients: [PostIngredientWithQuantity]
-  let instructions: String
+    let id: Int
+    let name: String
+    let pictures: [String]
+    let category: PostCategory
+    let ingredients: [PostIngredientWithQuantity]
+    let instructions: String
 }
 
 struct PostCategory: Decodable {
-  let id: Int
-  let name: String
+    let id: Int
+    let name: String
 }
 
 struct PostIngredientWithQuantity: Decodable {
-  let ingredient: PostIngredient
-  var unit: String
-  var qty: Float
+    let ingredient: PostIngredient
+    var unit: String
+    var qty: Float
 }
 
 struct PostIngredient: Decodable {
-  let id: Int
-  var name: String
+    let id: Int
+    var name: String
 }
 
 struct PostLoader {
-  
-  let activationManager = ActivationManager()
-  let authManager = AuthManager()
-  
-  let recipesUrl = ApiConf.baseUrl + "recipes"
-  let lastChangeUrl = ApiConf.baseUrl + "last-change"
-  
-  func loadPosts(isFirstAttempt: Bool = true) async throws -> [Post] {
-//    print("loadPosts authToken \(authManager.getAuthToken() != nil)")
     
-    let url = URL(string: recipesUrl)!
+    private let networkManager: NetworkManager
     
-    if let authToken = authManager.getAuthToken() {
-      var request = URLRequest(url: url)
-      request.setValue("Bearer \(authToken)", forHTTPHeaderField: "Authorization")
-
-      let (data, response) = try await URLSession.shared.data(for: request)
-
-      let httpResponse = response as! HTTPURLResponse
-      if httpResponse.statusCode == 401 {
-        if isFirstAttempt {
-//          print("Server answered that authToken is expired. Trying to re-login...")
-          try await authManager.logIn(installationToken: activationManager.getInstallationToken())
-          return try await loadPosts(isFirstAttempt: false)
-        } else {
-          print("Failed to load data even after re-login attempt!")
-          return []
-        }
-      } else if httpResponse.statusCode != 200 {
-        print("Failed to load data. Server responded with code \(httpResponse.statusCode).")
-        return []
-      }
-
-      return try JSONDecoder().decode([Post].self, from: data)
-    } else {
-      let (data, response) = try await URLSession.shared.data(from: url)
-
-      let httpResponse = response as! HTTPURLResponse
-      if httpResponse.statusCode != 200 {
-        print("Failed to load data. Server responded with code \(httpResponse.statusCode).")
-        return []
-      }
-
-      return try JSONDecoder().decode([Post].self, from: data)
+    init(networkManager: NetworkManager = NetworkManager.shared) {
+        self.networkManager = networkManager
     }
-  }
-  
-  func getLastChangeTimeFromServer() async throws -> String {
-    let url = URL(string: lastChangeUrl)!
-    let (data, response) = try await URLSession.shared.data(from: url)
-    guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else { return "" }
-    let lastChangeTimestamp = try JSONDecoder().decode(String.self, from: data)
     
-    return lastChangeTimestamp
-  }
+    func loadPosts(isFirstAttempt: Bool = true) async throws -> [Post] {
+        return try await withCheckedThrowingContinuation { continuation in
+            networkManager.authenticatedRequest(ApiConf.recipesUrl) { data, response, error in
+                if let error = error {
+                    print("Failed to load posts: \(error)")
+                    continuation.resume(throwing: error)
+                    return
+                }
+                
+                guard let data = data else {
+                    continuation.resume(throwing: NSError(domain: "PostLoader", code: 0, userInfo: [NSLocalizedDescriptionKey: "No data received"]))
+                    return
+                }
+                
+                do {
+                    let posts = try JSONDecoder().decode([Post].self, from: data)
+                    continuation.resume(returning: posts)
+                } catch {
+                    print("Failed to decode posts: \(error)")
+                    continuation.resume(throwing: error)
+                }
+            }
+        }
+    }
+    
+    func getLastChangeTimeFromServer() async throws -> String {
+        return try await withCheckedThrowingContinuation { continuation in
+            networkManager.authenticatedRequest(ApiConf.lastChangeUrl) { data, response, error in
+                if let error = error {
+                    print("Failed to get last change time: \(error)")
+                    continuation.resume(throwing: error)
+                    return
+                }
+                
+                guard let data = data else {
+                    continuation.resume(throwing: NSError(domain: "PostLoader", code: 0, userInfo: [NSLocalizedDescriptionKey: "No data received"]))
+                    return
+                }
+                
+                do {
+                    let lastChangeTime = try JSONDecoder().decode(String.self, from: data)
+                    continuation.resume(returning: lastChangeTime)
+                } catch {
+                    print("Failed to decode last change time: \(error)")
+                    continuation.resume(throwing: error)
+                }
+            }
+        }
+    }
 }

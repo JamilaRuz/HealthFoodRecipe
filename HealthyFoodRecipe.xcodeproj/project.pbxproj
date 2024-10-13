@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8D18A3AE2C0A169800B2238D /* ActivationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D18A3AD2C0A169800B2238D /* ActivationView.swift */; };
-		8D18A3B02C0A18BB00B2238D /* ActivationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D18A3AF2C0A18BA00B2238D /* ActivationManager.swift */; };
 		8D1EB35E2BAA29D100285053 /* HealthyFoodRecipeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1EB35D2BAA29D100285053 /* HealthyFoodRecipeApp.swift */; };
 		8D1EB3602BAA29D100285053 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1EB35F2BAA29D100285053 /* ContentView.swift */; };
 		8D1EB3642BAA29D800285053 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D1EB3632BAA29D800285053 /* Assets.xcassets */; };
@@ -19,8 +17,10 @@
 		8D1EB37E2BAB2D6000285053 /* RecipeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1EB37D2BAB2D6000285053 /* RecipeDetailView.swift */; };
 		8D1EB3812BACD6DC00285053 /* CategoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1EB3802BACD6DC00285053 /* CategoryListView.swift */; };
 		8D1EB3832BACE86800285053 /* FavouriteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1EB3822BACE86700285053 /* FavouriteListView.swift */; };
+		8D4659312C96180D00D4A5D9 /* ReceiptManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4659302C96180D00D4A5D9 /* ReceiptManager.swift */; };
+		8D4659332C9652E200D4A5D9 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4659322C9652E200D4A5D9 /* NetworkManager.swift */; };
+		8D4659352C96549D00D4A5D9 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4659342C96549D00D4A5D9 /* AuthManager.swift */; };
 		8D4D7EAB2C02783400FF7EF5 /* DataImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4D7EAA2C02783400FF7EF5 /* DataImporter.swift */; };
-		8D4FC5C92C3DCE98007F0BB9 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4FC5C82C3DCE98007F0BB9 /* AuthManager.swift */; };
 		8D4FC5CB2C4035DC007F0BB9 /* ApiConf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4FC5CA2C4035DC007F0BB9 /* ApiConf.swift */; };
 		8D848FC52BC830200057534F /* EmptyFavouriteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D848FC42BC830200057534F /* EmptyFavouriteListView.swift */; };
 		8D89C1202BADD497006FCF81 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D89C11F2BADD497006FCF81 /* CardView.swift */; };
@@ -34,8 +34,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		8D18A3AD2C0A169800B2238D /* ActivationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivationView.swift; sourceTree = "<group>"; };
-		8D18A3AF2C0A18BA00B2238D /* ActivationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivationManager.swift; sourceTree = "<group>"; };
 		8D1E3D012C42E24900DCE60E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1EB35A2BAA29D100285053 /* HealthyFoodRecipe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HealthyFoodRecipe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D1EB35D2BAA29D100285053 /* HealthyFoodRecipeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthyFoodRecipeApp.swift; sourceTree = "<group>"; };
@@ -49,8 +47,10 @@
 		8D1EB37F2BAB76BD00285053 /* HealthyFoodRecipe.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HealthyFoodRecipe.entitlements; sourceTree = "<group>"; };
 		8D1EB3802BACD6DC00285053 /* CategoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListView.swift; sourceTree = "<group>"; };
 		8D1EB3822BACE86700285053 /* FavouriteListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteListView.swift; sourceTree = "<group>"; };
+		8D4659302C96180D00D4A5D9 /* ReceiptManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptManager.swift; sourceTree = "<group>"; };
+		8D4659322C9652E200D4A5D9 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		8D4659342C96549D00D4A5D9 /* AuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		8D4D7EAA2C02783400FF7EF5 /* DataImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataImporter.swift; sourceTree = "<group>"; };
-		8D4FC5C82C3DCE98007F0BB9 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		8D4FC5CA2C4035DC007F0BB9 /* ApiConf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiConf.swift; sourceTree = "<group>"; };
 		8D848FC42BC830200057534F /* EmptyFavouriteListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyFavouriteListView.swift; sourceTree = "<group>"; };
 		8D89C11F2BADD497006FCF81 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
@@ -137,7 +137,6 @@
 				8D848FC42BC830200057534F /* EmptyFavouriteListView.swift */,
 				8D94D6652BDADC0600416CD7 /* RecipeListRowView.swift */,
 				8D89C11F2BADD497006FCF81 /* CardView.swift */,
-				8D18A3AD2C0A169800B2238D /* ActivationView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -154,11 +153,12 @@
 		8DB412592BD0023C00984AC8 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				8D4659342C96549D00D4A5D9 /* AuthManager.swift */,
 				8DB4125A2BD0025200984AC8 /* PostLoader.swift */,
 				8D4D7EAA2C02783400FF7EF5 /* DataImporter.swift */,
-				8D18A3AF2C0A18BA00B2238D /* ActivationManager.swift */,
-				8D4FC5C82C3DCE98007F0BB9 /* AuthManager.swift */,
 				8D4FC5CA2C4035DC007F0BB9 /* ApiConf.swift */,
+				8D4659302C96180D00D4A5D9 /* ReceiptManager.swift */,
+				8D4659322C9652E200D4A5D9 /* NetworkManager.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -234,19 +234,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D1EB37C2BAB29E200285053 /* RecipeListView.swift in Sources */,
-				8D4FC5C92C3DCE98007F0BB9 /* AuthManager.swift in Sources */,
 				8D848FC52BC830200057534F /* EmptyFavouriteListView.swift in Sources */,
 				8DABE2512BE1799B003DA69C /* MenuDayView.swift in Sources */,
+				8D4659332C9652E200D4A5D9 /* NetworkManager.swift in Sources */,
 				8D1EB3602BAA29D100285053 /* ContentView.swift in Sources */,
 				8D1EB3812BACD6DC00285053 /* CategoryListView.swift in Sources */,
 				8D1EB36E2BAA2A5100285053 /* MenuItem.swift in Sources */,
 				8D1EB37E2BAB2D6000285053 /* RecipeDetailView.swift in Sources */,
-				8D18A3AE2C0A169800B2238D /* ActivationView.swift in Sources */,
 				8D1EB3702BAA2DBA00285053 /* Weekdays.swift in Sources */,
 				8D94D6642BD866D300416CD7 /* Category.swift in Sources */,
 				8DE46A9B2BBC642D00482A6C /* MenuView.swift in Sources */,
 				8D4FC5CB2C4035DC007F0BB9 /* ApiConf.swift in Sources */,
-				8D18A3B02C0A18BB00B2238D /* ActivationManager.swift in Sources */,
 				8D1EB35E2BAA29D100285053 /* HealthyFoodRecipeApp.swift in Sources */,
 				8D1EB3832BACE86800285053 /* FavouriteListView.swift in Sources */,
 				8D89C1202BADD497006FCF81 /* CardView.swift in Sources */,
@@ -254,6 +252,8 @@
 				8DB4125B2BD0025200984AC8 /* PostLoader.swift in Sources */,
 				8D4D7EAB2C02783400FF7EF5 /* DataImporter.swift in Sources */,
 				8D89C1252BB1D69F006FCF81 /* Recipe.swift in Sources */,
+				8D4659352C96549D00D4A5D9 /* AuthManager.swift in Sources */,
+				8D4659312C96180D00D4A5D9 /* ReceiptManager.swift in Sources */,
 				8DB4125D2BD00BF500984AC8 /* StubData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

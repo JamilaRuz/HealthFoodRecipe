@@ -9,35 +9,44 @@ import SwiftUI
 import SwiftData
 import CoreData
 
-
 @main
 struct HealthyFoodRecipeApp: App {
-  static let refreshIntervalSeconds: TimeInterval = 5 * 60
+    @Environment(\.scenePhase) private var scenePhase
+    let container = try! ModelContainer(for: Recipe.self)
 
-  @Environment(\.scenePhase) private var scenePhase
-  
-  let container = try! ModelContainer(for: Recipe.self)
-  
-  private let timer = Timer.publish(every: refreshIntervalSeconds, on: .main, in: .common).autoconnect()
-  
-  var body: some Scene {
-    WindowGroup {
-      ContentView()
-        .onReceive(timer) { _ in
-          refreshDataFromServer()
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+        }
+        .modelContainer(container)
+        .onChange(of: scenePhase) { _, newPhase in
+            if newPhase == .active {
+                validateReceiptAndRefreshToken()
+            }
         }
     }
-    .modelContainer(container)
-    .onChange(of: scenePhase, initial: false) { oldPhase, newPhase in
-      if newPhase == .active {
-        refreshDataFromServer()
-      }
+    
+    private func validateReceiptAndRefreshToken() {
+        ReceiptManager.shared.fetchReceiptData { receiptData in
+            guard let receiptData = receiptData else {
+                print("Failed to fetch receipt data")
+                return
+            }
+            
+            ReceiptManager.shared.sendReceiptToServer(receiptData: receiptData) { success in
+                if success {
+                    print("Receipt validated and token refreshed successfully")
+                    refreshDataFromServer()
+                } else {
+                    print("Failed to validate receipt or refresh token")
+                }
+            }
+        }
     }
-  }
-  
-  private func refreshDataFromServer() {
-    Task { @MainActor in
-      await DataImporter(modelContext: container.mainContext).importData(resetLastChangeTime: false)
+    
+    private func refreshDataFromServer() {
+        Task { @MainActor in
+            await DataImporter(modelContext: container.mainContext).importData(resetLastChangeTime: false)
+        }
     }
-  }
 }

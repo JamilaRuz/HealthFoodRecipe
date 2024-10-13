@@ -9,8 +9,6 @@ import SwiftUI
 import SwiftData
 
 struct CategoryListView: View {
-  @State private var isAppActivated: Bool = AuthManager().getAuthToken() != nil
-
   @Environment(\.modelContext) var modelContext
   @Query private var recipes: [Recipe]
   
@@ -38,7 +36,7 @@ struct CategoryListView: View {
         ScrollView {
           LazyVGrid(columns: columns, spacing: 20) {
             ForEach(categories, id: \.self) { category in
-              NavigationLink(destination: RecipeListView(category: category, isAppActivated: $isAppActivated)) {
+              NavigationLink(destination: RecipeListView(category: category)) {
                 CardView(category: category)
               }
             }
