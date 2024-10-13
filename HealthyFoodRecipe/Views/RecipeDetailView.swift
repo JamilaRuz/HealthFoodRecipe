@@ -82,25 +82,10 @@ struct RecipeDetailView: View {
             }
           }
           
-          let columns = [
-            GridItem(.flexible()),
-            GridItem(.flexible())
-          ]
-          
-          LazyVGrid(columns: columns, spacing: 5) {
-            ForEach(recipe.ingredients, id: \.self) { ingredient in
-              HStack(spacing: 5) { // Adjust spacing as needed
-                Image(systemName: "circle.fill")
-                  .font(.system(size: 5)) // Adjust the size as needed
-                Text("\(ingredient.name)")
-                  .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                  .multilineTextAlignment(.leading)
-              }
-              Text("\(String(format: "%g", ingredient.quantity)) \(ingredient.unit)")
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-            }
+          VStack(alignment: .leading, spacing: 5) {
+            Text(recipe.ingredients)
+                .font(.body)
           }
-          .padding(.bottom, 10)
           
           Divider()
           

@@ -12,24 +12,13 @@ struct Post: Decodable {
     let name: String
     let pictures: [String]
     let category: PostCategory
-    let ingredients: [PostIngredientWithQuantity]
+    let ingredients: String
     let instructions: String
 }
 
 struct PostCategory: Decodable {
     let id: Int
     let name: String
-}
-
-struct PostIngredientWithQuantity: Decodable {
-    let ingredient: PostIngredient
-    var unit: String
-    var qty: Float
-}
-
-struct PostIngredient: Decodable {
-    let id: Int
-    var name: String
 }
 
 struct PostLoader {

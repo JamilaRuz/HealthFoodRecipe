@@ -94,15 +94,19 @@ class DataImporter {
     }
   }
   
-  fileprivate func createRecipe(_ post: Post) -> Recipe {
-    let categoryImage = getCategoryAssetName(for: post.category.name)
-    let category = Category(name: post.category.name, image: categoryImage)
+  @MainActor
+  private func createRecipe(_ post: Post) -> Recipe {
+    let recipe = Recipe(
+        id: post.id,
+        name: post.name,
+        images: post.pictures,
+        ingredients: post.ingredients,
+        instructions: post.instructions,
+        category: Category(name: post.category.name, image: getCategoryAssetName(for: post.category.name)),
+        isFavorite: false
+    )
     
-    let ingredients = post.ingredients.map { postIngredient in
-      Ingredient(name: postIngredient.ingredient.name, unit: postIngredient.unit, quantity: postIngredient.qty)
-    }
-    
-    return Recipe(id: post.id, name: post.name, images: post.pictures, ingredients: ingredients, instructions: post.instructions, category: category, isFavorite: false, menuItems: [])
+    return recipe
   }
   
   private func saveLastChangeTimeToApp(_ lastChangeTime: String) {

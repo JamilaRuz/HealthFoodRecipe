@@ -46,8 +46,7 @@ struct RecipeListRowView: View {
         Text(recipe.name)
           .font(.system(size: 18, weight: .medium))
         
-        let allIngreds = recipe.ingredients.map{$0.name}.joined(separator: ", ")
-        Text(allIngreds)
+        Text(recipe.ingredients)
           .font(.system(size: 12))
           .foregroundColor(.gray)
           .frame(maxWidth: .infinity, alignment: .leading)
