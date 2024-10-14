@@ -12,17 +12,56 @@ import CoreData
 @main
 struct HealthyFoodRecipeApp: App {
     @Environment(\.scenePhase) private var scenePhase
-    let container = try! ModelContainer(for: Recipe.self)
-
+    @State private var container: ModelContainer?
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
-        }
-        .modelContainer(container)
-        .onChange(of: scenePhase) { _, newPhase in
-            if newPhase == .active {
-                validateReceiptAndRefreshToken()
+            Group {
+                if let container = container {
+                    ContentView()
+                        .modelContainer(container)
+                } else {
+                    ProgressView("Loading...")
+                }
             }
+            .task {
+                await setupModelContainer()
+            }
+            .onChange(of: scenePhase) { _, newPhase in
+                if newPhase == .active {
+                    validateReceiptAndRefreshToken()
+                }
+            }
+        }
+    }
+    
+    private func setupModelContainer() async {
+        do {
+            let container = try await createModelContainer()
+            self.container = container
+        } catch {
+            print("Failed to create model container: \(error)")
+            // Handle the error appropriately, e.g., show an error message to the user
+        }
+    }
+    
+    private func createModelContainer() async throws -> ModelContainer {
+        let schema = Schema([Recipe.self])
+        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+        
+        do {
+            return try ModelContainer(for: schema, configurations: [modelConfiguration])
+        } catch {
+            print("Error creating ModelContainer: \(error)")
+            print("Attempting to recreate the database...")
+            
+            // Attempt to delete the existing store
+            if let storeURL = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first?.appendingPathComponent("default.store") {
+                try? FileManager.default.removeItem(at: storeURL)
+            }
+            
+            // Try creating the container again
+            return try ModelContainer(for: schema, configurations: [modelConfiguration])
         }
     }
     
@@ -46,7 +85,12 @@ struct HealthyFoodRecipeApp: App {
     
     private func refreshDataFromServer() {
         Task { @MainActor in
-            await DataImporter(modelContext: container.mainContext).importData(resetLastChangeTime: false)
+            guard let modelContext = container?.mainContext else {
+                print("Error: ModelContext is not available")
+                return
+            }
+            
+            await DataImporter(modelContext: modelContext).importData(resetLastChangeTime: false)
         }
     }
 }

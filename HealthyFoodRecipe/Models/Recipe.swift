@@ -11,7 +11,7 @@ import SwiftData
 @Model
 class Recipe: Identifiable {
   @Attribute(.unique)
-  let id: Int
+  var id: Int
   var name: String
   var images: [String]
   var ingredients: String

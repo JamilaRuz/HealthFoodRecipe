@@ -66,7 +66,8 @@ class ReceiptManager {
         let body = ["receipt_data": base64Receipt]
         request.httpBody = try? JSONSerialization.data(withJSONObject: body)
 
-        print("Sending receipt to server... \(base64Receipt)")
+//        print("Sending receipt to server... \(base64Receipt)")
+        print("Sending receipt to server...")
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
@@ -82,7 +83,8 @@ class ReceiptManager {
             }
             
             do {
-                print("Receipt verification response: \(String(data: data, encoding: .utf8)!)")
+//                print("Receipt verification response: \(String(data: data, encoding: .utf8)!)")
+                print("Receipt verification response received")
                 if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
                    let authToken = json["auth_token"] as? String {
                     AuthManager.shared.setAuthToken(authToken)

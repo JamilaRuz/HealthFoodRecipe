@@ -46,10 +46,6 @@ struct RecipeListView: View {
           }
         }
         .scrollContentBackground(.hidden)
-        //                .background(Color.pink1)
-        //                .background(
-        //                    LinearGradient(colors: [.pink2, .pink1, .white], startPoint: .top, endPoint: .bottom)
-        //                )
         .cornerRadius(20)
         
         .navigationTitle("Рецепты")
