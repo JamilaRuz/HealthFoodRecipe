@@ -71,6 +71,7 @@ struct PostLoader {
                 do {
                     let lastChangeTime = try JSONDecoder().decode(String.self, from: data)
                     continuation.resume(returning: lastChangeTime)
+                    print("Last change time from server: \(lastChangeTime)")
                 } catch {
                     print("Failed to decode last change time: \(error)")
                     continuation.resume(throwing: error)

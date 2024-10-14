@@ -47,10 +47,9 @@ class DataImporter {
           } else {
             updateRecipe(post: post, existingRecipe: foundRecipes[0])
           }
-          
-          deleteRecipesNotInPosts(posts: posts)
         }
-        
+        deleteRecipesNotInPosts(posts: posts)
+
         saveLastChangeTimeToApp(lastChangeTimeFromServer)
       }
     } catch {
