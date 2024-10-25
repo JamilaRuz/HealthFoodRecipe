@@ -93,7 +93,7 @@ struct RecipeDetailView: View {
             HStack {
               Text("Способ приготовления:")
                 .font(.headline)
-                .foregroundColor(.green)
+                .foregroundColor(.green1)
               Spacer()
               
               Image("cooking")

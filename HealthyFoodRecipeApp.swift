@@ -18,7 +18,7 @@ struct HealthyFoodRecipeApp: App {
         WindowGroup {
             Group {
                 if let container = container {
-                    ContentView()
+                    SplashScreen()
                         .modelContainer(container)
                 } else {
                     ProgressView("Loading...")

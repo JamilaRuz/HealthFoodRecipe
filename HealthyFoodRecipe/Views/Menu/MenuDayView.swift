@@ -80,7 +80,7 @@ struct MenuDayView: View {
                   }
                 }) {
                   Image(systemName: menuItem.isChecked ? "checkmark" : "circle")
-                    .foregroundColor(menuItem.isChecked ? .pink3 : .green)
+                    .foregroundColor(menuItem.isChecked ? .pink3 : .green1)
                 }
               }
               Divider()
@@ -92,7 +92,7 @@ struct MenuDayView: View {
       Text(day.displayName)
         .font(.title2)
         .fontDesign(.monospaced)
-        .foregroundColor(.green)
+        .foregroundColor(.green1)
     }
     .padding(.horizontal, 10)
 //    .groupBoxStyle(.custom)

@@ -59,7 +59,7 @@ struct RecipeListRowView: View {
           }
           if !(recipe.menuItems?.isEmpty ?? true) {
             Image(systemName: "menucard.fill")
-              .foregroundColor(.green)
+              .foregroundColor(.green1)
           }
         }
       }
