@@ -129,13 +129,9 @@
 			children = (
 				8D1EB35F2BAA29D100285053 /* ContentView.swift */,
 				8D1EB3802BACD6DC00285053 /* CategoryListView.swift */,
-				8D1EB37B2BAB29E200285053 /* RecipeListView.swift */,
-				8DE46A9A2BBC642D00482A6C /* MenuView.swift */,
-				8DABE2502BE1799B003DA69C /* MenuDayView.swift */,
-				8D1EB37D2BAB2D6000285053 /* RecipeDetailView.swift */,
-				8D1EB3822BACE86700285053 /* FavouriteListView.swift */,
-				8D848FC42BC830200057534F /* EmptyFavouriteListView.swift */,
-				8D94D6652BDADC0600416CD7 /* RecipeListRowView.swift */,
+				8D9588812CCBCEC1004C0034 /* Menu */,
+				8D9588832CCBCF14004C0034 /* Recipes */,
+				8D9588822CCBCEEB004C0034 /* Favorites */,
 				8D89C11F2BADD497006FCF81 /* CardView.swift */,
 			);
 			path = Views;
@@ -148,6 +144,34 @@
 				8D94D6632BD866D300416CD7 /* Category.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		8D9588812CCBCEC1004C0034 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				8DE46A9A2BBC642D00482A6C /* MenuView.swift */,
+				8DABE2502BE1799B003DA69C /* MenuDayView.swift */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
+		8D9588822CCBCEEB004C0034 /* Favorites */ = {
+			isa = PBXGroup;
+			children = (
+				8D1EB3822BACE86700285053 /* FavouriteListView.swift */,
+				8D848FC42BC830200057534F /* EmptyFavouriteListView.swift */,
+			);
+			path = Favorites;
+			sourceTree = "<group>";
+		};
+		8D9588832CCBCF14004C0034 /* Recipes */ = {
+			isa = PBXGroup;
+			children = (
+				8D1EB37D2BAB2D6000285053 /* RecipeDetailView.swift */,
+				8D94D6652BDADC0600416CD7 /* RecipeListRowView.swift */,
+				8D1EB37B2BAB29E200285053 /* RecipeListView.swift */,
+			);
+			path = Recipes;
 			sourceTree = "<group>";
 		};
 		8DB412592BD0023C00984AC8 /* API */ = {
