@@ -50,10 +50,6 @@ struct CategoryListView: View {
       .padding()
       .navigationTitle("Похудейка")
       .frame(maxWidth: .infinity, maxHeight: .infinity)
-      //            .background {
-      //                Color.purple1.opacity(0.5)
-      //                    .ignoresSafeArea()
-      //            }
     }
     
   }

@@ -34,6 +34,11 @@ struct ContentView: View {
         .tabItem {
           Label("Избранное", systemImage: "heart")
         }
+        
+      AboutUsView()
+        .tabItem {
+          Label("О нас", systemImage: "person")
+        }
     }
     .onAppear() {
       UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor(.white)]

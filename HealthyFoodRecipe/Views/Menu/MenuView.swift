@@ -21,7 +21,6 @@ struct MenuView: View {
       }//Vstack main
       .navigationTitle("Меню на неделю")
       .navigationBarTitleDisplayMode(.inline)
-      //    .scrollContentBackground(.hidden)
       .background(
         LinearGradient(colors: [.pink2, .pink1, .white], startPoint: .top, endPoint: .bottom)
       )

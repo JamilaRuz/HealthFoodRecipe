@@ -141,11 +141,6 @@ struct RecipeDetailView: View {
     }
     .ignoresSafeArea(.container, edges: .top)
     .background(
-      //                Image("bg_pink")
-      //                    .resizable()
-      //                    .scaledToFill()
-      //                    .overlay(Color.black.opacity(0.2))
-      //                    .ignoresSafeArea()
       Color(.pink1)
         .opacity(0.5)
     )
