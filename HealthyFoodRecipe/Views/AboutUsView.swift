@@ -13,7 +13,7 @@ struct AboutUsView: View {
             VStack(spacing: 20) {
                 Spacer(minLength: 50)
                 
-                Text("О проекте")
+                Text("О нас")
                     .font(.largeTitle)
                     .fontWeight(.semibold)
                     .foregroundColor(.green1)
@@ -28,29 +28,41 @@ struct AboutUsView: View {
                 }
                 
                 VStack(spacing: 10) {
-                    Text("Lorem ipsum dolor sit amet. Et doloremque delectus et consequatur inventore et earum accusamus et cumque perspiciatis et veniam consectetur est nemo nihil.")
-                    Text("Lorem ipsum dolor sit amet. Et doloremque delectus et consequatur inventore et earum accusamus et cumque perspiciatis et veniam consectetur est nemo nihil.")
-                    Text("Lorem ipsum dolor sit amet. Et doloremque delectus et consequatur inventore et earum accusamus et cumque perspiciatis et veniam consectetur est nemo nihil.")
+                    
+                        Text("Dileknutrition Healthy Recipes - ")
+                            .fontWeight(.bold) +
+                    Text("ваш надежный помощник на пути к стройности и здоровому питанию!\n\n Меня зовут Дилек Умарова, я сертифицированный нутрициолог и мама четверых детей. Уже более десяти лет я помогаю женщинам по всему миру находить баланс между заботой о близких и вниманием к своему здоровью и красоте. \n\n В приложении вы найдете уникальные рецепты, разработанные и проверенные участницами нашего сообщества. Эти блюда легко готовить, они вкусны и питательны — идеальный выбор для занятых мам, которые хотят поддерживать себя в форме и вдохновлять своих близких на здоровое питание. \n\n Хотите пройти программу похудения с нами?")
+                    Text("Посетите наш сайт:")
+                    VStack(spacing: 15) {
+                        SocialLinkButton(imageName: "globe", url: "https://dileknutrition.com", label: "Website")
+                    }
+                    
+                    Text("Там вас ждут отзывы, истории успеха и программы на любой бюджет.")
+                    Text("Каждый рецепт — это шаг к вашему новому Я. Все в ваших руках, а мы с радостью поможем вам достичь желаемых результатов!.")
+                        .fontWeight(.semibold)
                 }
                 .font(.body)
                 .foregroundColor(.black)
                 .padding()
-                .background(Color.white.opacity(0.5))
+                .background(Color.pink3.opacity(0.1))
                 .cornerRadius(10)
                 
                 Spacer()
                 
-                VStack(spacing: 15) {
-                    SocialLinkButton(imageName: "globe", url: "https://dileknutrition.com", label: "Website")
-                }
-                .padding(.bottom)
+                
             }
             .padding()
         }
-        .background(
-            LinearGradient(colors: [.pink2, .pink1, .white], startPoint: .top, endPoint: .bottom)
-        )
+//        .background(
+//            LinearGradient(colors: [.pink2, .pink1, .white], startPoint: .top, endPoint: .bottom)
+//        )
 //        .background(Color.pink1)
+        .background(
+            Image("bg_pink")
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .opacity(0.3)
+        )
         .edgesIgnoringSafeArea(.top)
     }
 }
