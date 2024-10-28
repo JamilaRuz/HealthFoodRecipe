@@ -7,7 +7,6 @@
 
 import SwiftUI
 import SwiftData
-import CoreData
 
 @main
 struct HealthyFoodRecipeApp: App {
@@ -46,7 +45,7 @@ struct HealthyFoodRecipeApp: App {
     }
     
     private func createModelContainer() async throws -> ModelContainer {
-        let schema = Schema([Recipe.self])
+        let schema = Schema([Recipe.self, MenuItem.self])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
         
         do {

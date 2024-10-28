@@ -12,6 +12,7 @@ struct FavouriteListView: View {
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.modelContext) var modelContext
     @Query private var recipes: [Recipe]
+    @Query private var menuItems: [MenuItem]
     let emptyText: String
     
     var favorites: [Recipe] {
@@ -29,7 +30,7 @@ struct FavouriteListView: View {
                     List {
                         ForEach(favorites, id: \.self) { recipe in
                             NavigationLink(destination: RecipeDetailView(recipe: recipe)) {
-                                RecipeListRowView(recipe: recipe)
+                                RecipeListRowView(recipe: recipe, menuItems: menuItems)
                             }
                             .listRowBackground(colorScheme == .dark ? Color(UIColor.secondarySystemBackground) : .white)
                         }

@@ -13,6 +13,7 @@ struct RecipeListView: View {
   @Environment(\.colorScheme) var colorScheme
   
   @Query private var recipes: [Recipe]
+  @Query private var menuItems: [MenuItem]  // Add this line
   @State private var searchTerm = ""
   
   var filteredRecipes: [Recipe] {
@@ -35,7 +36,7 @@ struct RecipeListView: View {
           ) {
             ForEach(filteredRecipes, id: \.self) { recipe in
               NavigationLink(destination: RecipeDetailView(recipe: recipe)) {
-                RecipeListRowView(recipe: recipe)
+                RecipeListRowView(recipe: recipe, menuItems: menuItems)  // Pass menuItems here
               }
             }
             .padding(.vertical, 5)

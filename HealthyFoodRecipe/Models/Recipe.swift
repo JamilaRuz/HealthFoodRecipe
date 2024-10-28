@@ -9,18 +9,18 @@ import Foundation
 import SwiftData
 
 @Model
-class Recipe: Identifiable {
+final class Recipe: Identifiable {
   @Attribute(.unique)
   var id: Int
   var name: String
+  @Attribute(.externalStorage)
   var images: [String]
   var ingredients: String
   var instructions: String
   var category: Category
   var isFavorite: Bool
-  var menuItems: [MenuItem]?
   
-  init(id: Int, name: String, images: [String], ingredients: String, instructions: String, category: Category, isFavorite: Bool, menuItems: [MenuItem]? = nil) {
+  init(id: Int, name: String, images: [String], ingredients: String, instructions: String, category: Category, isFavorite: Bool) {
     self.id = id
     self.name = name
     self.images = images
@@ -28,7 +28,6 @@ class Recipe: Identifiable {
     self.instructions = instructions
     self.category = category
     self.isFavorite = isFavorite
-    self.menuItems = menuItems
   }
 }
 

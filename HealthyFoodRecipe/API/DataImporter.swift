@@ -7,7 +7,6 @@
 
 import SwiftUI
 import SwiftData
-import CoreData
 
 
 class DataImporter {
@@ -80,16 +79,17 @@ class DataImporter {
   @MainActor
   private func deleteRecipesNotInPosts(posts: [Post]) {
     do {
-      let allRecipes = try modelContext.fetch(FetchDescriptor<Recipe>())
-      let postIDs = posts.map { $0.id }
-      for recipe in allRecipes {
-        if !postIDs.contains(recipe.id) {
-          modelContext.delete(recipe)
+        let descriptor = FetchDescriptor<Recipe>()
+        let allRecipes = try modelContext.fetch(descriptor)
+        let postIDs = posts.map { $0.id }
+        
+        for recipe in allRecipes {
+            if !postIDs.contains(recipe.id) {
+                modelContext.delete(recipe)
+            }
         }
-      }
-      try modelContext.save()
     } catch {
-      print("Failed to delete recipes not in posts: \(error)")
+        print("Failed to delete recipes not in posts: \(error)")
     }
   }
   

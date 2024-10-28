@@ -150,5 +150,5 @@ struct RecipeDetailView: View {
 
 #Preview {
   RecipeDetailView(recipe: createStubRecipes()[0])
-    .environment(\.modelContext, createPreviewModelContainer().mainContext)
+    .modelContainer(for: [Recipe.self, MenuItem.self], inMemory: true)
 }

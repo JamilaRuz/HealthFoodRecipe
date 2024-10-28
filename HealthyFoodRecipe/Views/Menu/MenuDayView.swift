@@ -18,7 +18,7 @@ struct MenuDayView: View {
   init(day: Day) {
     self.day = day
     
-    let dayRawValue: String? = day.rawValue
+      let dayRawValue: String = day.rawValue
     
     self._menuItems = Query(filter: #Predicate<MenuItem> {
       $0.day == dayRawValue
@@ -39,7 +39,7 @@ struct MenuDayView: View {
             .foregroundColor(.pink3)
           
           let categoriesForToday = Array(Set(menuItems.map { $0.recipe?.category.name ?? "Unknown" }
-                                                      .filter { $0 != "Unknown" } )).sorted()
+                .filter { $0 != "Unknown" } )).sorted()
           ForEach(categoriesForToday, id: \.self) { category in
             HStack {
               Text("\(category):")

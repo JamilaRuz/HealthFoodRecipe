@@ -11,6 +11,11 @@ struct RecipeListRowView: View {
   
   let picsApiUrl = ApiConf.baseUrl + "pictures/"
   let recipe: Recipe
+  let menuItems: [MenuItem]  // Add this
+  
+  var isInMenu: Bool {
+    menuItems.contains { $0.recipe?.id == recipe.id }
+  }
   
   var body: some View {
     HStack {
@@ -57,7 +62,7 @@ struct RecipeListRowView: View {
             Image(systemName: "heart.fill")
               .foregroundColor(.pink2)
           }
-          if !(recipe.menuItems?.isEmpty ?? true) {
+          if isInMenu {  // Changed this condition
             Image(systemName: "menucard.fill")
               .foregroundColor(.green1)
           }

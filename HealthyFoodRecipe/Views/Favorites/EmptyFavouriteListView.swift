@@ -9,6 +9,7 @@ import SwiftUI
 
 struct EmptyFavouriteListView: View {
     let emptyText: String
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         VStack(alignment: .center) {
@@ -19,17 +20,37 @@ struct EmptyFavouriteListView: View {
             Text(emptyText)
                 .padding()
                 .font(.title3)
-                .foregroundColor(.gray)
+                .foregroundColor(colorScheme == .dark ? .white : .gray)
                 .multilineTextAlignment(.center)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(
-            LinearGradient(colors: [.pink2, .pink1, .white], startPoint: .top, endPoint: .bottom)
+            Group {
+                if colorScheme == .dark {
+                    LinearGradient(
+                        colors: [Color(red: 0.2, green: 0.1, blue: 0.2), Color.black],
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
+                } else {
+                    LinearGradient(
+                        colors: [Color("pink2"), Color("pink1"), .white],
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
+                }
+            }
         )
         .edgesIgnoringSafeArea(.all)
     }
 }
 
 #Preview {
-    EmptyFavouriteListView(emptyText: "Чтобы добавть рецепт в избранное, нажмите на сердечко на самом рецепте.")
+    Group {
+        EmptyFavouriteListView(emptyText: "Чтобы добавть рецепт в избранное, нажмите на сердечко на самом рецепте.")
+            .preferredColorScheme(.light)
+        
+        EmptyFavouriteListView(emptyText: "Чтобы добавть рецепт в избранное, нажмите на сердечко на самом рецепте.")
+            .preferredColorScheme(.dark)
+    }
 }
