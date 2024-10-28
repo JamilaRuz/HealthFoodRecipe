@@ -10,6 +10,7 @@ import SwiftData
 
 struct CategoryListView: View {
   @Environment(\.modelContext) var modelContext
+    @Environment(\.colorScheme) var colorScheme
   @Query private var recipes: [Recipe]
   
   let categories = getAllCategories()
@@ -21,7 +22,14 @@ struct CategoryListView: View {
   var body: some View {
     NavigationStack {
       VStack(alignment: .leading) {
-        
+//          VStack(alignment: .center) {
+//            Text("Рецепты правильного питания для эффективного и здорового снижения веса.")
+//            .font(.system(size: 28, weight: .medium, design: .rounded))
+//            .foregroundColor(colorScheme == .dark ? .white : .pink3)
+//            .multilineTextAlignment(.center)
+//            .padding(.horizontal)
+//        }
+          
         HStack {
           Image("banner")
             .resizable()
@@ -47,10 +55,10 @@ struct CategoryListView: View {
           await DataImporter(modelContext: modelContext).importData(resetLastChangeTime: false)
         }
       }
+      .navigationTitle("Dileknutrition")
       .padding()
-      .navigationTitle("Похудейка")
       .frame(maxWidth: .infinity, maxHeight: .infinity)
-    }
+    }//NavigationStack
     
   }
 }

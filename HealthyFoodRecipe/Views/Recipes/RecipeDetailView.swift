@@ -1,5 +1,5 @@
 //
-//  RecipeDetails.swift
+//  RecipeDetailView.swift
 //  HealthFoodRecipe
 //
 //  Created by Jamila Ruzimetova on 3/20/24.
@@ -9,7 +9,6 @@ import SwiftUI
 import SwiftData
 
 struct RecipeDetailView: View {
-  @Query private var menuItems: [MenuItem]
   @Environment(\.modelContext) var modelContext
   @Environment(\.dismiss) var dismiss
   

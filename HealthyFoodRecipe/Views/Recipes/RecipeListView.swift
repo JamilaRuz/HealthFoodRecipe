@@ -10,8 +10,8 @@ import SwiftData
 
 struct RecipeListView: View {
   var category: Category
+  @Environment(\.colorScheme) var colorScheme
   
-  @Environment(\.modelContext) var modelContext
   @Query private var recipes: [Recipe]
   @State private var searchTerm = ""
   
@@ -30,7 +30,9 @@ struct RecipeListView: View {
     NavigationStack {
       VStack(alignment: .leading) {
         List {
-          Section(header: Text("\(category.name) (\(filteredRecipes.count))")) {
+          Section(header: Text("\(category.name) (\(filteredRecipes.count))")
+            .foregroundColor(colorScheme == .dark ? .white : .black)
+          ) {
             ForEach(filteredRecipes, id: \.self) { recipe in
               NavigationLink(destination: RecipeDetailView(recipe: recipe)) {
                 RecipeListRowView(recipe: recipe)
@@ -39,9 +41,11 @@ struct RecipeListView: View {
             .padding(.vertical, 5)
             .listRowBackground(
               RoundedRectangle(cornerRadius: 10)
-                .fill(Color(.white))
+                .fill(colorScheme == .dark ? 
+                      Color(UIColor.secondarySystemBackground) : 
+                      Color.white)
                 .padding(.vertical, 5)
-                .shadow(radius: 5)
+                .shadow(radius: colorScheme == .dark ? 2 : 5)
             )
           }
         }
@@ -53,9 +57,23 @@ struct RecipeListView: View {
         .searchable(text: $searchTerm, prompt: "Поиск рецептов")
       }//nav stack
       .background(
-        LinearGradient(colors: [.pink2, .pink1, .white], startPoint: .top, endPoint: .bottom)
+        Group {
+          if colorScheme == .dark {
+            LinearGradient(
+              colors: [Color(red: 0.2, green: 0.1, blue: 0.2), Color.black],
+              startPoint: .top,
+              endPoint: .bottom
+            )
+          } else {
+            LinearGradient(
+              colors: [Color("pink2"), Color("pink1"), .white],
+              startPoint: .top,
+              endPoint: .bottom
+            )
+          }
+        }
       )
-      
+      .accentColor(colorScheme == .dark ? .white : Color("green1"))
     }//body
   }
 }
