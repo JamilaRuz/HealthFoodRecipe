@@ -49,13 +49,8 @@ struct RecipeListRowView: View {
       
       VStack(alignment: .leading, spacing: 5) {
         Text(recipe.name)
-          .font(.system(size: 18, weight: .medium))
-        
-        Text(recipe.ingredients)
-          .font(.system(size: 12))
-          .foregroundColor(.gray)
-          .frame(maxWidth: .infinity, alignment: .leading)
-          .lineLimit(2)
+           .font(.system(size: 16, weight: .semibold, design: .rounded))
+
         
         HStack {
           if recipe.isFavorite {

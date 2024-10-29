@@ -22,18 +22,24 @@ struct CategoryListView: View {
   var body: some View {
     NavigationStack {
       VStack(alignment: .leading) {
-//          VStack(alignment: .center) {
-//            Text("Рецепты правильного питания для эффективного и здорового снижения веса.")
-//            .font(.system(size: 28, weight: .medium, design: .rounded))
-//            .foregroundColor(colorScheme == .dark ? .white : .pink3)
-//            .multilineTextAlignment(.center)
-//            .padding(.horizontal)
-//        }
           
         HStack {
           Image("banner")
             .resizable()
             .scaledToFill()
+            .overlay(
+                VStack {
+                    Spacer() // This pushes the text to the bottom
+                    Text("dileknutrition.com")
+                        .foregroundStyle(.black)
+                        .font(.system(size: 16, weight: .semibold))
+                        .shadow(color: .white, radius: 1, x: 0, y: 0)
+                        .padding(.vertical, 4)
+                        .frame(maxWidth: .infinity)
+                        .background(Color.white.opacity(0.7))
+                        .padding(.bottom, 10)
+                }
+            )
         }
         .frame(maxWidth: .infinity, maxHeight: 150)
         .cornerRadius(10)
