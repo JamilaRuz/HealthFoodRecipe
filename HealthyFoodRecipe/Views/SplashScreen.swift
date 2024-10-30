@@ -25,10 +25,11 @@ struct SplashScreen: View {
                         .cornerRadius(10)
                     
                     Text("ПП Рецепты от участниц программы \"Похудейка\"")
-                        .font(.title)
-                        .fontWeight(.semibold)
+                        .font(.custom("Noteworthy-Light", size: 30))
+                        .fontWeight(.regular)
                         .foregroundColor(.pink2)
                         .multilineTextAlignment(.center)
+                        .padding(.horizontal)
                     
                     Text("с Дилек Умаровой")
                         .padding()

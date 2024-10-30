@@ -22,14 +22,20 @@ struct CategoryListView: View {
   var body: some View {
     NavigationStack {
       VStack(alignment: .leading) {
-          
+          VStack(alignment: .center) {
+              Text("Dileknutrition")
+                  .font(.custom("Snell Roundhand Bold", size: 32))
+                  .fontWeight(.black)
+                  .tracking(5)
+                  .frame(maxWidth: .infinity, alignment: .center)
+          }
         HStack {
           Image("banner")
             .resizable()
             .scaledToFill()
             .overlay(
                 VStack {
-                    Spacer() // This pushes the text to the bottom
+                    Spacer()
                     Text("dileknutrition.com")
                         .foregroundStyle(.black)
                         .font(.system(size: 16, weight: .semibold))
@@ -61,7 +67,6 @@ struct CategoryListView: View {
           await DataImporter(modelContext: modelContext).importData(resetLastChangeTime: false)
         }
       }
-      .navigationTitle("Dileknutrition")
       .padding()
       .frame(maxWidth: .infinity, maxHeight: .infinity)
     }//NavigationStack

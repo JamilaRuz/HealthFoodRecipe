@@ -11,7 +11,7 @@ func getCategoryAssetName(for category: String) -> String {
   switch category {
   case "Завтраки":
     return "breakfast"
-  case "Основные Блюда":
+  case "Обеды":
     return "lunch"
   case "Ужины":
     return "dinner"
@@ -33,7 +33,7 @@ func getCategoryAssetName(for category: String) -> String {
 func getAllCategories() -> [Category] {
   [
     Category(name: "Завтраки", image: "breakfast"),
-    Category(name: "Основные Блюда", image: "lunch"),
+    Category(name: "Обеды", image: "lunch"),
     Category(name: "Ужины", image: "dinner"),
     Category(name: "Супы", image: "soup"),
     Category(name: "Салаты", image: "salad"),
