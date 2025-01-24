@@ -11,6 +11,7 @@ struct SplashScreen: View {
     @State private var isActive = false
     @State private var opacity = 0.0
     @State private var titleText = ""
+    @State private var logoScale = 0.5
     
     var isPreview: Bool = false
     
@@ -27,19 +28,27 @@ struct SplashScreen: View {
                     .frame(width: 200, height: 200)
                     .aspectRatio(contentMode: .fit)
                     .cornerRadius(10)
+                    .scaleEffect(logoScale)
                 
                 Text(titleText)
-                    .font(.custom("HelveticaNeue-CondensedBold", size: 32))
+                    .font(.custom("Oswald", size: 32, relativeTo: .title))
+                    .fontWeight(.bold)
                     .foregroundColor(.black)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal)
                 
                 Text(authorText)
-                    .font(.custom("AvenirNext-Bold", size: 36))
+                    .font(.custom("Oswald", size: 36, relativeTo: .title))
+                    .fontWeight(.bold)
                     .foregroundColor(.pink2)
             }
             .opacity(opacity)
             .onAppear {
+                // Add logo growth animation
+                withAnimation(.easeOut(duration: 0.8)) {
+                    self.logoScale = 1.0
+                }
+                
                 // Simple fade in
                 withAnimation(.easeIn(duration: 0.6)) {
                     self.opacity = 1.0
@@ -58,7 +67,17 @@ struct SplashScreen: View {
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color.white)
+            .background(
+                ZStack {
+                    Image("bg_pink")
+                        .resizable()
+                        .scaledToFill()
+                        .edgesIgnoringSafeArea(.all)
+                    
+                    // Add white transparent overlay
+                    Color.white.opacity(0.3)
+                }
+            )
             .edgesIgnoringSafeArea(.all)
         }
     }
