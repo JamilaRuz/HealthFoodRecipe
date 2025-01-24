@@ -30,8 +30,3 @@ final class Recipe: Identifiable {
     self.isFavorite = isFavorite
   }
 }
-
-struct Category: Codable, Hashable {
-  var name: String
-  var image: String
-}

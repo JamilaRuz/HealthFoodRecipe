@@ -30,7 +30,7 @@ struct MenuDayView: View {
     VStack {
       GroupBox {
         if menuItems.isEmpty {
-          Text("Нет блюд на сегодняшний день")
+          Text("Нет блюд на этот день")
             .font(.callout)
             .foregroundColor(.gray)
         } else {

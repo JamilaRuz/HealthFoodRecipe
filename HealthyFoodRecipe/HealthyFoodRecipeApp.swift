@@ -7,11 +7,13 @@
 
 import SwiftUI
 import SwiftData
+import UIKit
 
 @main
 struct HealthyFoodRecipeApp: App {
     @Environment(\.scenePhase) private var scenePhase
     @State private var container: ModelContainer?
+    @StateObject private var notificationManager = NotificationManager()
     
     var body: some Scene {
         WindowGroup {
@@ -25,12 +27,26 @@ struct HealthyFoodRecipeApp: App {
             }
             .task {
                 await setupModelContainer()
+                await notificationManager.requestPermission()
             }
             .onChange(of: scenePhase) { _, newPhase in
                 if newPhase == .active {
                     validateReceiptAndRefreshToken()
+                    Task { @MainActor in
+                        await notificationManager.refreshNotificationSettings()
+                    }
                 }
             }
+//            .onReceive(NotificationCenter.default.publisher(for: UIApplication.application(_:didRegisterForRemoteNotificationsWithDeviceToken:))) { notification in
+//                if let deviceToken = notification.userInfo?["deviceToken"] as? Data {
+//                    notificationManager.handleDeviceToken(deviceToken)
+//                }
+//            }
+//            .onReceive(NotificationCenter.default.publisher(for: UIApplication.didFailToRegisterForRemoteNotificationsWithErrorNotification)) { notification in
+//                if let error = notification.userInfo?["error"] as? Error {
+//                    print("Failed to register for notifications: \(error)")
+//                }
+//            }
         }
     }
     

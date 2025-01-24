@@ -15,4 +15,5 @@ class ApiConf {
     static let verifySimulatorReceiptUrl = baseUrl + "auth/verify-simulator-receipt"
     static let recipesUrl = baseUrl + "recipes"
     static let lastChangeUrl = baseUrl + "last-change"
+    static let registerDeviceUrl = baseUrl + "register-device"
 }

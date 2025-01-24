@@ -9,63 +9,61 @@ import SwiftUI
 
 struct SplashScreen: View {
     @State private var isActive = false
-    @State private var size = 0.8
-    @State private var opacity = 0.5
+    @State private var opacity = 0.0
+    @State private var titleText = ""
+    
+    var isPreview: Bool = false
+    
+    private let fullTitleText = "ПП Рецепты от участниц программы \"Похудейка\""
+    private let authorText = "с Дилек Умаровой"
     
     var body: some View {
-        if isActive {
+        if isActive && !isPreview {
             ContentView()
         } else {
-            VStack {
-                VStack(spacing: 30) {
-                    Image("logo2")
-                        .resizable()
-                        .frame(width: 200, height: 200)
-                        .aspectRatio(contentMode: .fit)
-                        .cornerRadius(10)
-                    
-                    Text("ПП Рецепты от участниц программы \"Похудейка\"")
-                        .font(.custom("Noteworthy-Light", size: 30))
-                        .fontWeight(.regular)
-                        .foregroundColor(.pink2)
-                        .multilineTextAlignment(.center)
-                        .padding(.horizontal)
-                    
-                    Text("с Дилек Умаровой")
-                        .padding()
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-                        .foregroundColor(.black)
-                        .border(.black, width: 2)
-                }
-                .scaleEffect(size)
-                .opacity(opacity)
-                .onAppear {
-                    withAnimation(.easeIn(duration: 1.2)) {
-                        self.size = 0.9
-                        self.opacity = 1.0
-                    }
-                }
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(
-                Image("bg_pink")
+            VStack(spacing: 20) {
+                Image("logo2")
                     .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .opacity(0.3)
-            )
-            .edgesIgnoringSafeArea(.all)
+                    .frame(width: 200, height: 200)
+                    .aspectRatio(contentMode: .fit)
+                    .cornerRadius(10)
+                
+                Text(titleText)
+                    .font(.custom("HelveticaNeue-CondensedBold", size: 32))
+                    .foregroundColor(.black)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal)
+                
+                Text(authorText)
+                    .font(.custom("AvenirNext-Bold", size: 36))
+                    .foregroundColor(.pink2)
+            }
+            .opacity(opacity)
             .onAppear {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                // Simple fade in
+                withAnimation(.easeIn(duration: 0.6)) {
+                    self.opacity = 1.0
+                }
+                
+                // Simple text animation
+                withAnimation(.easeIn(duration: 0.8)) {
+                    titleText = fullTitleText
+                }
+                
+                // Navigate to main content
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                     withAnimation {
                         self.isActive = true
                     }
                 }
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color.white)
+            .edgesIgnoringSafeArea(.all)
         }
     }
 }
 
 #Preview {
-    SplashScreen()
+    SplashScreen(isPreview: true)
 }

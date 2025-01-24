@@ -75,7 +75,7 @@ func createStubRecipes() -> [Recipe] {
       images: ["baking1"],
       ingredients: "сыр коттедж - 500 гр, овсянка - 300 гр, яйца - 3 шт, разрыхлитель - 1 ч.л, соль - 1 ч.л, семечки - 1 ч.л",
       instructions: "Все перемешать, руками создать форму хлеба и выставить на пергаментную бумагу на противень. Посыпать кунжут, овсянку. Печь на 350 градусов в течение часа примерно.",
-      category: Category(name: "ПП Выпечка", image: "baking"),
+      category: Category(name: "Выпечка", image: "baking"),
       isFavorite: false
     ),
     Recipe(
@@ -129,7 +129,7 @@ func createStubRecipes() -> [Recipe] {
       images: ["drink1"],
       ingredients: "Минеральная вода - 1 л, лайм - 2 шт, сахзам - 3 ст.л, листья мяты - 10 шт",
       instructions: "Нарезать лайм кружочками. В минеланую воду добавить лайм, сахзам по вкусу, мяты и выдавить сок 2 лаймов. Все перемешать и потреблять добавив лед.",
-      category: Category(name: "ПП Выпечка", image: "baking"),
+      category: Category(name: "Выпечка", image: "baking"),
       isFavorite: true
     )
   ]

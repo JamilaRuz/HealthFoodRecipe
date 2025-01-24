@@ -33,19 +33,6 @@ struct CategoryListView: View {
           Image("banner")
             .resizable()
             .scaledToFill()
-            .overlay(
-                VStack {
-                    Spacer()
-                    Text("dileknutrition.com")
-                        .foregroundStyle(.black)
-                        .font(.system(size: 16, weight: .semibold))
-                        .shadow(color: .white, radius: 1, x: 0, y: 0)
-                        .padding(.vertical, 4)
-                        .frame(maxWidth: .infinity)
-                        .background(Color.white.opacity(0.7))
-                        .padding(.bottom, 10)
-                }
-            )
         }
         .frame(maxWidth: .infinity, maxHeight: 150)
         .cornerRadius(10)

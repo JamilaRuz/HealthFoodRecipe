@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import StoreKit
 
 struct RecipeDetailView: View {
   @Environment(\.modelContext) var modelContext
@@ -15,6 +16,8 @@ struct RecipeDetailView: View {
   @State private var isSelecting = false
   @State var selectedDay = Day.Monday
   @Bindable var recipe: Recipe
+  @StateObject private var ratingManager = RatingManager()
+
   
   let picsApiUrl = ApiConf.baseUrl + "pictures/"
   
@@ -143,8 +146,19 @@ struct RecipeDetailView: View {
       Color(.pink1)
         .opacity(0.5)
     )
+    .onAppear {
+        checkAndShowRating()
+    }
   }
   
+    private func checkAndShowRating() {
+      if ratingManager.shouldRequestReview() {
+          if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+              SKStoreReviewController.requestReview(in: scene)
+          }
+      }
+  }
+
   
 }
 
