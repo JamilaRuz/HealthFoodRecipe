@@ -29,34 +29,29 @@ struct RecipeDetailView: View {
             switch phase {
             case .empty:
               ProgressView()
-                .frame(width: 100, height: 80)
-                .background(Color.gray.opacity(0.2))
-                .cornerRadius(5)
+                .modifier(RecipeImageModifier())
             case .success(let image):
               image
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(width: UIScreen.main.bounds.width, height: 300)
-                .clipped()
+                .modifier(RecipeImageModifier())
             case .failure:
               Image("placeholderImg")
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(width: UIScreen.main.bounds.width, height: 300)
-                .clipped()
+                .modifier(RecipeImageModifier())
             @unknown default:
               Image("placeholderImg")
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(width: UIScreen.main.bounds.width, height: 300)
-                .clipped()
+                .modifier(RecipeImageModifier())
             }
           }
-        } //ForEach
-      } //Scroll Horizontal
+        }
+      }
       .tabViewStyle(PageTabViewStyle())
-      .frame(height: 300)
-      .background(LinearGradient(gradient: Gradient(colors: [Color(.gray).opacity(0.3), Color(.gray)]), startPoint: .top, endPoint: .bottom))
+      .frame(height: 200)
+      .padding(.top, 50)
       
       Text(recipe.name)
         .font(.title)
@@ -74,7 +69,6 @@ struct RecipeDetailView: View {
               .foregroundColor(.pink2)
             Spacer()
             Button(action: {
-              //                            isFavorited.toggle()
               recipe.isFavorite.toggle()
             }) {
               Image(systemName: recipe.isFavorite ? "heart.fill" : "heart")
@@ -162,7 +156,18 @@ struct RecipeDetailView: View {
   
 }
 
+struct RecipeImageModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .frame(maxWidth: .infinity)
+            .frame(height: 180)
+            .cornerRadius(15)
+            .clipped()
+            .padding(.horizontal, 24)
+    }
+}
+
 #Preview {
-  RecipeDetailView(recipe: createStubRecipes()[0])
+  RecipeDetailView(recipe: createStubRecipes()[1])
     .modelContainer(for: [Recipe.self, MenuItem.self], inMemory: true)
 }

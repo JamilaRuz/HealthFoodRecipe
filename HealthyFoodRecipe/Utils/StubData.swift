@@ -36,7 +36,7 @@ func createStubRecipes() -> [Recipe] {
     Recipe(
       id: 1,
       name: "Поке постное",
-      images: ["salad1"],
+      images: ["salad.jpg"],
       ingredients: "Авокадо - 0.25 шт, Огурец - 0.25 шт, Кукуруза в початках или в банке без сахара - 2 ст.л, Рыбка солёная - 30 гр",
       instructions: "Ингредиенты нарезать кубиками и сложить в миску. Перед употреблением перемешать.",
       category: Category(name: "Салаты", image: "salad"),
@@ -45,8 +45,14 @@ func createStubRecipes() -> [Recipe] {
     Recipe(
       id: 2,
       name: "Кукурузная лепешка с сыром",
-      images: ["breakfast1"],
-      ingredients: "кефир - 100 мл, кукурузная мука - 50 гр, яйцо - 1 шт, сыр - 50 гр, зелень - 10 гр",
+      images: ["salad.jpg"],
+      ingredients: """
+      1. Кефир - 100 мл
+      2. Кукурузная мука - 50 гр
+      3. Яйцо - 1 шт
+      4. Сыр - 50 гр
+      5. Зелень - 10 гр
+      """,
       instructions: "Все перемешать, сыр на крупной тёрке потереть и добавить в смесь. Жарить на медленном огне, затем дать остыть. Получается 2 лепешки.",
       category: Category(name: "Завтраки", image: "breakfast"),
       isFavorite: false
