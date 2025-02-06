@@ -8,12 +8,14 @@
 import SwiftUI
 import SwiftData
 import UIKit
+import UserNotifications
 
 @main
 struct HealthyFoodRecipeApp: App {
     @Environment(\.scenePhase) private var scenePhase
     @State private var container: ModelContainer?
     @StateObject private var notificationManager = NotificationManager()
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
     var body: some Scene {
         WindowGroup {
@@ -34,19 +36,21 @@ struct HealthyFoodRecipeApp: App {
                     validateReceiptAndRefreshToken()
                     Task { @MainActor in
                         await notificationManager.refreshNotificationSettings()
+
+                        UNUserNotificationCenter.current().setBadgeCount(0) { error in
+                            if let error = error {
+                                print("Error clearing badge count: \(error)")
+                            }
+                        }
+                        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
                     }
                 }
             }
-//            .onReceive(NotificationCenter.default.publisher(for: UIApplication.application(_:didRegisterForRemoteNotificationsWithDeviceToken:))) { notification in
-//                if let deviceToken = notification.userInfo?["deviceToken"] as? Data {
-//                    notificationManager.handleDeviceToken(deviceToken)
-//                }
-//            }
-//            .onReceive(NotificationCenter.default.publisher(for: UIApplication.didFailToRegisterForRemoteNotificationsWithErrorNotification)) { notification in
-//                if let error = notification.userInfo?["error"] as? Error {
-//                    print("Failed to register for notifications: \(error)")
-//                }
-//            }
+           .onReceive(NotificationCenter.default.publisher(for: Notification.Name("UIApplicationDidFailToRegisterForRemoteNotificationsError"))) { notification in
+               if let error = notification.userInfo?["error"] as? Error {
+                   print("Failed to register for notifications: \(error)")
+               }
+           }
         }
     }
     
@@ -89,10 +93,10 @@ struct HealthyFoodRecipeApp: App {
             
             ReceiptManager.shared.sendReceiptToServer(receiptData: receiptData) { success in
                 if success {
-                    print("Receipt validated and token refreshed successfully")
+                    print("Receipt validated and auth token refreshed successfully")
                     refreshDataFromServer()
                 } else {
-                    print("Failed to validate receipt or refresh token")
+                    print("Failed to validate receipt or refresh auth token")
                 }
             }
         }
@@ -107,5 +111,40 @@ struct HealthyFoodRecipeApp: App {
             
             await DataImporter(modelContext: modelContext).importData(resetLastChangeTime: false)
         }
+    }
+}
+
+class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        UNUserNotificationCenter.current().delegate = self
+        return true
+    }
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        NotificationManager.shared.handleDeviceToken(deviceToken)
+    }
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("Failed to register for remote notifications: \(error)")
+    }
+    
+    // Handle notifications when app is in foreground
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        willPresent notification: UNNotification,
+        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
+    ) {
+        completionHandler([.banner, .sound, .badge])
+    }
+    
+    // Handle notification taps
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        didReceive response: UNNotificationResponse,
+        withCompletionHandler completionHandler: @escaping () -> Void
+    ) {
+        let userInfo = response.notification.request.content.userInfo
+        print("Notification tapped: \(userInfo)")
+        completionHandler()
     }
 }
