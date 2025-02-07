@@ -22,120 +22,173 @@ struct RecipeDetailView: View {
   let picsApiUrl = ApiConf.baseUrl + "pictures/"
   
   var body: some View {
-    ScrollView() {
-      TabView {
-        ForEach(recipe.images, id: \.self) { imageUrl in
-          AsyncImage(url: URL(string: picsApiUrl + imageUrl)) { phase in
-            switch phase {
-            case .empty:
-              ProgressView()
-                .modifier(RecipeImageModifier())
-            case .success(let image):
-              image
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .modifier(RecipeImageModifier())
-            case .failure:
-              Image("placeholderImg")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .modifier(RecipeImageModifier())
-            @unknown default:
-              Image("placeholderImg")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .modifier(RecipeImageModifier())
+    ScrollView(showsIndicators: false) {
+      VStack(spacing: 0) {
+        TabView {
+          if recipe.images.isEmpty {
+            ZStack {
+              Rectangle()
+                .fill(
+                  LinearGradient(
+                    colors: [Color("pink1"), Color("pink2")],
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                  )
+                )
+              Text("Нет фото")
+                .font(.title3)
+                .fontWeight(.medium)
+                .foregroundColor(.white)
+            }
+            .modifier(RecipeImageModifier())
+          } else {
+            ForEach(recipe.images, id: \.self) { imageUrl in
+              AsyncImage(url: URL(string: picsApiUrl + imageUrl)) { phase in
+                switch phase {
+                case .empty:
+                  ZStack {
+                    Rectangle()
+                      .fill(
+                        LinearGradient(
+                          colors: [Color("pink1"), Color("pink2")],
+                          startPoint: .topLeading,
+                          endPoint: .bottomTrailing
+                        )
+                      )
+                    Text("Нет фото")
+                      .font(.title3)
+                      .fontWeight(.medium)
+                      .foregroundColor(.white)
+                  }
+                  .modifier(RecipeImageModifier())
+                case .success(let image):
+                  image
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .modifier(RecipeImageModifier())
+                case .failure:
+                  ZStack {
+                    Rectangle()
+                      .fill(
+                        LinearGradient(
+                          colors: [Color("pink1"), Color("pink2")],
+                          startPoint: .topLeading,
+                          endPoint: .bottomTrailing
+                        )
+                      )
+                    Text("Нет фото")
+                      .font(.title3)
+                      .fontWeight(.medium)
+                      .foregroundColor(.white)
+                  }
+                  .modifier(RecipeImageModifier())
+                @unknown default:
+                  ZStack {
+                    Rectangle()
+                      .fill(
+                        LinearGradient(
+                          colors: [Color("pink1"), Color("pink2")],
+                          startPoint: .topLeading,
+                          endPoint: .bottomTrailing
+                        )
+                      )
+                    Text("Нет фото")
+                      .font(.title3)
+                      .fontWeight(.medium)
+                      .foregroundColor(.white)
+                  }
+                  .modifier(RecipeImageModifier())
+                }
+              }
             }
           }
         }
-      }
-      .tabViewStyle(PageTabViewStyle())
-      .frame(height: 200)
-      .padding(.top, 50)
-      
-      Text(recipe.name)
-        .font(.title)
-        .bold()
-        .foregroundColor(.pink2)
-        .multilineTextAlignment(.center)
-        .padding(5)
-      
-      VStack(spacing: 15) {
+        .tabViewStyle(PageTabViewStyle())
+        .frame(height: 200)
+        .padding(.top, 16)
         
-        VStack(alignment: .leading, spacing: 5) {
-          HStack {
-            Text("Ингредиенты:")
-              .font(.headline)
-              .foregroundColor(.pink2)
-            Spacer()
-            Button(action: {
-              recipe.isFavorite.toggle()
-            }) {
-              Image(systemName: recipe.isFavorite ? "heart.fill" : "heart")
-                .resizable()
-                .tint(Color.pink2)
-                .frame(width: 30, height: 30)
-            }
-          }
+        VStack(spacing: 15) {
+          Text(recipe.name)
+            .font(.title)
+            .bold()
+            .foregroundColor(.pink2)
+            .multilineTextAlignment(.center)
+            .padding(5)
           
           VStack(alignment: .leading, spacing: 5) {
-            Text(recipe.ingredients)
-                .font(.body)
-          }
-          
-          Divider()
-          
-          VStack(alignment: .leading, spacing: 10) {
             HStack {
-              Text("Способ приготовления:")
+              Text("Ингредиенты:")
                 .font(.headline)
-                .foregroundColor(.green1)
+                .foregroundColor(.pink2)
               Spacer()
+              Button(action: {
+                recipe.isFavorite.toggle()
+              }) {
+                Image(systemName: recipe.isFavorite ? "heart.fill" : "heart")
+                  .resizable()
+                  .tint(Color.pink2)
+                  .frame(width: 30, height: 30)
+              }
+            }
+            
+            VStack(alignment: .leading, spacing: 5) {
+              Text(recipe.ingredients)
+                  .font(.body)
+            }
+            
+            Divider()
+            
+            VStack(alignment: .leading, spacing: 10) {
+              HStack {
+                Text("Способ приготовления:")
+                  .font(.headline)
+                  .foregroundColor(.green1)
+                Spacer()
+                
+                Image("cooking")
+                  .resizable()
+                  .scaledToFit()
+                  .frame(width: 60, height: 60)
+              }
               
-              Image("cooking")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 60, height: 60)
+              Text(recipe.instructions)
+              
             }
-            
-            Text(recipe.instructions)
-            
+            .padding(.top, 10)
           }
-          .padding(.top, 10)
-        }
-        
-        VStack(spacing: 0) {
-          Text("Выберите день для добавления в меню")
-            .foregroundColor(.gray)
-            .font(.caption2)
           
-          Picker("Выберите день недели", selection: $selectedDay) {
-            ForEach(Day.allCases, id: \.self) {
-              Text($0.displayName).tag($0)
+          VStack(spacing: 0) {
+            Text("Выберите день для добавления в меню")
+              .foregroundColor(.gray)
+              .font(.caption2)
+            
+            Picker("Выберите день недели", selection: $selectedDay) {
+              ForEach(Day.allCases, id: \.self) {
+                Text($0.displayName).tag($0)
+              }
             }
-          }
-          .pickerStyle(.menu)
-          
-          Button(action: {
-            let thisMenuItem = MenuItem(day: selectedDay.rawValue, isChecked: false, recipe: recipe)
-            modelContext.insert(thisMenuItem)
+            .pickerStyle(.menu)
             
-            dismiss()
-          }) {
-            Text("Добавить")
-              .frame(width: 150, height: 50)
-              .background(LinearGradient(colors: [.pink3, .pink2], startPoint: .top, endPoint: .bottom))
-              .foregroundColor(.white)
-              .font(.body)
-              .bold()
-              .cornerRadius(10)
-              .padding(15)
+            Button(action: {
+              let thisMenuItem = MenuItem(day: selectedDay.rawValue, isChecked: false, recipe: recipe)
+              modelContext.insert(thisMenuItem)
+              
+              dismiss()
+            }) {
+              Text("Добавить")
+                .frame(width: 150, height: 50)
+                .background(LinearGradient(colors: [.pink3, .pink2], startPoint: .top, endPoint: .bottom))
+                .foregroundColor(.white)
+                .font(.body)
+                .bold()
+                .cornerRadius(10)
+                .padding(15)
+            }
           }
         }
+        .padding(.horizontal, 15)
       }
-      .padding(.horizontal, 15)// why is it so big
     }
-    .ignoresSafeArea(.container, edges: .top)
     .background(
       Color(.pink1)
         .opacity(0.5)
@@ -143,6 +196,9 @@ struct RecipeDetailView: View {
     .onAppear {
         checkAndShowRating()
     }
+    .navigationBarTitleDisplayMode(.inline)
+    .toolbarBackground(.visible, for: .navigationBar)
+    .navigationBarBackButtonHidden(false)
   }
   
     private func checkAndShowRating() {
@@ -161,9 +217,19 @@ struct RecipeImageModifier: ViewModifier {
         content
             .frame(maxWidth: .infinity)
             .frame(height: 180)
-            .cornerRadius(15)
-            .clipped()
-            .padding(.horizontal, 24)
+            .clipShape(RoundedRectangle(cornerRadius: 20))
+            .padding(8)
+            .background(
+                RoundedRectangle(cornerRadius: 25)
+                    .fill(.white)
+                    .shadow(color: .gray.opacity(0.2), radius: 8, x: 0, y: 4)
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: 25)
+                    .stroke(Color("pink2"), lineWidth: 3)
+                    .padding(1)
+            )
+            .padding(.horizontal, 16)
     }
 }
 

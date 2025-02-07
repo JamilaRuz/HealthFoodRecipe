@@ -13,24 +13,24 @@ struct MenuView: View {
     
     var body: some View {
         NavigationView {
-            VStack {
-                ScrollView(.vertical) {
+            ScrollView(showsIndicators: false) {
+                VStack(spacing: 16) {
                     ForEach(Day.allCases, id: \.self) { day in
                         MenuDayView(day: day)
+                            .padding(.horizontal)
                     }
                 }
+                .padding(.vertical)
             }
+            .background(
+                LinearGradient(colors: [Color("pink1").opacity(0.5), .white], 
+                             startPoint: .top, 
+                             endPoint: .bottom)
+                    .ignoresSafeArea()
+            )
             .navigationTitle("Меню на неделю")
             .navigationBarTitleDisplayMode(.inline)
-            .background(
-                Group {
-                    if colorScheme == .dark {
-                        LinearGradient(colors: [Color(red: 0.2, green: 0.1, blue: 0.2), Color.black], startPoint: .top, endPoint: .bottom)
-                    } else {
-                        LinearGradient(colors: [Color("pink2"), Color("pink1"), .white], startPoint: .top, endPoint: .bottom)
-                    }
-                }
-            )
+            .toolbarBackground(.visible, for: .navigationBar)
         }
         .accentColor(colorScheme == .dark ? .white : Color("green1"))
     }
