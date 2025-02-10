@@ -22,12 +22,7 @@ struct MenuView: View {
                 }
                 .padding(.vertical)
             }
-            .background(
-                LinearGradient(colors: [Color("pink1").opacity(0.5), .white], 
-                             startPoint: .top, 
-                             endPoint: .bottom)
-                    .ignoresSafeArea()
-            )
+            .pinkGradientBackground(colorScheme: colorScheme)
             .navigationTitle("Меню на неделю")
             .navigationBarTitleDisplayMode(.inline)
             .toolbarBackground(.visible, for: .navigationBar)

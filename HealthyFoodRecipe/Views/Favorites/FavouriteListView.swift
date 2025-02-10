@@ -20,36 +20,31 @@ struct FavouriteListView: View {
     }
     
     var body: some View {
-        NavigationStack {
-            if favorites.isEmpty {
-                EmptyFavouriteListView(emptyText: "Нет избранных рецептов. Добавьте их, чтобы они появились здесь.")
-                    .font(.title)
-                    .foregroundColor(colorScheme == .dark ? .white : .gray)
-            } else {
-                VStack {
+        NavigationView {
+            VStack {
+                if favorites.isEmpty {
+                    EmptyFavouriteListView(emptyText: "Нет избранных рецептов. Добавьте их, чтобы они появились здесь.")
+                        .font(.title)
+                        .foregroundColor(.secondary)
+                } else {
                     List {
                         ForEach(favorites, id: \.self) { recipe in
                             NavigationLink(destination: RecipeDetailView(recipe: recipe)) {
                                 RecipeListRowView(recipe: recipe, menuItems: menuItems)
                             }
-                            .listRowBackground(colorScheme == .dark ? Color(UIColor.secondarySystemBackground) : .white)
+                            .listRowBackground(colorScheme == .dark ? Color(.systemGray6) : Color(.systemBackground))
                         }
                     }
-                    .background(Color(UIColor.systemBackground))
-                    .listStyle(.grouped)
+                    .listStyle(.insetGrouped)
+                    .scrollContentBackground(.hidden)
+                    .background(Color.clear)
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .cornerRadius(10)
-                .navigationTitle("Избранное")
-                .navigationBarTitleDisplayMode(.inline)
-                .background(
-                    colorScheme == .dark ?
-                    LinearGradient(colors: [Color(red: 0.2, green: 0.1, blue: 0.2), Color.black], startPoint: .top, endPoint: .bottom) :
-                    LinearGradient(colors: [Color("pink2"), Color("pink1"), .white], startPoint: .top, endPoint: .bottom)
-                )
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .pinkGradientBackground(colorScheme: colorScheme)
+            .navigationTitle("Избранное")
+            .navigationBarTitleDisplayMode(.inline)
         }
-        .accentColor(colorScheme == .dark ? .white : Color("green1"))
     }
 }
     

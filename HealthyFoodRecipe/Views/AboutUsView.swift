@@ -47,7 +47,12 @@ struct AboutUsView: View {
                 .font(.body)
                 .foregroundColor(colorScheme == .dark ? .white : .black)
                 .padding()
-                .background(colorScheme == .dark ? Color(red: 0.5, green: 0, blue: 0.5).opacity(0.3) : Color("pink3").opacity(0.1))                .cornerRadius(10)
+                .background(
+                    colorScheme == .dark ? 
+                        Color(.systemGray6).opacity(0.3) : // Lighter gray with opacity for dark mode
+                        Color("pink3").opacity(0.1)
+                )
+                .cornerRadius(10)
                 
                 Spacer()
             }

@@ -19,32 +19,38 @@ struct RecipeListRowView: View {
   
   var body: some View {
     HStack {
-      AsyncImage(url: URL(string: picsApiUrl + (recipe.images.first ?? ""))) { phase in
-        switch phase {
-        case .empty:
-          ProgressView()
-            .frame(width: 100, height: 80)
-            .background(Color.gray.opacity(0.2))
-            .cornerRadius(5)
-        case .success(let image):
-          image
-            .resizable()
-            .scaledToFill()
-            .frame(width: 100, height: 80)
-            .cornerRadius(5)
-        case .failure:
-          Image("placeholderImg")
-            .resizable()
-            .scaledToFill()
-            .frame(width: 100, height: 80)
-            .cornerRadius(5)
-        @unknown default:
-          Image("placeholderImg")
-            .resizable()
-            .scaledToFill()
-            .frame(width: 100, height: 80)
-            .cornerRadius(5)
+      Group {
+        AsyncImage(url: URL(string: picsApiUrl + (recipe.images.first ?? ""))) { phase in
+          switch phase {
+          case .empty:
+            ProgressView()
+          case .success(let image):
+            image
+              .resizable()
+              .scaledToFill()
+          case .failure:
+            Image("placeholderImg")
+              .resizable()
+              .scaledToFill()
+          @unknown default:
+            Image("placeholderImg")
+              .resizable()
+              .scaledToFill()
+          }
         }
+        .frame(width: 100, height: 80)
+        .clipShape(RoundedRectangle(cornerRadius: 12))
+        .padding(4)
+        .background(
+          RoundedRectangle(cornerRadius: 15)
+            .fill(.white)
+            .shadow(color: .gray.opacity(0.2), radius: 4, x: 0, y: 2)
+        )
+        .overlay(
+          RoundedRectangle(cornerRadius: 15)
+            .stroke(Color("pink2"), lineWidth: 2)
+            .padding(0.5)
+        )
       }
       
       VStack(alignment: .leading, spacing: 5) {

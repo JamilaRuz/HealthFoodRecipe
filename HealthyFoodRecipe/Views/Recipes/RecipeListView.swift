@@ -9,11 +9,11 @@ import SwiftUI
 import SwiftData
 
 struct RecipeListView: View {
-  var category: Category
   @Environment(\.colorScheme) var colorScheme
+  var category: Category
   
   @Query private var recipes: [Recipe]
-  @Query private var menuItems: [MenuItem]  // Add this line
+  @Query private var menuItems: [MenuItem]
   @State private var searchTerm = ""
   
   var filteredRecipes: [Recipe] {
@@ -28,54 +28,26 @@ struct RecipeListView: View {
   }
   
   var body: some View {
-    NavigationStack {
-      VStack(alignment: .leading) {
-        List {
-          Section(header: Text("\(category.name) (\(filteredRecipes.count))")
-            .foregroundColor(colorScheme == .dark ? .white : .black)
-          ) {
-            ForEach(filteredRecipes, id: \.self) { recipe in
-              NavigationLink(destination: RecipeDetailView(recipe: recipe)) {
-                RecipeListRowView(recipe: recipe, menuItems: menuItems)  // Pass menuItems here
-              }
+    VStack {
+      List {
+        Section(header: Text("\(category.name) (\(filteredRecipes.count))")) {
+          ForEach(filteredRecipes, id: \.self) { recipe in
+            NavigationLink(destination: RecipeDetailView(recipe: recipe)) {
+              RecipeListRowView(recipe: recipe, menuItems: menuItems)
             }
-            .padding(.vertical, 5)
-            .listRowBackground(
-              RoundedRectangle(cornerRadius: 10)
-                .fill(colorScheme == .dark ? 
-                      Color(UIColor.secondarySystemBackground) : 
-                      Color.white)
-                .padding(.vertical, 5)
-                .shadow(radius: colorScheme == .dark ? 2 : 5)
-            )
+            .listRowBackground(colorScheme == .dark ? Color(.systemGray6) : Color(.systemBackground))
           }
         }
-        .scrollContentBackground(.hidden)
-        .cornerRadius(20)
-        
-        .navigationTitle("Рецепты")
-        .navigationBarTitleDisplayMode(.inline)
-        .searchable(text: $searchTerm, prompt: "Поиск рецептов")
-      }//nav stack
-      .background(
-        Group {
-          if colorScheme == .dark {
-            LinearGradient(
-              colors: [Color(red: 0.2, green: 0.1, blue: 0.2), Color.black],
-              startPoint: .top,
-              endPoint: .bottom
-            )
-          } else {
-            LinearGradient(
-              colors: [Color("pink2"), Color("pink1"), .white],
-              startPoint: .top,
-              endPoint: .bottom
-            )
-          }
-        }
-      )
-      .accentColor(colorScheme == .dark ? .white : Color("green1"))
-    }//body
+      }
+      .listStyle(.insetGrouped)
+      .scrollContentBackground(.hidden)
+      .background(Color.clear)
+      .searchable(text: $searchTerm, prompt: "Поиск рецептов")
+    }
+    .frame(maxWidth: .infinity, maxHeight: .infinity)
+    .pinkGradientBackground(colorScheme: colorScheme)
+    .navigationTitle("Рецепты")
+    .navigationBarTitleDisplayMode(.inline)
   }
 }
 
