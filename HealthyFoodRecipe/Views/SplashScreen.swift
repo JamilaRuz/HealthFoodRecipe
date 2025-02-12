@@ -17,7 +17,7 @@ struct SplashScreen: View {
     
     var isPreview: Bool = false
     
-    private let firstPartText = "ПП Рецепты от участниц"
+    private let firstPartText = "Полезные рецепты участниц"
     private let secondPartText = "программы \"Похудейка\""
     private let authorText = "с Дилек Умаровой"
     
