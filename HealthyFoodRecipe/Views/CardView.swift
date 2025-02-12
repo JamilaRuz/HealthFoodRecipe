@@ -18,19 +18,20 @@ struct CardView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fill)
             }
-            .frame(width: 170, height: 120)
+            .frame(maxWidth: .infinity)
+            .frame(height: 120)
             .overlay(alignment: .bottom) {
                 Text(category.name)
                     .font(.headline)
                     .minimumScaleFactor(0.1)
                     .foregroundColor(.white)
                     .shadow(color: .black, radius: 3, x: 0, y: 0)
-                    .frame(maxWidth: 150)
+                    .frame(maxWidth: .infinity)
                     .padding()
             }
         }
-        .cornerRadius(10) // Add rounded corners
-        .shadow(radius: 5) // Add a subtle shadow
+        .cornerRadius(10)
+        .shadow(radius: 5)
     }
 }
 
