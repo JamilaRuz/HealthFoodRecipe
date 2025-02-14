@@ -25,7 +25,7 @@ struct MenuView: View {
             .pinkGradientBackground(colorScheme: colorScheme)
             .navigationTitle("Меню на неделю")
             .navigationBarTitleDisplayMode(.inline)
-            .toolbarBackground(.visible, for: .navigationBar)
+            .toolbarBackground(.clear, for: .navigationBar)
         }
         .accentColor(colorScheme == .dark ? .white : Color("green1"))
     }
