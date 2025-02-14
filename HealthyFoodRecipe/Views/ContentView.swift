@@ -13,9 +13,10 @@ struct ContentView: View {
 //    let appearance = UISearchBar.appearance()
 //    appearance.barTintColor = UIColor(.pink1)
 //
-    UITextField
-      .appearance(whenContainedInInstancesOf: [UISearchBar.self])
-      .backgroundColor = UIColor.white // Adjust if needed
+      
+//    UITextField
+//      .appearance(whenContainedInInstancesOf: [UISearchBar.self])
+//      .backgroundColor = UIColor.white // Adjust if needed
   }
   
   var body: some View {

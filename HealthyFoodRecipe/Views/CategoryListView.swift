@@ -10,7 +10,7 @@ import SwiftData
 
 struct CategoryListView: View {
   @Environment(\.modelContext) var modelContext
-    @Environment(\.colorScheme) var colorScheme
+  @Environment(\.colorScheme) var colorScheme
   @Query private var recipes: [Recipe]
   @Query private var menuItems: [MenuItem]
   @State private var searchTerm = ""
@@ -94,6 +94,21 @@ struct CategoryListView: View {
       .foregroundColor(colorScheme == .dark ? .gray : .black)
     }
   }
+}
+
+struct PlaceholderStyle: ViewModifier {
+    var showPlaceHolder: Bool
+    var placeholder: String
+
+    func body(content: Content) -> some View {
+        ZStack(alignment: .leading) {
+            if showPlaceHolder {
+                Text(placeholder)
+                    .foregroundColor(.gray)
+            }
+            content
+        }
+    }
 }
 
 #Preview {
