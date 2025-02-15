@@ -88,7 +88,7 @@ struct CategoryListView: View {
       }
       .searchable(
         text: $searchTerm,
-        prompt: "Поиск рецептов"
+        prompt: Text("Поиск рецептов")
       )
       .tint(colorScheme == .dark ? .gray : Color("green1"))
       .foregroundColor(colorScheme == .dark ? .gray : .black)
